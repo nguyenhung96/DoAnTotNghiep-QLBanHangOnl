@@ -106,6 +106,5 @@
 
 		</div>
 	</div>
-	<h2>Add Employee Data</h2>
 </body>
 </html>

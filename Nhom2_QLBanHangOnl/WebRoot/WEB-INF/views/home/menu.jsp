@@ -17,10 +17,10 @@
 							<a href="#"><i class="fa fa-cogs nav_icon"></i>Sản phẩm<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
-									<a href="home/CreateProduct.do">Thêm sản phẩm mới</a>
+									<a href="home/createproduct.do">Thêm sản phẩm mới</a>
 								</li>
 								<li>
-									<a href="home/Product.do">Danh sách sản phẩm</a>
+									<a href="home/sanpham.do">Danh sách sản phẩm</a>
 								</li>
 								<li>
 									<a href="ProductType.html">Loại sản phẩm</a>

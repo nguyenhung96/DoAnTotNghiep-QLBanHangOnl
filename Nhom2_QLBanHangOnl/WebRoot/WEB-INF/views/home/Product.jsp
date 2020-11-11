@@ -1,9 +1,10 @@
-<%@ page pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="f"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta charset="utf-8" />
@@ -13,7 +14,7 @@
 	href="http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"
 	rel="stylesheet">
 <script
-	src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> 
+	src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <style>
 h2 {
 	text-align: center;
@@ -96,7 +97,7 @@ tr:nth-child(even) {
 				<div id="table">
 
 					<table class="table table-bordered" id="myTable">
-					
+
 						<thead>
 							<tr>
 								<th>Mã sản phẩm</th>
@@ -110,35 +111,39 @@ tr:nth-child(even) {
 								<th>Hoạt động</th>
 							</tr>
 						</thead>
-					
-							<tbody>
-								<c:forEach var="sp" items="${sanpham}">
+
+						<tbody>
+							<c:forEach var="sanpham" items="${sanphamList}">
 								<tr>
-								<td>
-									<a href="#" name="txtname">${sp.maSP}</a>
-								</td>
-									<td>${sp.tenSP}</td>
-									<td>${sp.thongTinSP}</td>
-									<td>${sp.hinh}</td>
-									<td>${sp.giaSP}</td>
-									<td>${sp.tenNhomSP}</td>
-									<td>${sp.maNhaCungCap}</td>
-									<td>${sp.soLuongSP}</td>
+									<td><a href="#" name="txtname">${sanpham.maSP}</a></td>
+									<td>${sanpham.tenSP}</td>
+									<td>${sanpham.thongTinSP}</td>
+									<td>${sanpham.hinh}</td>
+									<td>${sampham.giaSP}</td>
+									<td>${sanpham.tenNhomSP}</td>
+									<td>${sanpham.maNhaCungCap}</td>
+									<td>${sanpham.soLuongSP}</td>
 									<td>
 										<div class="hidden-phone visible-desktop action-buttons">
-											<a type="submit" name="btnedit" class="btn btn-minier btn-success" title="Chỉnh sửa thông tin sản phẩm" >
-											<i class="glyphicon glyphicon-edit"></i>
-											</a>
-											 <a type="submit" name="btndelete" class="btn btn-minier btn-danger" title="Xóa sản phẩm">
+											<a
+												href="home/editsanpham.do?MaSP=${sanpham.maSP}"
+												class="btn btn-minier btn-success" id="btnEdit"
+												title="Chỉnh sửa thông tin sản phẩm"> <i
+												class="glyphicon glyphicon-edit"></i>
+											</a> <a
+												href="home/deletesanpham.do?MaSP=${sanpham.maSP}"
+												class="btn btn-minier btn-danger" title="Xóa sản phẩm">
 												<i class="glyphicon glyphicon-trash"></i>
 											</a>
+
+
 										</div>
 									</td>
 
 								</tr>
-									</c:forEach>
-							</tbody>
-					
+							</c:forEach>
+						</tbody>
+
 					</table>
 
 				</div>
