@@ -53,6 +53,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 			<list>
 				<value>QL_BanHang.model.Employee</value>
 				<value>QL_BanHang.model.NhanVien</value>
+				<value>QL_BanHang.model.SanPham</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
