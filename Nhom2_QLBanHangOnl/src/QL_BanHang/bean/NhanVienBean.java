@@ -1,7 +1,7 @@
 package QL_BanHang.bean;
 
 public class NhanVienBean {
-	
+
 	private String MaNhanVien;
 	private String HoTenNV;
 	private String MatKhau;
@@ -9,10 +9,9 @@ public class NhanVienBean {
 	private String SDT;
 	private int CMND;
 	private boolean GioiTinh;
-	private int ChucVu;
+	private String ChucVu;
 	private String Hinh;
 	private String DiaChi;
-	
 	public String getMaNhanVien() {
 		return MaNhanVien;
 	}
@@ -55,10 +54,10 @@ public class NhanVienBean {
 	public void setGioiTinh(boolean gioiTinh) {
 		GioiTinh = gioiTinh;
 	}
-	public int getChucVu() {
+	public String getChucVu() {
 		return ChucVu;
 	}
-	public void setChucVu(int chucVu) {
+	public void setChucVu(String chucVu) {
 		ChucVu = chucVu;
 	}
 	public String getHinh() {
@@ -72,7 +71,8 @@ public class NhanVienBean {
 	}
 	public void setDiaChi(String diaChi) {
 		DiaChi = diaChi;
-	}	
+	}
 	
-	
+
+
 }
