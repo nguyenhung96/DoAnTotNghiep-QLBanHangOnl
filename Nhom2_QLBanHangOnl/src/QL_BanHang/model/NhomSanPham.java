@@ -1,6 +1,7 @@
 package QL_BanHang.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +29,9 @@ public class NhomSanPham implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "MaNhaCungCap")
 	private NhaCungCap nhacungcap;
+
+	@OneToMany(mappedBy = "nhomsanpham")
+	private Collection<SanPham> sanpham;
 
 	public Integer getId() {
 		return Id;
@@ -52,8 +57,16 @@ public class NhomSanPham implements Serializable {
 		this.nhacungcap = nhacungcap;
 	}
 
+	public Collection<SanPham> getSanpham() {
+		return sanpham;
+	}
+
+	public void setSanpham(Collection<SanPham> sanpham) {
+		this.sanpham = sanpham;
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 }

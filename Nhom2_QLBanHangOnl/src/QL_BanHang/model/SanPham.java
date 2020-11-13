@@ -6,6 +6,8 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -34,7 +36,9 @@ public class SanPham implements Serializable {
 	private float GiaSP;
 
 	@Column(name = "Id_NhomSP")
-	private Integer Id_NhomSP;
+	@ManyToOne
+	@JoinColumn(name = "Id_NhomSP")
+	private NhomSanPham nhomsanpham;
 
 	@Column(name = "MaNhaCungCap")
 	private String MaNhaCungCap;
@@ -88,12 +92,12 @@ public class SanPham implements Serializable {
 		GiaSP = giaSP;
 	}
 
-	public Integer getId_NhomSP() {
-		return Id_NhomSP;
+	public NhomSanPham getNhomsanpham() {
+		return nhomsanpham;
 	}
 
-	public void setId_NhomSP(Integer id_NhomSP) {
-		Id_NhomSP = id_NhomSP;
+	public void setNhomsanpham(NhomSanPham nhomsanpham) {
+		this.nhomsanpham = nhomsanpham;
 	}
 
 	public String getMaNhaCungCap() {
