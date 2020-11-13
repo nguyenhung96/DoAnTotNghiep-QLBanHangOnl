@@ -35,7 +35,6 @@ public class SanPham implements Serializable {
 	@Column(name = "GiaSP")
 	private float GiaSP;
 
-	@Column(name = "Id_NhomSP")
 	@ManyToOne
 	@JoinColumn(name = "Id_NhomSP")
 	private NhomSanPham nhomsanpham;
