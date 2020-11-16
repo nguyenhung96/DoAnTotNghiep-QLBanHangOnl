@@ -43,7 +43,7 @@
 							<!-- /nav-second-level -->
 						</li>
 						<li>
-							<a href="Customers.html"><i class="fa fa-th-large nav_icon"></i>Khách hàng</span></a>
+							<a href="home/khachhang.do"><i class="fa fa-th-large nav_icon"></i>Khách hàng</span></a>
 						</li>
 						<li>
 							<a href="#"><i class="fa fa-envelope nav_icon"></i>Quản lý kho<span class="fa arrow"></span></a>
