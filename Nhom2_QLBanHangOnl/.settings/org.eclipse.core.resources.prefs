@@ -1,4 +1,3 @@
 eclipse.preferences.version=1
-encoding//WebRoot/WEB-INF/views/home/AddNhanVien.jsp=UTF-8
-encoding//WebRoot/WEB-INF/views/home/CreateStaff.jsp=UTF-8
-encoding//WebRoot/WEB-INF/views/home/Staff.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/home/CreateStaff.jsp=UTF-8
+encoding//WebContent/WEB-INF/views/home/Staff.jsp=UTF-8

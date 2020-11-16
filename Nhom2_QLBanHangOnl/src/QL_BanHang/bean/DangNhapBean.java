@@ -6,7 +6,7 @@ public class DangNhapBean {
 	private String MaNhanVien;
 	private String HoTenNV;
 	private String MatKhau;
-	private int ChucVu;
+	private String ChucVu;
 	public String getMaNhanVien() {
 		return MaNhanVien;
 	}
@@ -25,10 +25,10 @@ public class DangNhapBean {
 	public void setMatKhau(String matKhau) {
 		MatKhau = matKhau;
 	}
-	public int getChucVu() {
+	public String getChucVu() {
 		return ChucVu;
 	}
-	public void setChucVu(int chucVu) {
+	public void setChucVu(String chucVu) {
 		ChucVu = chucVu;
 	}
 	

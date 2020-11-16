@@ -1,11 +1,13 @@
 package QL_BanHang.model;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.sql.Date;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,82 +18,99 @@ public class KhachHang implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -3221326695082255954L;
-		@Id
-		@Column(name = "MaKH")
-		private String MaKH;
-		
-		@Column(name = "HoTenKH")
-		private String HoTenKH;
-		
-		@Column(name = "NgaySinh")
-		private Date NgaySinh;
-		
-		@Column(name = "MatKhau")
-		private String MatKhau;
-		
-		@Column(name = "SDT")
-		private String SDT;
-		
-		@Column(name = "Email")
-		private String Email;
-		
-		@Column(name = "DiaChi")
-		private String DiaChi;
+	@Id
+	@Column(name = "MaKH")
+	private String MaKH;
 
-		public String getMaKH() {
-			return MaKH;
-		}
+	@Column(name = "HoTenKH")
+	private String HoTenKH;
 
-		public void setMaKH(String maKH) {
-			MaKH = maKH;
-		}
+	@Column(name = "NgaySinh")
+	private Date NgaySinh;
 
-		public String getHoTenKH() {
-			return HoTenKH;
-		}
+	@Column(name = "MatKhau")
+	private String MatKhau;
 
-		public void setHoTenKH(String hoTenKH) {
-			HoTenKH = hoTenKH;
-		}
+	@Column(name = "SDT")
+	private String SDT;
 
-		public Date getNgaySinh() {
-			return NgaySinh;
-		}
+	@Column(name = "Email")
+	private String Email;
 
-		public void setNgaySinh(Date ngaySinh) {
-			NgaySinh = ngaySinh;
-		}
+	@Column(name = "DiaChi")
+	private String DiaChi;
 
-		public String getMatKhau() {
-			return MatKhau;
-		}
+	@OneToMany(mappedBy = "khachhang")
+	private Collection<DonHang> donhang;
 
-		public void setMatKhau(String matKhau) {
-			MatKhau = matKhau;
-		}
+	public String getMaKH() {
+		return MaKH;
+	}
 
-		public String getSDT() {
-			return SDT;
-		}
+	public void setMaKH(String maKH) {
+		MaKH = maKH;
+	}
 
-		public void setSDT(String sDT) {
-			SDT = sDT;
-		}
+	public String getHoTenKH() {
+		return HoTenKH;
+	}
 
-		public String getEmail() {
-			return Email;
-		}
+	public void setHoTenKH(String hoTenKH) {
+		HoTenKH = hoTenKH;
+	}
 
-		public void setEmail(String email) {
-			Email = email;
-		}
+	public Date getNgaySinh() {
+		return NgaySinh;
+	}
 
-		public String getDiaChi() {
-			return DiaChi;
-		}
+	public void setNgaySinh(Date ngaySinh) {
+		NgaySinh = ngaySinh;
+	}
 
-		public void setDiaChi(String diaChi) {
-			DiaChi = diaChi;
-		}
-		
+	public String getMatKhau() {
+		return MatKhau;
+	}
+
+	public void setMatKhau(String matKhau) {
+		MatKhau = matKhau;
+	}
+
+	public String getSDT() {
+		return SDT;
+	}
+
+	public void setSDT(String sDT) {
+		SDT = sDT;
+	}
+
+	public String getEmail() {
+		return Email;
+	}
+
+	public void setEmail(String email) {
+		Email = email;
+	}
+
+	public String getDiaChi() {
+		return DiaChi;
+	}
+
+	public void setDiaChi(String diaChi) {
+		DiaChi = diaChi;
+	}
+
+	public Collection<DonHang> getDonhang() {
+		return donhang;
+	}
+
+	public void setDonhang(Collection<DonHang> donhang) {
+		this.donhang = donhang;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
+	
+
 }
