@@ -1,10 +1,14 @@
 package QL_BanHang.model;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,8 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+/*
+ * @NamedEntityGraph(name="graph.DonHang.donhangchitiet", attributeNodes
+ * = @NamedAttributeNode(value = "donhangchitiet", subgraph = "donhangchitiet"))
+ */
 @Table(name = "DonHang")
-public class DonHang implements Serializable{
+public class DonHang implements Serializable {
 	/**
 	 * 
 	 */
@@ -35,8 +43,8 @@ public class DonHang implements Serializable{
 	private int TrangThai;
 
 	private float TongTien;
-	
-	@OneToMany(mappedBy = "donhang")
+
+	@OneToMany(mappedBy = "donhang", cascade = CascadeType.ALL)
 	private Collection<DonHangChiTiet> donhangchitiet;
 
 	public String getMaDonHang() {
@@ -91,9 +99,8 @@ public class DonHang implements Serializable{
 		return donhangchitiet;
 	}
 
-	public void setDonhangchitiet(Collection<DonHangChiTiet> donhangchitiet) {
+	public void setDonhangchitiet(ArrayList<DonHangChiTiet> donhangchitiet) {
 		this.donhangchitiet = donhangchitiet;
 	}
-	
-	
+
 }

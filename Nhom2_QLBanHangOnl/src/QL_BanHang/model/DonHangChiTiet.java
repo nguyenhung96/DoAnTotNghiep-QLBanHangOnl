@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "DonHangChiTiet")
-public class DonHangChiTiet implements Serializable{
+public class DonHangChiTiet implements Serializable {
 	/**
 	 * 
 	 */
@@ -30,9 +30,8 @@ public class DonHangChiTiet implements Serializable{
 	@JoinColumn(name = "MaSP")
 	private SanPham sanpham;
 
-	private Integer SoLuong;
+	private int SoLuong;
 
-	private Float DonGia;
 
 	public Integer getId() {
 		return Id;
@@ -58,22 +57,17 @@ public class DonHangChiTiet implements Serializable{
 		this.sanpham = sanpham;
 	}
 
-	public Integer getSoLuong() {
+	public int getSoLuong() {
 		return SoLuong;
 	}
 
-	public void setSoLuong(Integer soLuong) {
+	public void setSoLuong(int soLuong) {
 		SoLuong = soLuong;
 	}
 
-	public Float getDonGia() {
-		return DonGia;
-	}
 
-	public void setDonGia(Float donGia) {
-		DonGia = donGia;
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
-
-	
 
 }
