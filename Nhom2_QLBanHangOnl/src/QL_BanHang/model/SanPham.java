@@ -39,8 +39,9 @@ public class SanPham implements Serializable {
 	@JoinColumn(name = "Id_NhomSP")
 	private NhomSanPham nhomsanpham;
 
-	@Column(name = "MaNhaCungCap")
-	private String MaNhaCungCap;
+	@ManyToOne
+	@JoinColumn(name = "MaNhaCungCap")
+	private NhaCungCap nhacungcap;
 
 	@Column(name = "SoLuongSP")
 	private Integer SoLuongSP;
@@ -99,12 +100,12 @@ public class SanPham implements Serializable {
 		this.nhomsanpham = nhomsanpham;
 	}
 
-	public String getMaNhaCungCap() {
-		return MaNhaCungCap;
+	public NhaCungCap getNhacungcap() {
+		return nhacungcap;
 	}
 
-	public void setMaNhaCungCap(String maNhaCungCap) {
-		MaNhaCungCap = maNhaCungCap;
+	public void setNhacungcap(NhaCungCap nhacungcap) {
+		this.nhacungcap = nhacungcap;
 	}
 
 	public Integer getSoLuongSP() {
