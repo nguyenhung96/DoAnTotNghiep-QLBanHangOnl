@@ -25,7 +25,6 @@ import QL_BanHang.bean.NhanVienBean;
 import QL_BanHang.model.NhanVien;
 import QL_BanHang.service.NhanVienService;
 
-
 @Controller
 public class LoginController {
 	@RequestMapping(value = "/login/login", method = RequestMethod.GET)
@@ -33,51 +32,56 @@ public class LoginController {
 
 		return "login/Login";
 	}
-	
+
 	@Autowired
 	SessionFactory factory;
+
 	@Transactional
 	@RequestMapping(value = "/login/Login", method = RequestMethod.POST)
-	public String validate1(ModelMap model,HttpSession session, @ModelAttribute("dangnhap") DangNhapBean dangnhap, BindingResult errors) {
+	public String validate1(ModelMap model, HttpSession session, @ModelAttribute("dangnhap") DangNhapBean dangnhap,
+			BindingResult errors) {
 		Session session1 = factory.getCurrentSession();
 		String hql = "FROM NhanVien";
 		Query query = session1.createQuery(hql);
 		List<NhanVien> list = query.list();
 		model.addAttribute("nhanvien", list);
 		for (NhanVien i : list) {
-			if ((dangnhap.getMaNhanVien().equals(i.getMaNhanVien())) && (dangnhap.getMatKhau().equals(i.getMatKhau()))) {	
-				
-				return "home/index";
+			if ((dangnhap.getMaNhanVien().equals(i.getMaNhanVien()))
+					&& (dangnhap.getMatKhau().equals(i.getMatKhau()))) {
+				if (i.getEnable() == 1) {
+					return "home/index";
+				} else if (i.getEnable() == 2) {
+					System.out.println("Tai khoan da bi vo hieu hoa");
+
+					return ("redirect:/login/login.do");
+				}
 			}
 		}
-		return "login/Login";
+		return ("redirect:/login/login.do");
 
 	}
-	
-	//pripare model
-	private NhanVien prepareModel(DangNhapBean dangnhapBean){
+
+	// pripare model
+	private NhanVien prepareModel(DangNhapBean dangnhapBean) {
 		NhanVien nhanvien = new NhanVien();
 		nhanvien.setMaNhanVien(dangnhapBean.getMaNhanVien());
-		nhanvien.setHoTenNV(dangnhapBean.getHoTenNV());
+		nhanvien.setEnable(dangnhapBean.getEnable());
 		nhanvien.setMatKhau(dangnhapBean.getMatKhau());
-		nhanvien.setChucVu(dangnhapBean.getChucVu());
 		dangnhapBean.setMaNhanVien(null);
 		return nhanvien;
 	}
-	
-	
-	//pripare list of bean
-	private List<DangNhapBean> prepareListofBean(List<NhanVien> nhanvienList){
+
+	// pripare list of bean
+	private List<DangNhapBean> prepareListofBean(List<NhanVien> nhanvienList) {
 		List<DangNhapBean> beans = null;
-		if(nhanvienList != null && !nhanvienList.isEmpty()){
+		if (nhanvienList != null && !nhanvienList.isEmpty()) {
 			beans = new ArrayList<DangNhapBean>();
 			DangNhapBean bean = null;
-			for(NhanVien nhanvien : nhanvienList){
+			for (NhanVien nhanvien : nhanvienList) {
 				bean = new DangNhapBean();
 				bean.setMaNhanVien(nhanvien.getMaNhanVien());
-				bean.setHoTenNV(nhanvien.getHoTenNV());
 				bean.setMatKhau(nhanvien.getMatKhau());
-				bean.setChucVu(nhanvien.getChucVu());
+				bean.setEnable(nhanvien.getEnable());
 				beans.add(bean);
 			}
 		}

@@ -38,4 +38,10 @@ public class DonHangServiceImpl implements DonHangService {
 	public List<DonHangChiTiet> listDonHangChiTiet(String madh) {
 		return donhangDao.listDonHangChiTiet(madh);
 	}
+
+	@Override
+	public void DuyetDonHang(DonHang donhang) {
+		donhangDao.DuyetDonHang(donhang);
+
+	}
 }

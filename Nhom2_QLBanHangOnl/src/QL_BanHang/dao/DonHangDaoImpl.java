@@ -1,5 +1,6 @@
 package QL_BanHang.dao;
 
+import java.io.File;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -43,4 +44,12 @@ public class DonHangDaoImpl implements DonHangDao {
 		return (List<DonHangChiTiet>) sessionFactory.getCurrentSession()
 				.createQuery(" FROM DonHangChiTiet WHERE MaDonHang = '" + madh + "'").list();
 	}
+
+	@Override
+	public void DuyetDonHang(DonHang donhang) {
+		sessionFactory.getCurrentSession()
+				.createQuery("update DonHang set TrangThai = 2, MaNhanVien = '"+donhang.getNhanvien().getMaNhanVien() + "' where MaDonHang = '" + donhang.getMaDonHang() + "'")
+				.executeUpdate();
+	}
+
 }

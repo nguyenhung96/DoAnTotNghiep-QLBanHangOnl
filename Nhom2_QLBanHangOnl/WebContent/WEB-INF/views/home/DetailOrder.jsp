@@ -76,14 +76,14 @@ tr:nth-child(even) {
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="donhang" items="${donhangList}">
+								<c:forEach var="c" items="${donhangList}">
 									<tr>
-										<td>${donhang.id}</td>
-										<td>${donhang.tenSanPham}</td>
-										<td>${donhang.soLuong}</td>
-										<td>${donhang.donGia}</td>
-										<td>${donhang.tongTien}</td>
-										<td><a class="red" data-ng-click=""> <i
+										<td>${c.id}</td>
+										<td>${c.tenSanPham}</td>
+										<td>${c.soLuong}</td>
+										<td>${c.donGia}</td>
+										<td>${c.tongTien}</td>
+										<td><a class="red"> <i
 												class="glyphicon glyphicon-trash"></i>
 										</a></td>
 									</tr>
@@ -101,51 +101,78 @@ tr:nth-child(even) {
 							</h4>
 						</div>
 						<div class="widget-body">
-							<form:form method="POST"
-								action="/Nhom2_QLBanHangOnl/home/savenhanvien.do">
+							<form:form method="PÓ"
+								action="/Nhom2_QLBanHangOnl/home/duyetdonhang.do">
+								<table>
+									<tr class="form-group">
+										<td><form:label class="col-sm-5" for="lbloaiSP"
+												path="maDonHang">Mã đơn hàng</form:label></td>
 
-								<div class="form-group">
-									<form:label class="col-sm-5" for="lbloaiSP" path="maDonHang">Mã đơn hàng</form:label>
-									<form:input path="maDonHang" class="form-control col-sm-7 "
-										value="${donhang.maDonHang}" />
+										<td><form:input path="maDonHang"
+												class="form-control col-sm-7 " value="${donhang.maDonHang}" />
+										</td>
 
-								</div>
-								<div class="form-group">
-									<form:label class="col-sm-5" for="lbloaiSP" path="maKH">Khách Hàng</form:label>
-									<form:input path="maKH" class="form-control col-sm-7 "
-										value="${donhang.maKH}" />
+									</tr>
+									<tr class="form-group">
+										<td><form:label class="col-sm-5" for="lbloaiSP"
+												path="maKH">Khách Hàng</form:label></td>
+										<td><form:input path="maKH"
+												class="form-control col-sm-7 " value="${donhang.maKH}" /></td>
 
-								</div>
-								<div class="form-group">
-									<form:label class="col-sm-5" for="lbloaiSP" path="ngayDat">Ngày đặt</form:label>
-									<form:input path="ngayDat" class="form-control col-sm-7 "
-										value="${donhang.ngayDat}" />
+									</tr>
+									<tr class="form-group">
+										<td><form:label class="col-sm-5" for="lbloaiSP"
+												path="ngayDat">Ngày đặt</form:label></td>
+										<td><form:input path="ngayDat"
+												class="form-control col-sm-7 " value="${donhang.ngayDat}" />
+										</td>
 
-								</div>
-								<div class="form-group">
-									<form:label class="col-sm-5" for="lbloaiSP" path="maNhanVien">Nhân Viên</form:label>
-									<form:input path="maNhanVien" class="form-control col-sm-7 "
-										value="${donhang.maNhanVien}" />
+									</tr>
+									<tr class="form-group">
+										<td><form:label class="col-sm-5" for="lbloaiSP"
+												path="maNhanVien">Nhân Viên</form:label></td>
+										<%-- <td><form:input path="maNhanVien"
+												class="form-control col-sm-7 " value="${donhang.maNhanVien}" />
+										</td> --%>
+										<td><form:select class="form-control col-sm-7"
+												path="maNhanVien">
+												<option value="-1">Chọn nhân viên</option>
+												<c:forEach var="c" items="${nhanvienList}">
+													<option value="${c.maNhanVien}"
+														${donhang.maNhanVien == c.maNhanVien ? 'selected=""' : ''}>${c.hoTenNV}</option>
+												</c:forEach>
+											</form:select></td>
 
-								</div>
-								<div class="form-group">
-									<form:label class="col-sm-5" for="lbloaiSP" path="diaChi">Địa chỉ giao</form:label>
-									<form:input path="diaChi" class="form-control col-sm-7 "
-										value="${donhang.diaChi}" />
+									</tr>
+									<tr class="form-group">
+										<td><form:label class="col-sm-5" for="lbloaiSP"
+												path="diaChi">Địa chỉ giao</form:label></td>
+										<td><form:input path="diaChi"
+												class="form-control col-sm-7 " value="${donhang.diaChi}" />
+										</td>
 
-								</div>
+									</tr>
 
-								<div class=" width-border col-sm-12">
-									<h4 class="widget-title">
-										<span class="glyphicon glyphicon-info-sign"></span> Thông Tin
-										Thanh Toán
-									</h4>
-								</div>
-								<div class="form-group">
-									<form:label class="col-sm-5" for="lbloaiSP" path="tongTien">Tổng tiền hàng</form:label>
-									<form:label class="col-sm-5" for="lbloaiSP" path="tongTien">${donhang.tongTien}</form:label>
+									<tr class=" width-border col-sm-12">
+										<h4 class="widget-title">
+											<span class="glyphicon glyphicon-info-sign"></span> Thông Tin
+											Thanh Toán
+										</h4>
+									</tr>
+									<tr class="form-group">
+										<td><form:label class="col-sm-5" for="lbloaiSP"
+												path="tongTien">Tổng tiền hàng</form:label></td>
+										<td><form:label class="col-sm-5" for="lbloaiSP"
+												path="tongTien">${donhang.tongTien}</form:label></td>
 
-								</div>
+									</tr>
+									<tr>
+
+										<td colspan="2"><input type="submit"
+											class="btn btn-mini btn-primary glyphicon glyphicon-plus-sign btncreate"
+											value="Duyệt đơn hàng" /></td>
+									</tr>
+								</table>
 							</form:form>
 						</div>
 					</div>
@@ -158,8 +185,9 @@ tr:nth-child(even) {
 				class="btn btn-mini btn-primary btncreate" href="#"> <i
 				class="glyphicon glyphicon-print"></i> In
 			</a> <a style="float: right; margin-right: 5px;"
-				class="btn btn-mini btn-primary btncreate" href="#"> <i
-				class="glyphicon glyphicon-floppy-save"></i> Lưu
+				class="btn btn-mini btn-primary btncreate"
+				href="home/duyetdonhang.do??MaDonHang=${donhang.maDonHang}maNhanVien=${donhang.maNhanVien}">
+				<i class="glyphicon glyphicon-floppy-save"></i> Duyệt đơn hàng
 			</a>
 		</div>
 

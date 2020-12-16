@@ -11,11 +11,12 @@ public interface DonHangService {
 
 	public List<DonHang> listDonHang();
 
-
 	public DonHang getDonHang(String madh);
 
 	public void deleteDonHang(DonHang donhang);
-	
+
 	public List<DonHangChiTiet> listDonHangChiTiet(String madh);
+
+	public void DuyetDonHang(DonHang donhang);
 
 }
