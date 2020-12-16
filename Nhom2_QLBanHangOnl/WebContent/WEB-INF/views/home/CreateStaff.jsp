@@ -73,12 +73,18 @@
 									</tr>
 
 									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="chucVu">Chức vụ</form:label></td>
-										<td class="col-md-5"><form:input path="chucVu"
-												class="form-control " value="${nhanvien.chucVu}" /></td>
+										<td class="col-md-3"><form:label path="enable">Trạng thái</form:label></td>
+										<td class="col-md-5"><form:select path="enable"
+												class="form-control">
+												<option value="${nhanvien.enable}">${nhanvien.enableString}</option>
+												<option value="1">Bật</option>
+												<option value="2">Tắt</option>
+
+											</form:select></td>
+
 									</tr>
 									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="hinh">Hình ảnh</form:label></td>
+										<td class="col-md-3"><form:label path="hinh">Giới tính</form:label></td>
 										<td class="col-md-5"><form:input path="hinh"
 												class="form-control " value="${nhanvien.gioiTinh}" /></td>
 									</tr>
@@ -88,13 +94,10 @@
 												class="form-control " value="${nhanvien.diaChi}" /></td>
 									</tr>
 									<tr>
-									
-										<td  colspan="2" >
-										
-										<input  type="submit"class="btn btn-mini btn-primary glyphicon glyphicon-plus-sign btncreate" value="Lưu" />
-										
-										
-										</td>
+
+										<td colspan="2"><input type="submit"
+											class="btn btn-mini btn-primary glyphicon glyphicon-plus-sign btncreate"
+											value="Lưu" /></td>
 									</tr>
 
 								</table>
