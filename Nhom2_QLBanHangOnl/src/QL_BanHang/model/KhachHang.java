@@ -1,6 +1,6 @@
 package QL_BanHang.model;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collection;
 
@@ -24,9 +24,6 @@ public class KhachHang implements Serializable {
 
 	@Column(name = "HoTenKH")
 	private String HoTenKH;
-
-	@Column(name = "NgaySinh")
-	private Date NgaySinh;
 
 	@Column(name = "MatKhau")
 	private String MatKhau;
@@ -57,14 +54,6 @@ public class KhachHang implements Serializable {
 
 	public void setHoTenKH(String hoTenKH) {
 		HoTenKH = hoTenKH;
-	}
-
-	public Date getNgaySinh() {
-		return NgaySinh;
-	}
-
-	public void setNgaySinh(Date ngaySinh) {
-		NgaySinh = ngaySinh;
 	}
 
 	public String getMatKhau() {
@@ -110,7 +99,5 @@ public class KhachHang implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
 
 }

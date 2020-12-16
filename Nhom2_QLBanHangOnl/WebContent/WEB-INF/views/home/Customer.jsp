@@ -12,77 +12,77 @@
 	rel="stylesheet">
 <script
 	src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+	
+	<style>
+	h2 {
+			text-align: center;
+			}
+			/* Định dạng cho bảng dữ liệu*/
+			table {
+				margin: auto;
+				border-collapse: collapse;
+				border-spacing: 0;
+				width: 90%;
+				border: 1px solid #ddd;
+			}
+			/* Định dạng cho các cột*/
+			th, td {
+				border: none;
+				text-align: left;
+				padding: 8px;
+				vertical-align: middle !important;
+			}
+			/* Tạo thanh sroll ngang nếu chiều dài nội dung quá lớn*/
+			#table {
+			overflow-x: auto;
+			}
+			/* Thiết lập màu nền cho các ô*/
+			tr:nth-child(even){
+			background-color: #f2f2f2;
+			}
+			@media screen and (max-width: 1100px) {
+				.profile_details-left{
+					display: none;
+				}
+			}
+			@media screen and (min-width: 1100px) {
+				input.col-md-5, select.col-md-5{
+					width: 30%;
+				}
+			}
 
-<style>
-h2 {
-	text-align: center;
-}
-/* Định dạng cho bảng dữ liệu*/
-table {
-	margin: auto;
-	border-collapse: collapse;
-	border-spacing: 0;
-	width: 90%;
-	border: 1px solid #ddd;
-}
-/* Định dạng cho các cột*/
-th, td {
-	border: none;
-	text-align: left;
-	padding: 8px;
-	vertical-align: middle !important;
-}
-/* Tạo thanh sroll ngang nếu chiều dài nội dung quá lớn*/
-#table {
-	overflow-x: auto;
-}
-/* Thiết lập màu nền cho các ô*/
-tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
+			.modal {
+				display: block; /* Hidden by default */
+				position: fixed; /* Stay in place */
+				z-index: -1; /* Sit on top */
+				left: 0;
+				top: 0;
+				overflow: auto; /* Enable scroll if needed */
+				}
 
-@media screen and (max-width: 1100px) {
-	.profile_details-left {
-		display: none;
-	}
-}
+				/* Modal Content/Box */
+				.modal-content {
+				background-color: #fefefe;
+				margin: 5% auto; /* 15% from the top and centered */
+				border: 1px solid #888;
+			
+				}
 
-@media screen and (min-width: 1100px) {
-	input.col-md-5, select.col-md-5 {
-		width: 30%;
-	}
-}
+				/* The Close Button */
+				.closeSetKey, .closeEdit {
+				color: blue;
+				float: right;
+				font-size: 28px;
+				font-weight: bold;
+				}
 
-.modal {
-	display: block; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: -1; /* Sit on top */
-	left: 0;
-	top: 0;
-	overflow: auto; /* Enable scroll if needed */
-}
-
-/* Modal Content/Box */
-.modal-content {
-	background-color: #fefefe;
-	margin: 5% auto; /* 15% from the top and centered */
-	border: 1px solid #888;
-}
-
-/* The Close Button */
-.closeSetKey, .closeEdit {
-	color: blue;
-	float: right;
-	font-size: 28px;
-	font-weight: bold;
-}
-
-.close:hover, .close:focus {
-	color: black;
-	text-decoration: none;
-	cursor: pointer;
-}
-</style>
+				.close:hover,
+				.close:focus {
+				color: black;
+				text-decoration: none;
+				cursor: pointer;
+				}
+	</style>
 </head>
 
 <body>
@@ -151,11 +151,15 @@ tr:nth-child(even) {
 												<td><c:out value="${khachhang.diaChi}" /></td>
 												<td>
 													<div class="hidden-phone visible-desktop action-buttons">
-														<a href="home/editkhachhang.do?maKH=${khachhang.maKH}"
+														<a
+															href="home/editkhachhang.do?maKH=${khachhang.maKH}"
 															class="btn btn-minier btn-success" id="btnEdit"
 															title="Chỉnh sửa thông tin"> <i
 															class="glyphicon glyphicon-edit"></i>
-														</a> <a href="home/deletekhachhang.do?maKH=${khachhang.maKH}"
+														</a> 
+														
+														<a
+															href="home/deletekhachhang.do?maKH=${khachhang.maKH}"
 															class="btn btn-minier btn-danger" title="Xóa khách hàng">
 															<i class="glyphicon glyphicon-trash"></i>
 														</a>
@@ -186,7 +190,8 @@ tr:nth-child(even) {
 								tin khách hàng
 							</h4>
 						</div>
-						<div class="panel-body"></div>
+						<div class="panel-body">
+						</div>
 
 					</div>
 				</div>
@@ -234,29 +239,29 @@ tr:nth-child(even) {
 	</div>
 	<script>
 		//Script mở model Edit
-		var modal = document.getElementById("editModal");
-		var modal2 = document.getElementById("setkeyModal");
-		// Get the button that opens the modal
-		var btn = document.getElementById("btnEdit");
-		var btn2 = document.getElementById("btnSetKey");
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("closeEdit")[0];
-		var span2 = document.getElementsByClassName("closeSetKey")[0];
-		// When the user clicks on the button, open the modal
-		btn.onclick = function() {
+			var modal = document.getElementById("editModal");
+			var modal2 = document.getElementById("setkeyModal");
+			// Get the button that opens the modal
+			var btn = document.getElementById("btnEdit");
+			var btn2 = document.getElementById("btnSetKey");
+			// Get the <span> element that closes the modal
+			var span = document.getElementsByClassName("closeEdit")[0];
+			var span2 = document.getElementsByClassName("closeSetKey")[0];
+			// When the user clicks on the button, open the modal
+			btn.onclick = function() {
 			modal.style.zIndex = "100";
-		}
-		btn2.onclick = function() {
+			}
+			btn2.onclick = function() {
 			modal2.style.zIndex = "100";
-		}
+			}
 
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
+			// When the user clicks on <span> (x), close the modal
+			span.onclick = function() {
 			modal.style.zIndex = "-2";
-		}
-		span2.onclick = function() {
+			}
+			span2.onclick = function() {
 			modal2.style.zIndex = "-2";
-		}
+			}
 
 		//Script mở model Edit
 	</script>
