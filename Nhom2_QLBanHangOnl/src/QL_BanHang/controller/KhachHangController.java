@@ -65,7 +65,6 @@ public class KhachHangController {
 		KhachHang khachhang = new KhachHang();
 		khachhang.setMaKH(khachhangBean.getMaKH());
 		khachhang.setHoTenKH(khachhangBean.getHoTenKH());
-		khachhang.setNgaySinh(khachhangBean.getNgaySinh());
 		khachhang.setMatKhau(khachhangBean.getMatKhau());
 		khachhang.setSDT(khachhangBean.getSDT());
 		khachhang.setEmail(khachhangBean.getEmail());
@@ -83,7 +82,6 @@ public class KhachHangController {
 				bean = new KhachHangBean();
 				bean.setMaKH(khachhang.getMaKH());
 				bean.setHoTenKH(khachhang.getHoTenKH());
-				bean.setNgaySinh(khachhang.getNgaySinh());
 				bean.setMatKhau(khachhang.getMatKhau());
 				bean.setSDT(khachhang.getSDT());
 				bean.setEmail(khachhang.getEmail());
@@ -98,7 +96,6 @@ public class KhachHangController {
 		KhachHangBean bean = new KhachHangBean();
 		bean.setMaKH(khachhang.getMaKH());
 		bean.setHoTenKH(khachhang.getHoTenKH());
-		bean.setNgaySinh(khachhang.getNgaySinh());
 		bean.setMatKhau(khachhang.getMatKhau());
 		bean.setSDT(khachhang.getSDT());
 		bean.setEmail(khachhang.getEmail());

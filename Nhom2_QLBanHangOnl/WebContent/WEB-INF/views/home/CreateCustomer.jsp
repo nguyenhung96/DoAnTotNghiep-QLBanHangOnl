@@ -43,11 +43,6 @@
 												path="hoTenKH" value="${khachhang.hoTenKH}" /></td>
 									</tr>
 									
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="ngaySinh">Ngày sinh</form:label></td>
-										<td class="col-md-5"><form:input type="date"
-												path="ngaySinh" value="${khachhang.ngaySinh}" /></td>
-									</tr>
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="matKhau">Mật khẩu</form:label></td>
