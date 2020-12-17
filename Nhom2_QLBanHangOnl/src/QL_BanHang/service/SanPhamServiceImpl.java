@@ -38,4 +38,13 @@ public class SanPhamServiceImpl implements SanPhamService {
 		sanphamDao.deleteSanPham1(masp);
 
 	}
+
+	public void updateImage(SanPham sanpham, String tenhinh) {
+		sanphamDao.updateImage(sanpham, tenhinh);
+
+	}
+	public String locationfolder() {
+		return sanphamDao.folderlocation();
+	}
+	
 }

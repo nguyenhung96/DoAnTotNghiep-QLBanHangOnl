@@ -1,7 +1,6 @@
 package QL_BanHang.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,23 +15,29 @@ import org.springframework.web.servlet.ModelAndView;
 
 import QL_BanHang.bean.ChiTietDonHangBean;
 import QL_BanHang.bean.DonHangBean;
-import QL_BanHang.bean.DonHangBean;
+import QL_BanHang.bean.NhanVienBean;
 import QL_BanHang.model.DonHang;
 import QL_BanHang.model.DonHangChiTiet;
+import QL_BanHang.model.NhanVien;
 import QL_BanHang.service.DonHangService;
+import QL_BanHang.service.KhachHangService;
+import QL_BanHang.service.NhanVienService;
 
 @Controller
 public class DonHangController {
 	@Autowired
 	private DonHangService donhangService;
+	@Autowired
+	private NhanVienService nhanvienService;
+	@Autowired
+	private KhachHangService khachhangService;
 
-	/*
-	 * @RequestMapping(value = "home/saveorder", method = RequestMethod.POST) public
-	 * ModelAndView saveDonHang(@ModelAttribute("command") DonHangBean donhangBean,
-	 * BindingResult result) { DonHang donhang = prepareModel(donhangBean);
-	 * donhangService.addDonHang(donhang); return new
-	 * ModelAndView("redirect:/home/order.do"); }
-	 */
+	@RequestMapping(value = "home/duyetdonhang", method = RequestMethod.POST)
+	public ModelAndView saveDonHang(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
+		DonHang donhang = prepareModel(donhangBean);
+		donhangService.DuyetDonHang(donhang);
+		return new ModelAndView("redirect:/home/order.do");
+	}
 
 	@RequestMapping(value = "home/order", method = RequestMethod.GET)
 	public ModelAndView listDonHang() {
@@ -64,7 +69,22 @@ public class DonHangController {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("donhang", prepareDonHangBean(donhangService.getDonHang(donhangBean.getMaDonHang())));
 		model.put("donhangList", prepareListofBean1(donhangService.listDonHangChiTiet(donhangBean.getMaDonHang())));
+		model.put("nhanvienList", nhanvienService.listNhanVien());
 		return new ModelAndView("home/DetailOrder", model);
+	}
+
+	private DonHang prepareModel(DonHangBean donhangBean) {
+		DonHang donhang = new DonHang();
+		donhang.setMaDonHang(donhangBean.getMaDonHang());
+		/*
+		 * donhang.setKhachhang(khachhangService.getKhachHang(donhangBean.getMaKH()));
+		 */
+		 donhang.setNhanvien(nhanvienService.getNhanVien(donhangBean.getMaNhanVien()));
+		donhang.setNgayDat(donhangBean.getNgayDat());
+		donhang.setTongTien(donhangBean.getTongTien());
+		donhang.setTrangThai(donhangBean.getTrangThai());
+		donhangBean.setMaDonHang(null);
+		return donhang;
 	}
 
 	private List<DonHangBean> prepareListofBean(List<DonHang> donhangList) {
@@ -81,7 +101,9 @@ public class DonHangController {
 				bean.setTongTien(donhang.getTongTien());
 				bean.setTrangThai(donhang.getTrangThai());
 				bean.setDiaChi(donhang.getKhachhang().getDiaChi());
+				bean.setTrangThaiString(donhang.getTrangThai());
 				beans.add(bean);
+		
 			}
 		}
 		return beans;
@@ -95,6 +117,7 @@ public class DonHangController {
 		bean.setNgayDat(donhang.getNgayDat());
 		bean.setTongTien(donhang.getTongTien());
 		bean.setTrangThai(donhang.getTrangThai());
+		bean.setTrangThaiString(donhang.getTrangThai());
 		bean.setDiaChi(donhang.getKhachhang().getDiaChi());
 		bean.setTongTien(donhang.getTongTien());
 		return bean;
@@ -113,6 +136,7 @@ public class DonHangController {
 				bean.setSoLuong(donhang.getSoLuong());
 				bean.setDonGia(donhang.getSanpham().getGiaSP());
 				bean.setTongTien(donhang.getSanpham().getGiaSP() * donhang.getSoLuong());
+
 				beans.add(bean);
 			}
 		}

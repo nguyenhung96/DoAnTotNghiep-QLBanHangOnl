@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "NhanVien")
@@ -19,11 +20,12 @@ public class NhanVien implements Serializable {
 	private static final long serialVersionUID = 530795520327444207L;
 	@Id
 	@Column(name = "MaNhanVien")
+
 	private String MaNhanVien;
 
 	@Column(name = "HoTenNV")
 	private String HoTenNV;
-
+	@NotNull
 	@Column(name = "MatKhau")
 	private String MatKhau;
 
@@ -39,8 +41,8 @@ public class NhanVien implements Serializable {
 	@Column(name = "GioiTinh")
 	private boolean GioiTinh;
 
-	@Column(name = "ChucVu")
-	private String ChucVu;
+	@Column(name = "Enable")
+	private int Enable;
 
 	@Column(name = "Hinh")
 	private String Hinh;
@@ -50,9 +52,6 @@ public class NhanVien implements Serializable {
 
 	@OneToMany(mappedBy = "nhanvien", fetch = FetchType.LAZY)
 	private Collection<DonHang> donhang;
-
-	@OneToMany(mappedBy = "nhanvien", fetch = FetchType.LAZY)
-	private Collection<PhieuNhap> phieunhap;
 
 	public String getMaNhanVien() {
 		return MaNhanVien;
@@ -110,12 +109,12 @@ public class NhanVien implements Serializable {
 		GioiTinh = gioiTinh;
 	}
 
-	public String getChucVu() {
-		return ChucVu;
+	public int getEnable() {
+		return Enable;
 	}
 
-	public void setChucVu(String chucVu) {
-		ChucVu = chucVu;
+	public void setEnable(int enable) {
+		Enable = enable;
 	}
 
 	public String getHinh() {
@@ -140,14 +139,6 @@ public class NhanVien implements Serializable {
 
 	public void setDonhang(Collection<DonHang> donhang) {
 		this.donhang = donhang;
-	}
-
-	public Collection<PhieuNhap> getPhieunhap() {
-		return phieunhap;
-	}
-
-	public void setPhieunhap(Collection<PhieuNhap> phieunhap) {
-		this.phieunhap = phieunhap;
 	}
 
 	public static long getSerialversionuid() {

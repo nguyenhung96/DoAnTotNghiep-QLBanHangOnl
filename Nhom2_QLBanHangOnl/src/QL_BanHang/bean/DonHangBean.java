@@ -1,7 +1,10 @@
 package QL_BanHang.bean;
 
 import java.sql.Date;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Collection;
+import java.util.Locale;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,6 +30,8 @@ public class DonHangBean {
 	private String DiaChi;
 
 	private String GhiChu;
+
+	private String TrangThaiString;
 
 	public String getMaDonHang() {
 		return MaDonHang;
@@ -91,6 +96,19 @@ public class DonHangBean {
 	public void setGhiChu(String ghiChu) {
 		GhiChu = ghiChu;
 	}
-	
-	
+
+	public String getTrangThaiString() {
+		return TrangThaiString;
+	}
+
+	public void setTrangThaiString(int trangThai) {
+		String trangthai = null;
+		if (trangThai == 1) {
+			trangthai = "Chờ duyệt";
+		} else if (trangThai == 2) {
+			trangthai = "Đã duyệt";
+		}
+		TrangThaiString = trangthai;
+	}
+
 }

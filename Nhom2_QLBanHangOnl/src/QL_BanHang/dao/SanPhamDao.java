@@ -22,4 +22,11 @@ public interface SanPhamDao {
 
 	// Hàm xóa sp theo mã
 	public void deleteSanPham1(String masp);
+	
+	// Hàm thêm
+	public void updateImage(SanPham sanpham, String tenhinh);
+
+	
+	public String folderlocation();
+	
 }

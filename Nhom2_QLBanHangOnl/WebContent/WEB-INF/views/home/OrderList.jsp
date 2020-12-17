@@ -97,7 +97,7 @@ tr:nth-child(even) {
 									<td>${donhang.maKH}</td>
 									<td>${donhang.maNhanVien}</td>
 									<td>${donhang.ngayDat}</td>
-									<td>${donhang.trangThai}</td>
+									<td>${donhang.trangThaiString}</td>
 									<td>${donhang.tongTien}</td>
 
 									<td><a

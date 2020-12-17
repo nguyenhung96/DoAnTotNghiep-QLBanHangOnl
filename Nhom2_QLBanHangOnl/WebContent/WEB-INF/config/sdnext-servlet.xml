@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
@@ -14,19 +14,23 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 http://www.springframework.org/schema/mvc 
 http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<context:property-placeholder location="classpath:resources/database.properties" />
-	<context:component-scan base-package="QL_BanHang" />
+	<context:property-placeholder
+		location="classpath:resources/database.properties" />
+	<context:component-scan
+		base-package="QL_BanHang" />
 
-	<tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
+	<tx:annotation-driven
+		transaction-manager="hibernateTransactionManager" />
 
 	<bean id="jspViewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/WEB-INF/views/layout-dispatcher.jsp?view=" />
+		<property name="prefix"
+			value="/WEB-INF/views/layout-dispatcher.jsp?view=" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-		<bean id="localeResolver"
+	<bean id="localeResolver"
 		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
 		<property name="defaultLocale" value="vi" />
 		<property name="cookieMaxAge" value="43200" />
@@ -50,24 +54,23 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="annotatedClasses">
-			<list>	
+			<list>
 				<value>QL_BanHang.model.DonHang</value>
 				<value>QL_BanHang.model.DonHangChiTiet</value>
 				<value>QL_BanHang.model.KhachHang</value>
 				<value>QL_BanHang.model.NhaCungCap</value>
 				<value>QL_BanHang.model.NhanVien</value>
 				<value>QL_BanHang.model.NhomSanPham</value>
-				<value>QL_BanHang.model.PhieuNhap</value>
-				<value>QL_BanHang.model.PhieuNhapChiTiet</value>
+				<value>QL_BanHang.model.QuyenNV</value>
 				<value>QL_BanHang.model.SanPham</value>
-			
+
 			</list>
 		</property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>				
+				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
 			</props>
 		</property>
 	</bean>
@@ -75,5 +78,9 @@ http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	<bean id="hibernateTransactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="268435456" />
 	</bean>
 </beans>

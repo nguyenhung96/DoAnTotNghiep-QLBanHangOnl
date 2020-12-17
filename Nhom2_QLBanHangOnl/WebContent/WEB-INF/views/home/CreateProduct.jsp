@@ -5,7 +5,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -28,8 +27,8 @@
 								<div class="form-group">
 									<form:label for="lblmaSP" path="maSP" class="col-sm-4">Mã sản phẩm</form:label>
 									<form:input class="form-control" path="maSP"
-										value="${sanpham.maSP}" id="txtproductCode"/>
-								</div>	
+										value="${sanpham.maSP}" id="txtproductCode" />
+								</div>
 								<div class="form-group">
 									<form:label for="lbltenSP" path="tenSP" class="col-sm-4">Tên sản phẩm</form:label>
 									<form:input class="form-control" path="tenSP"
@@ -48,10 +47,13 @@
 										id="txtproductPrice" value="${sanpham.giaSP}" />
 								</div>
 								<div class="form-group">
-									<form:label for="lblgia" path="soLuongSP" class="col-sm-4">Số lượng còn trong kho</form:label>
-									<form:input class="form-control" path="soLuongSP"
-										id="txtproductPrice" value="${sanpham.soLuongSP}"
-										type="number" />
+									<form:label for="lblgia" path="enable" class="col-sm-4">Trạng thái</form:label>
+									<form:select class="form-control" path="enable">
+										<option value="${sanpham.enable}">${sanpham.enableString}</option>
+										<option value="1">Bật</option>
+										<option value="2">Tắt</option>
+
+									</form:select>
 								</div>
 
 							</td>
@@ -87,33 +89,11 @@
 
 									<p id="status"></p>
 									<div>
-										<img id="output" width="200px" height="200px">
+										<img src="productImg/${sanpham.hinh}" width="200px" height="200px">
 									</div>
+									
+									
 									<input type="file" id="file-selector" style="float: right;">
-									<script>
-									const status = document.getElementById('status');
-									const output = document.getElementById('output');
-									if (window.FileList && window.File && window.FileReader) {
-									document.getElementById('file-selector').addEventListener('change', event => {
-										output.src = '';
-										status.textContent = '';
-										const file = event.target.files[0];
-										if (!file.type) {
-										status.textContent = 'Error: The File.type property does not appear to be supported on this browser.';
-										return;
-										}
-										if (!file.type.match('image.*')) {
-										status.textContent = 'Error: The selected file does not appear to be an image.'
-										return;
-										}
-										const reader = new FileReader();
-										reader.addEventListener('load', event => {
-										output.src = event.target.result;
-										});
-										reader.readAsDataURL(file);
-									}); 
-									}
-								</script>
 								</div>
 
 
@@ -121,21 +101,16 @@
 
 							</td>
 						</tr>
-								<tr>
+						<tr>
 
-										<td colspan="2"><input type="submit"
-											class="btn btn-mini btn-primary glyphicon glyphicon-plus-sign btncreate"
-											value="Lưu sản phẩm" /></td>
-									</tr>
+							<td colspan="2"><input type="submit"
+								class="btn btn-mini btn-primary glyphicon glyphicon-plus-sign btncreate"
+								value="Lưu sản phẩm" /></td>
+						</tr>
 					</table>
 				</form:form>
 			</div>
-<!-- 			<div style="height: 50px;">
-				<a style="float: right; margin-right: 35px;"
-					class="btn btn-mini btn-primary btncreate" href="#"> <i
-					class="glyphicon glyphicon-plus-sign"></i> Lưu sản phẩm
-				</a>
-			</div> -->
+
 		</div>
 
 	</div>

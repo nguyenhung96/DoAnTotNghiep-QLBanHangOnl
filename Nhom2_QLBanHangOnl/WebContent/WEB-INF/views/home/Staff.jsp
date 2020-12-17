@@ -138,7 +138,7 @@
 											<th>SĐT</th>
 											<th>Số CMND</th>
 											<th>Giới Tính</th>
-											<th>Chức Vụ</th>
+											<th>TrangThai</th>
 											<th>Ảnh</th>
 											<th>Địa Chỉ</th>
 											<th>Hoạt động</th>
@@ -153,8 +153,8 @@
 												<td><c:out value="${nhanvien.email}" /></td>
 												<td><c:out value="${nhanvien.SDT}" /></td>
 												<td><c:out value="${nhanvien.CMND}" /></td>
-												<td><c:out value="${nhanvien.gioiTinh}" /></td>
-												<td><c:out value="${nhanvien.chucVu}" /></td>
+												<td><c:out value="${nhanvien.gioiTinhString}" /></td>
+												<td><c:out value="${nhanvien.enableString}" /></td>
 												<td><c:out value="${nhanvien.hinh}" /></td>
 												<td><c:out value="${nhanvien.diaChi}" /></td>
 												<td>

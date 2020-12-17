@@ -5,7 +5,6 @@ import java.sql.Date;
 public class KhachHangBean {
 	private String MaKH;
 	private String HoTenKH;
-	private Date NgaySinh;
 	private String MatKhau;
 	private String SDT;
 	private String Email;
@@ -22,12 +21,6 @@ public class KhachHangBean {
 	}
 	public void setHoTenKH(String hoTenKH) {
 		HoTenKH = hoTenKH;
-	}
-	public Date getNgaySinh() {
-		return NgaySinh;
-	}
-	public void setNgaySinh(Date ngaySinh) {
-		NgaySinh = ngaySinh;
 	}
 	public String getMatKhau() {
 		return MatKhau;

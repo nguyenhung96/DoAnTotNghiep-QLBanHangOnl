@@ -16,4 +16,8 @@ public interface DonHangDao {
 	public void deleteDonHang(DonHang madh);
 	
 	public List<DonHangChiTiet> listDonHangChiTiet(String madh);
+	
+	public void DuyetDonHang(DonHang donhang);
+	
+
 }

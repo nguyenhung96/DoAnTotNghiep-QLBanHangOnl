@@ -1,5 +1,6 @@
 package QL_BanHang.dao;
 
+import java.io.File;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -16,12 +17,12 @@ public class SanPhamDaoImpl implements SanPhamDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	//Hàm thêm sản phẩm
+	// Hàm thêm sản phẩm
 	public void addSanPham(SanPham sanpham) {
 		sessionFactory.getCurrentSession().saveOrUpdate(sanpham);
 	}
-	
-	//Hàm lấy list sản phẩm
+
+	// Hàm lấy list sản phẩm
 	@SuppressWarnings("unchecked")
 	public List<SanPham> listSanPham() {
 		return (List<SanPham>) sessionFactory.getCurrentSession().createCriteria(SanPham.class).list();
@@ -45,4 +46,17 @@ public class SanPhamDaoImpl implements SanPhamDao {
 
 	}
 
+//Hàm update image
+	public void updateImage(SanPham sanpham, String tenhinh) {
+		sessionFactory.getCurrentSession()
+				.createQuery("update SanPham set Hinh ='" + tenhinh + "' where MaSP = '" + sanpham.getMaSP() + "'")
+				.executeUpdate();
+
+	}
+
+	public String folderlocation() {
+		String basePath = new File("").getAbsolutePath();
+		System.out.println(basePath);
+		return basePath;
+	}
 }

@@ -16,5 +16,9 @@ public interface SanPhamService {
 	public void deleteSanPham(SanPham sanpham);
 	
 	public void deleteSanPham1(String masp);
+	
+	public void updateImage	(SanPham sanpham, String tenhinh);
+	
+	public String locationfolder();
 }
 

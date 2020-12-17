@@ -22,16 +22,9 @@
 						<li><a href="home/supplier.do">Nhà cung cấp</a></li>
 					</ul> <!-- /nav-second-level --></li>
 				<li class=""><a href="home/order.do"><i
-						class="fa fa-book nav_icon"></i>Đơn hàng</a></li>
+						class="fa fa-book nav_icon"></i>Đơn hàng</span></a></li>
 				<li><a href="home/khachhang.do"><i
 						class="fa fa-th-large nav_icon"></i>Khách hàng</span></a></li>
-				<li><a href="#"><i class="fa fa-envelope nav_icon"></i>Quản
-						lý kho<span class="fa arrow"></span></a>
-					<ul class="nav nav-second-level collapse">
-						<li><a href="ProductInbound.html">Tạo phiếu nhập kho <span
-								class="nav-badge-btm"></span></a></li>
-						<li><a href="home/phieunhap.do">Danh sách phiếu nhập</a></li>
-					</ul> <!-- //nav-second-level --></li>
 				<li><a href="home/nhansu.do"><i
 						class="fa fa-table nav_icon"></i>Nhân sự</a></li>
 				<li><a href="Revenue.html"><i class="fa fa-table nav_icon"></i>Thống

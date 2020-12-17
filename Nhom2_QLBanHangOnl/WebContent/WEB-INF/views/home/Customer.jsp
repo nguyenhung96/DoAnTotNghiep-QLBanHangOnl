@@ -133,7 +133,6 @@
 										<tr>
 											<th>Mã KH</th>
 											<th>Tên KH</th>
-											<th>Ngày sinh</th>
 											<th>Mật Khẩu</th>
 											<th>SĐT</th>
 											<th>Email</th>
@@ -146,7 +145,6 @@
 											<tr>
 												<td><c:out value="${khachhang.maKH}" /></td>
 												<td><c:out value="${khachhang.hoTenKH}" /></td>
-												<td><c:out value="${khachhang.ngaySinh}" /></td>
 												<td><c:out value="${khachhang.matKhau}" /></td>
 												<td><c:out value="${khachhang.SDT}" /></td>
 												<td><c:out value="${khachhang.email}" /></td>

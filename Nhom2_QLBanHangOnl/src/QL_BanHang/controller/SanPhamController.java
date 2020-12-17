@@ -1,16 +1,26 @@
 package QL_BanHang.controller;
 
+import java.io.File;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.jasper.tagplugins.jstl.core.If;
+import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import QL_BanHang.bean.SanPhamBean;
@@ -33,6 +43,25 @@ public class SanPhamController {
 	public ModelAndView saveSanPham(@ModelAttribute("command") SanPhamBean sanphamBean, BindingResult result) {
 		SanPham sanpham = prepareModel(sanphamBean);
 		sanphamService.addSanPham(sanpham);
+		return new ModelAndView("redirect:/home/sanpham.do");
+	}
+
+	@RequestMapping(value = "home/updateimage", method = RequestMethod.POST)
+	public ModelAndView UpdateImage(@ModelAttribute("command") SanPhamBean sanphamBean, BindingResult result,
+			HttpServletRequest request) {
+		SanPham sanpham = prepareModel1(sanphamBean);
+		try {
+			String location = request.getServletContext().getRealPath("productImg");
+			System.out.println(location);
+			MultipartFile multipartFile = sanphamBean.getMultipartFile();
+			String fileName = multipartFile.getOriginalFilename();
+			File file = new File(location, fileName);
+			multipartFile.transferTo(file);
+			sanphamService.updateImage(sanpham, fileName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return new ModelAndView("redirect:/home/sanpham.do");
 	}
 
@@ -63,13 +92,23 @@ public class SanPhamController {
 	}
 
 	@RequestMapping(value = "home/editsanpham", method = RequestMethod.GET)
-	public ModelAndView editSanPham(@ModelAttribute("command") SanPhamBean sanphamBean, BindingResult result) {
+	public ModelAndView editSanPham(@ModelAttribute("command") SanPhamBean sanphamBean, BindingResult result,
+			HttpServletRequest request) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("sanpham", prepareSanPhamBean(sanphamService.getSanPham(sanphamBean.getMaSP())));
-		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
+		String location = request.getServletContext().getRealPath("/WEB-INF/productImg/");
+		model.put("locationfolder", location);
 		model.put("nhacungcapList", nhacungcapService.listNhaCungCap());
 		model.put("nhomsanphamList", nhomsanphamService.listNhomSanPham());
 		return new ModelAndView("home/CreateProduct", model);
+	}
+
+	@RequestMapping(value = "home/imageproduct", method = RequestMethod.GET)
+	public ModelAndView themanh(@ModelAttribute("command") SanPhamBean sanphamBean, BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("sanpham", prepareSanPhamBean(sanphamService.getSanPham(sanphamBean.getMaSP())));
+		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
+		return new ModelAndView("home/AddImageProduct", model);
 	}
 
 	private SanPham prepareModel(SanPhamBean sanphamBean) {
@@ -77,11 +116,11 @@ public class SanPhamController {
 		sanpham.setMaSP(sanphamBean.getMaSP());
 		sanpham.setTenSP(sanphamBean.getTenSP());
 		sanpham.setThongTinSP(sanphamBean.getThongTinSP());
-		sanpham.setHinh(sanphamBean.getHinh());
+		sanpham.setHinh(sanpham.getHinh()); 
 		sanpham.setGiaSP(sanphamBean.getGiaSP());
 		sanpham.setNhomsanpham(nhomsanphamService.getNhomSanPham(sanphamBean.getId_NhomSP()));
 		sanpham.setNhacungcap(nhacungcapService.getNhaCungCap(sanphamBean.getMaNhaCungCap()));
-		sanpham.setSoLuongSP(sanphamBean.getSoLuongSP());
+		sanpham.setEnable(sanphamBean.getEnable());
 		sanphamBean.setMaSP(null);
 		return sanpham;
 	}
@@ -100,8 +139,8 @@ public class SanPhamController {
 				bean.setGiaSP(sanpham.getGiaSP());
 				bean.setTenNhomSP(sanpham.getNhomsanpham().getTenNhomSP());
 				bean.setMaNhaCungCap(sanpham.getNhacungcap().getMaNhaCungCap());
-				bean.setSoLuongSP(sanpham.getSoLuongSP());
 				bean.setId_NhomSP(sanpham.getNhomsanpham().getId());
+				bean.setEnableString(sanpham.getEnable());
 				beans.add(bean);
 			}
 		}
@@ -118,8 +157,16 @@ public class SanPhamController {
 		bean.setGiaSP(sanpham.getGiaSP());
 		bean.setTenNhomSP(sanpham.getNhomsanpham().getTenNhomSP());
 		bean.setMaNhaCungCap(sanpham.getNhacungcap().getMaNhaCungCap());
-		bean.setSoLuongSP(sanpham.getSoLuongSP());
 		bean.setId_NhomSP(sanpham.getNhomsanpham().getId());
+		bean.setEnable(sanpham.getEnable());
+		bean.setEnableString(sanpham.getEnable());
 		return bean;
+	}
+
+	private SanPham prepareModel1(SanPhamBean sanphamBean) {
+		SanPham sanpham = new SanPham();
+		sanpham.setMaSP(sanphamBean.getMaSP());
+		sanpham.setHinh(sanphamBean.getHinh());
+		return sanpham;
 	}
 }
