@@ -104,9 +104,9 @@ public class DonHangBean {
 	public void setTrangThaiString(int trangThai) {
 		String trangthai = null;
 		if (trangThai == 1) {
-			trangthai = "Chưa duyệt";
+			trangthai = "Chờ duyệt";
 		} else if (trangThai == 2) {
-			trangthai = "Đang giao";
+			trangthai = "Đã duyệt";
 		}
 		TrangThaiString = trangthai;
 	}
