@@ -27,8 +27,7 @@ public class NhaCungCap implements Serializable {
 
 	private String DiaChi;
 
-	@OneToMany(mappedBy = "nhacungcap")
-	private Collection<PhieuNhapChiTiet> phieunhapchitiet;
+
 
 	@OneToMany(mappedBy = "nhacungcap")
 	private Collection<NhomSanPham> nhomsanpham;
@@ -73,13 +72,6 @@ public class NhaCungCap implements Serializable {
 		DiaChi = diaChi;
 	}
 
-	public Collection<PhieuNhapChiTiet> getPhieunhapchitiet() {
-		return phieunhapchitiet;
-	}
-
-	public void setPhieunhapchitiet(Collection<PhieuNhapChiTiet> phieunhapchitiet) {
-		this.phieunhapchitiet = phieunhapchitiet;
-	}
 
 	public Collection<NhomSanPham> getNhomsanpham() {
 		return nhomsanpham;
