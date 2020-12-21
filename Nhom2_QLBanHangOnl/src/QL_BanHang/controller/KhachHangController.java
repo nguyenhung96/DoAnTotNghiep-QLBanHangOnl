@@ -45,7 +45,7 @@ public class KhachHangController {
 
 	@RequestMapping(value = "home/deletekhachhang", method = RequestMethod.GET)
 	public ModelAndView editKhachHang(@ModelAttribute("command") KhachHangBean khachhangBean, BindingResult result) {
-		khachhangService.deleteKhachHang(prepareModel(khachhangBean));
+		khachhangService.deleteKhachHang(prepareModel1(khachhangBean));
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("khachhang", null);
 		model.put("khachhangList", prepareListofBean(khachhangService.listKhachHang()));
@@ -53,15 +53,33 @@ public class KhachHangController {
 	}
 
 	@RequestMapping(value = "home/editkhachhang", method = RequestMethod.GET)
-	public ModelAndView deleteKhachHang(@ModelAttribute("command")  KhachHangBean khachhangBean,
-			BindingResult result) {
+	public ModelAndView deleteKhachHang(@ModelAttribute("command") KhachHangBean khachhangBean, BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("khachhang", prepareKhachHangBean(khachhangService.getKhachHang(khachhangBean.getMaKH())));
-		model.put("khachhangList",  prepareListofBean(khachhangService.listKhachHang()));
+		model.put("khachhangList", prepareListofBean(khachhangService.listKhachHang()));
 		return new ModelAndView("home/CreateCustomer", model);
 	}
-	
-	private KhachHang prepareModel(KhachHangBean khachhangBean){
+
+	private KhachHang prepareModel(KhachHangBean khachhangBean) {
+		KhachHang khachhang = new KhachHang();
+		String makh = null;
+		if (khachhangBean.getMaKH() == "") {
+			makh = khachhangService.genratemaKH();
+		} else {
+			makh = khachhangBean.getMaKH();
+		}
+			
+		khachhang.setMaKH(makh);
+		khachhang.setHoTenKH(khachhangBean.getHoTenKH());
+		khachhang.setMatKhau(khachhangBean.getMatKhau());
+		khachhang.setSDT(khachhangBean.getSDT());
+		khachhang.setEmail(khachhangBean.getEmail());
+		khachhang.setDiaChi(khachhangBean.getDiaChi());
+		khachhangBean.setMaKH(null);
+		return khachhang;
+	}
+
+	private KhachHang prepareModel1(KhachHangBean khachhangBean) {
 		KhachHang khachhang = new KhachHang();
 		khachhang.setMaKH(khachhangBean.getMaKH());
 		khachhang.setHoTenKH(khachhangBean.getHoTenKH());
@@ -72,13 +90,13 @@ public class KhachHangController {
 		khachhangBean.setMaKH(null);
 		return khachhang;
 	}
-	
-	private List<KhachHangBean> prepareListofBean(List<KhachHang> khachhangList){
+
+	private List<KhachHangBean> prepareListofBean(List<KhachHang> khachhangList) {
 		List<KhachHangBean> beans = null;
-		if(khachhangList != null && !khachhangList.isEmpty()){
+		if (khachhangList != null && !khachhangList.isEmpty()) {
 			beans = new ArrayList<KhachHangBean>();
 			KhachHangBean bean = null;
-			for(KhachHang khachhang : khachhangList){
+			for (KhachHang khachhang : khachhangList) {
 				bean = new KhachHangBean();
 				bean.setMaKH(khachhang.getMaKH());
 				bean.setHoTenKH(khachhang.getHoTenKH());
@@ -91,8 +109,8 @@ public class KhachHangController {
 		}
 		return beans;
 	}
-	
-	private KhachHangBean prepareKhachHangBean(KhachHang khachhang){
+
+	private KhachHangBean prepareKhachHangBean(KhachHang khachhang) {
 		KhachHangBean bean = new KhachHangBean();
 		bean.setMaKH(khachhang.getMaKH());
 		bean.setHoTenKH(khachhang.getHoTenKH());

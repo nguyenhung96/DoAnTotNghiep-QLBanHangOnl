@@ -13,4 +13,6 @@ public interface KhachHangDao {
 	public KhachHang getKhachHang(String makh);
 	
 	public void deleteKhachHang(KhachHang khachhang);
+	
+	public String genratemaKH();
 }
