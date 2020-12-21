@@ -102,7 +102,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group">
-									<div class="autocomplete col-md-8 " id="suggestProduct">
+							<!-- 		<div class="autocomplete col-md-8 " id="suggestProduct">
 										<span class="input-icon input-icon-right" style="width: 100%;">
 											<input type="text"
 											placeholder="Nhập tên hoặc mã khách hàng và nhấn Tìm kiếm"
@@ -113,7 +113,8 @@
 												<span>Tìm kiếm</span> <i class="ace-icon fa fa-search"></i>
 											</button>
 										</span>
-									</div>
+									</div>    
+									 -->
 									<div class="col-md-4">
 										<a style="float: right;"
 											class="btn btn-mini btn-primary btncreate"

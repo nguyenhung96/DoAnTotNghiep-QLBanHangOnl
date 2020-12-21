@@ -82,7 +82,7 @@ tr:nth-child(even) {
 						<div class="col-md-4">
 							<a style="float: right;"
 								class="btn btn-mini btn-primary btncreate"
-								href="home/CreateProduct.do"> <i
+								href="home/createproduct.do"> <i
 								class="glyphicon glyphicon-plus-sign"></i> Thêm sản phẩm
 							</a>
 						</div>
@@ -107,7 +107,7 @@ tr:nth-child(even) {
 								<th>Giá bán</th>
 								<th>Loại sản phẩm</th>
 								<th>Nhà cung cấp</th>
-								<th>Số lượng</th>
+								<th>Trạng thái</th>
 								<th>Hoạt động</th>
 							</tr>
 						</thead>
@@ -119,21 +119,23 @@ tr:nth-child(even) {
 									<td>${sanpham.tenSP}</td>
 									<td>${sanpham.thongTinSP}</td>
 									<td>${sanpham.hinh}</td>
-									<td>${sampham.giaSP}</td>
+									<td class="dolars">${sanpham.giaSP}</td>
 									<td>${sanpham.tenNhomSP}</td>
 									<td>${sanpham.maNhaCungCap}</td>
-									<td>${sanpham.soLuongSP}</td>
+									<td>${sanpham.enableString}</td>
 									<td>
 										<div class="hidden-phone visible-desktop action-buttons">
-											<a
-												href="home/editsanpham.do?MaSP=${sanpham.maSP}"
+											<a href="home/editsanpham.do?MaSP=${sanpham.maSP}"
 												class="btn btn-minier btn-success" id="btnEdit"
 												title="Chỉnh sửa thông tin sản phẩm"> <i
 												class="glyphicon glyphicon-edit"></i>
-											</a> <a
-												href="home/deletesanpham.do?MaSP=${sanpham.maSP}"
+											</a> <a href="home/deletesanpham.do?MaSP=${sanpham.maSP}"
 												class="btn btn-minier btn-danger" title="Xóa sản phẩm">
 												<i class="glyphicon glyphicon-trash"></i>
+											</a> <a href="home/imageproduct.do?MaSP=${sanpham.maSP}"
+												class="btn btn-minier btn-success" id="btnImage"
+												title="Chỉnh sửa thông tin sản phẩm"> <i
+												class="glyphicon glyphicon-edit"></i>
 											</a>
 
 

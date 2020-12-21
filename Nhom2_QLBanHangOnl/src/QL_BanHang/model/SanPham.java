@@ -39,17 +39,15 @@ public class SanPham implements Serializable {
 	@JoinColumn(name = "Id_NhomSP")
 	private NhomSanPham nhomsanpham;
 
-	@Column(name = "MaNhaCungCap")
-	private String MaNhaCungCap;
+	@ManyToOne
+	@JoinColumn(name = "MaNhaCungCap")
+	private NhaCungCap nhacungcap;
 
-	@Column(name = "SoLuongSP")
-	private Integer SoLuongSP;
+	@Column(name = "Enable")
+	private int Enable;
 
 	@OneToMany(mappedBy = "sanpham")
 	private Collection<DonHangChiTiet> donhangchitiet;
-
-	@OneToMany(mappedBy = "sanpham")
-	private Collection<PhieuNhapChiTiet> phieunhapchitiet;
 
 	public String getMaSP() {
 		return MaSP;
@@ -99,20 +97,20 @@ public class SanPham implements Serializable {
 		this.nhomsanpham = nhomsanpham;
 	}
 
-	public String getMaNhaCungCap() {
-		return MaNhaCungCap;
+	public NhaCungCap getNhacungcap() {
+		return nhacungcap;
 	}
 
-	public void setMaNhaCungCap(String maNhaCungCap) {
-		MaNhaCungCap = maNhaCungCap;
+	public void setNhacungcap(NhaCungCap nhacungcap) {
+		this.nhacungcap = nhacungcap;
 	}
 
-	public Integer getSoLuongSP() {
-		return SoLuongSP;
+	public int getEnable() {
+		return Enable;
 	}
 
-	public void setSoLuongSP(Integer soLuongSP) {
-		SoLuongSP = soLuongSP;
+	public void setEnable(int enable) {
+		Enable = enable;
 	}
 
 	public Collection<DonHangChiTiet> getDonhangchitiet() {
@@ -121,14 +119,6 @@ public class SanPham implements Serializable {
 
 	public void setDonhangchitiet(Collection<DonHangChiTiet> donhangchitiet) {
 		this.donhangchitiet = donhangchitiet;
-	}
-
-	public Collection<PhieuNhapChiTiet> getPhieunhapchitiet() {
-		return phieunhapchitiet;
-	}
-
-	public void setPhieunhapchitiet(Collection<PhieuNhapChiTiet> phieunhapchitiet) {
-		this.phieunhapchitiet = phieunhapchitiet;
 	}
 
 	public static long getSerialversionuid() {
