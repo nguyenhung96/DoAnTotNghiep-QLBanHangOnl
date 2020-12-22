@@ -77,14 +77,13 @@
 				<ul>
 					<li class="dropdown profile_details_drop "><a href="#"
 						class="dropdown-toggle " data-toggle="dropdown"
-						aria-expanded="false"> 	
-						<c:forEach var="map" items="${sessionScope.nhanviendangnhap}">					
-									<div class="user-name" >
-										<span>${map.value.nhanvien.maNhanVien}</span>
-										<span style="color: orange;">${map.value.nhanvien.hoTenNV}</span>
-									</div>
-									</c:forEach>
-									 <i class="fa fa-angle-down lnr"></i> <i
+						aria-expanded="false"> <c:forEach var="map"
+								items="${sessionScope.nhanviendangnhap}">
+								<div class="user-name">
+									<span>${map.value.nhanvien.maNhanVien}</span> <span
+										style="color: orange;">${map.value.nhanvien.hoTenNV}</span>
+								</div>
+							</c:forEach> <i class="fa fa-angle-down lnr"></i> <i
 							class="fa fa-angle-up lnr"></i>
 							<div class="clearfix"></div>
 					</a>
@@ -92,8 +91,8 @@
 							<li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>
 							<li><a href="#"><i class="fa fa-user"></i> Thông tin tài
 									khoản</a></li>
-							<li><a href="#"><i class="fa fa-sign-out"></i> Đăng xuất</a>
-							</li>
+							<li><a href='<c:url value="/j_spring_security_logout" />'><i
+									class="fa fa-sign-out"></i> Đăng xuất</a></li>
 						</ul></li>
 				</ul>
 			</div>

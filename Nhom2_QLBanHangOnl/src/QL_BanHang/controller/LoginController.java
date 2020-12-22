@@ -1,5 +1,6 @@
 package QL_BanHang.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,71 +31,35 @@ import QL_BanHang.service.NhanVienService;
 
 @Controller
 public class LoginController {
-	@RequestMapping(value = "/login/login", method = RequestMethod.GET)
-	public String gotoLogin(@ModelAttribute("command") DangNhapBean dangnhap, BindingResult result) {
+
+	@RequestMapping(value="/home/index", method = RequestMethod.GET)
+	public String executeSecurity(ModelMap model, Principal principal ) {
+		String name = principal.getName();
+		model.addAttribute("author", name);
+		model.addAttribute("message", "Welcome To Login Form Based Spring Security Example!!!");
+		return "home/index";
+ 
+	}
+ 
+	@RequestMapping(value="/login/login", method = RequestMethod.GET)
+	public String login(ModelMap model) {
+ 
 		return "login/Login";
+ 
 	}
-
-	@Autowired
-	SessionFactory factory;
-	@Autowired
-	private NhanVienService nhanvienService;
-
-	@Transactional
-	@RequestMapping(value = "/login/Login", method = RequestMethod.POST)
-	public String validate1(ModelMap model, HttpSession session, @ModelAttribute("dangnhap") DangNhapBean dangnhap,
-			BindingResult errors) {
-		HashMap<String, LoginBean> nhanvien = (HashMap<String, LoginBean>) session.getAttribute("nhanviendangnhap");
-		nhanvien = new HashMap<>();
-		Session session1 = factory.getCurrentSession();
-		String hql = "FROM NhanVien";
-		Query query = session1.createQuery(hql);
-		List<NhanVien> list = query.list();
-		for (NhanVien i : list) {
-			if ((dangnhap.getMaNhanVien().equals(i.getMaNhanVien()))
-					&& (dangnhap.getMatKhau().equals(i.getMatKhau()))) {
-				if (i.getEnable() == 1) {
-					NhanVien nhanvientrue = nhanvienService.getNhanVien(i.getMaNhanVien());
-					LoginBean lgBean = new LoginBean();
-					lgBean.setNhanvien(nhanvientrue);
-					nhanvien.put(i.getMaNhanVien(), lgBean);
-					session.setAttribute("nhanviendangnhap", nhanvien);
-					return "home/index";
-
-				} else if (i.getEnable() == 2) {
-					System.out.println("Tai khoan da bi vo hieu hoa");
-					return ("redirect:/login/login.do");
-				}
-			}
-		}
-		return ("redirect:/login/login.do");
-
+ 
+	@RequestMapping(value="/login/fail2login", method = RequestMethod.GET)
+	public String loginerror(ModelMap model) {
+ 
+		model.addAttribute("error", "true");
+		return "login/Login";
+ 
 	}
-	// pripare model
-	private NhanVien prepareModel(DangNhapBean dangnhapBean) {
-		NhanVien nhanvien = new NhanVien();
-		nhanvien.setMaNhanVien(dangnhapBean.getMaNhanVien());
-		nhanvien.setEnable(dangnhapBean.getEnable());
-		nhanvien.setMatKhau(dangnhapBean.getMatKhau());
-		dangnhapBean.setMaNhanVien(null);
-		return nhanvien;
+ 
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logout(ModelMap model) {
+ 
+		return "login/Login";
+ 
 	}
-
-	// pripare list of bean
-	private List<DangNhapBean> prepareListofBean(List<NhanVien> nhanvienList) {
-		List<DangNhapBean> beans = null;
-		if (nhanvienList != null && !nhanvienList.isEmpty()) {
-			beans = new ArrayList<DangNhapBean>();
-			DangNhapBean bean = null;
-			for (NhanVien nhanvien : nhanvienList) {
-				bean = new DangNhapBean();
-				bean.setMaNhanVien(nhanvien.getMaNhanVien());
-				bean.setMatKhau(nhanvien.getMatKhau());
-				bean.setEnable(nhanvien.getEnable());
-				beans.add(bean);
-			}
-		}
-		return beans;
-	}
-
 }
