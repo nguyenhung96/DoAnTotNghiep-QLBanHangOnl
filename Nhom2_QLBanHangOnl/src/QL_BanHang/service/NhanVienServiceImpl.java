@@ -39,4 +39,8 @@ public class NhanVienServiceImpl implements NhanVienService{
 	public void deleteNhanVien(NhanVien nhanvien) {
 		nhanvienDao.deleteNhanVien(nhanvien);
 	}
+	
+	public String genratemaNV() {
+		return nhanvienDao.genratemaNV();
+	}
 }

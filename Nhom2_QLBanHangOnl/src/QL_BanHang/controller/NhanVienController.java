@@ -45,7 +45,7 @@ public class NhanVienController {
 
 	@RequestMapping(value = "home/deletenhanvien", method = RequestMethod.GET)
 	public ModelAndView editNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
-		nhanvienService.deleteNhanVien(prepareModel(nhanvienBean));
+		nhanvienService.deleteNhanVien(prepareModel1(nhanvienBean));
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("nhanvien", null);
 		model.put("nhanvienList", prepareListofBean(nhanvienService.listNhanVien()));
@@ -62,6 +62,29 @@ public class NhanVienController {
 
 	private NhanVien prepareModel(NhanVienBean nhanvienBean) {
 		NhanVien nhanvien = new NhanVien();
+		String manv = null;
+		if (nhanvienBean.getMaNhanVien() == "") {
+			manv = nhanvienService.genratemaNV();
+		} else {
+			manv = nhanvienBean.getMaNhanVien();
+		}
+		nhanvien.setMaNhanVien(manv);
+		nhanvien.setHoTenNV(nhanvienBean.getHoTenNV());
+		nhanvien.setMatKhau(nhanvienBean.getMatKhau());
+		nhanvien.setEmail(nhanvienBean.getEmail());
+		nhanvien.setDiaChi(nhanvienBean.getDiaChi());
+		nhanvien.setCMND(nhanvienBean.getCMND());
+		nhanvien.setGioiTinh(nhanvienBean.isGioiTinh());
+		nhanvien.setHinh(nhanvienBean.getHinh());
+		nhanvien.setEnable(nhanvienBean.getEnable());
+		nhanvien.setSDT(nhanvienBean.getSDT());
+		nhanvienBean.setMaNhanVien(null);
+		return nhanvien;
+	}
+	
+	private NhanVien prepareModel1(NhanVienBean nhanvienBean) {
+		NhanVien nhanvien = new NhanVien();
+		
 		nhanvien.setMaNhanVien(nhanvienBean.getMaNhanVien());
 		nhanvien.setHoTenNV(nhanvienBean.getHoTenNV());
 		nhanvien.setMatKhau(nhanvienBean.getMatKhau());

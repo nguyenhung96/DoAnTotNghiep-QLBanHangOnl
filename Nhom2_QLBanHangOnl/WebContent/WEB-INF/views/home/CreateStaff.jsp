@@ -7,6 +7,11 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<style type="text/css">
+.col-md-5{
+margin: 0 auto;
+}
+</style>
 </head>
 <body>
 	<!-- main content start-->
@@ -29,52 +34,59 @@
 						</div>
 						<div class="panel-body">
 							<form:form method="POST"
-								action="/Nhom2_QLBanHangOnl/home/savenhanvien.do">
+								action="/Nhom2_QLBanHangOnl/home/savenhanvien.do" onsubmit="return CreateStaff()">
 								<table>
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="maNhanVien">Mã nhân viên</form:label></td>
-										<td class="col-md-5"><form:input path="maNhanVien"
+										<td class="col-md-5"><form:input readonly="true" path="maNhanVien"
 												class="form-control " value="${nhanvien.maNhanVien}" /></td>
 									</tr>
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="hoTenNV">Tên nhân viên</form:label></td>
-										<td class="col-md-5"><form:input class="form-control "
-												path="hoTenNV" value="${nhanvien.hoTenNV}" /></td>
+										<td class="col-md-5"><form:input id="TenNV" class="form-control "
+												path="hoTenNV" value="${nhanvien.hoTenNV}" />
+												<span id="checkTenNV"></span></td>
 									</tr>
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="matKhau">Mật khẩu</form:label></td>
-										<td class="col-md-5"><form:input path="matKhau"
-												class="form-control " value="${nhanvien.matKhau}" /></td>
+										<td class="col-md-5"><form:input id="pass" path="matKhau"
+												class="form-control " value="${nhanvien.matKhau}" />
+												<span id="checkpass"></span></td>
+												
 									</tr>
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="email">Email</form:label></td>
-										<td class="col-md-5"><form:input path="email"
-												class="form-control " value="${nhanvien.email}" /></td>
+										<td class="col-md-5"><form:input id="email" path="email"
+												class="form-control " value="${nhanvien.email}" />
+												<span id="checkEmail"></span></td>
 									</tr>
 
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="SDT">Số ĐT</form:label></td>
-										<td class="col-md-5"><form:input path="SDT"
-												class="form-control " value="${nhanvien.SDT}" /></td>
+										<td class="col-md-5"><form:input id="SDT" path="SDT"
+												class="form-control " value="${nhanvien.SDT}" />
+												<span id="checkSDT"></span></td>
 									</tr>
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="CMND">Số CMND</form:label></td>
-										<td class="col-md-5"><form:input path="CMND"
-												class="form-control " value="${nhanvien.CMND}" /></td>
+										<td class="col-md-5"><form:input type="number" id="CMND" path="CMND"
+												class="form-control " value="${nhanvien.CMND}" />
+												<span id="checkCMND"></span></td>
 									</tr>
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="gioiTinh">Giới tính</form:label></td>
-										<td class="col-md-5"><form:input path="gioiTinh"
-												class="form-control " value="${nhanvien.gioiTinh}" /></td>
+										<td class="col-md-5"><form:input id="Gioitinh" path="gioiTinh"
+												class="form-control " value="${nhanvien.gioiTinh}" />
+												<span id="checkGioitinh"></span></td>
 									</tr>
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="enable">Trạng thái</form:label></td>
-										<td class="col-md-5"><form:select path="enable"
+										<td class="col-md-5"><form:select id="stt" path="enable"
 												class="form-control">
 												<option value="${nhanvien.enable}">${nhanvien.enableString}</option>
 												<option value="1">Bật</option>
@@ -83,15 +95,12 @@
 											</form:select></td>
 
 									</tr>
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="hinh">Giới tính</form:label></td>
-										<td class="col-md-5"><form:input path="hinh"
-												class="form-control " value="${nhanvien.gioiTinh}" /></td>
-									</tr>
+									
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="diaChi">Địa chỉ</form:label></td>
-										<td class="col-md-5"><form:input path="diaChi"
-												class="form-control " value="${nhanvien.diaChi}" /></td>
+										<td class="col-md-5"><form:input id="Diachi" path="diaChi"
+												class="form-control " value="${nhanvien.diaChi}" />
+												<span id="checkDiachi"></span></td>
 									</tr>
 									<tr>
 
@@ -99,7 +108,100 @@
 											class="btn btn-mini btn-primary glyphicon glyphicon-plus-sign btncreate"
 											value="Lưu" /></td>
 									</tr>
-
+									
+									<script>
+							
+											function CreateStaff(){
+								var TenNV= document.getElementById('TenNV').value;
+								var pass= document.getElementById('pass').value;
+								var emailID= document.getElementById('email').value;
+								var SDT= document.getElementById('SDT').value;
+								var 	CMND = document.getElementById('CMND').value;
+								var Gioitinh= document.getElementById('Gioitinh').value;
+								var stt= document.getElementById('stt').value;
+								var Diachi= document.getElementById('Diachi').value;
+								
+								var regExp = /^(0[234][0-9]{8}|1[89]00[0-9]{4})$/;
+								 atpos = emailID.indexOf("@");
+						         dotpos = emailID.lastIndexOf(".");
+								
+							    var status = false;
+							    
+							    if (TenNV == '') {
+									document.getElementById("checkTenNV").innerHTML = 
+							            " <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập Tên nhân viên!</span> ";
+							         status= false;
+								}
+								else{
+									document.getElementById("checkTenNV").innerHTML = 
+							            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+							            status= true;
+								}
+							    if (pass == '') {
+									document.getElementById("checkpass").innerHTML = 
+							            " <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập mật khẩu!</span> ";
+							         status= false;
+								}
+								else{
+									document.getElementById("checkpass").innerHTML = 
+							            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+							          
+								}
+							    if(emailID !==''){
+									if(atpos < 1 || ( dotpos - atpos < 2 )){
+										document.getElementById("checkEmail").innerHTML = 
+								            " <span class='fas fa-window-close' style='color:red;'>Email không đúng định dạng!</span> ";
+								         status=false;
+								}
+									else{
+										document.getElementById("checkEmail").innerHTML = 
+								            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+									}
+								}
+								else{
+									document.getElementById("checkEmail").innerHTML = 
+										" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập email!</span> ";
+								}
+							    if(SDT!==''){
+									if(regExp.test(SDT) == false){
+									document.getElementById("checkSDT").innerHTML = 
+							            " <span class='fas fa-window-close' style='color:red;'>Số điện thoại không đúng định dạng!</span> ";
+							         status=false;
+									}
+									else{
+										document.getElementById("checkSDT").innerHTML = 
+								            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+									}
+								}
+								else{
+									document.getElementById("checkSDT").innerHTML = 
+							            " <span class='fas fa-window-close' style='color:red;'>Bạn chưa nhập số điện thoại!</span> ";
+							         status=false;
+								}
+							    if (CMND.length <9 || CMND.length >9) {
+									document.getElementById("checkCMND").innerHTML = 
+							            " <span class='fas fa-window-close' style='color:red;'>CMND phải có 9 chữ số!</span> ";
+							         status= false;
+								}
+								else{
+									document.getElementById("checkCMND").innerHTML = 
+							            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+							          
+								}
+							    
+							    if(Diachi ==''){
+									document.getElementById("checkDiachi").innerHTML = 
+										" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập địa chỉ!</span> ";
+										status = false;
+								}
+								else{
+									document.getElementById("checkDiachi").innerHTML = 
+							            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+								}
+								return status;
+							}
+							
+							</script>
 								</table>
 							</form:form>
 						</div>

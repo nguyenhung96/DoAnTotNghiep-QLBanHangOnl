@@ -12,6 +12,9 @@
 	color: red;
 	font-style: italic;
 }
+.login100-form-btn{
+background: border-box !important;
+}
 </style>
 </head>
 <body>
@@ -59,37 +62,84 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('template/images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form:form class="login100-form validate-form" action="login/Login.do">
+				<form:form class="login100-form validate-form" action="login/Login.do" onsubmit="return checklogin()">
 					<span class="login100-form-title p-b-49">
 						Login
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
 						<span class="label-input100">Username</span>
-						<form:input class="input100" type="text" name="username" placeholder="Type your username" path="maNhanVien" />
+						<form:input id="ID" class="input100" type="text" name="username" placeholder="Tên đăng nhập" path="maNhanVien" />
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
-
+						<span id="login"></span>
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">Password</span>
-						<form:password class="input100" type="password" name="pass" placeholder="Type your password" path="matKhau" />
+						<form:password id="password" class="input100" type="password" name="pass" placeholder="Mật khẩu" path="matKhau" />
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
-					
-					<div class="text-right p-t-8 p-b-31">
-						<a href="#">
-							Forgot password?
-						</a>
-					</div>
+					<span id="pass"></span>
+					<br>
+					<br>
 					
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">
-								Login
-							</button>
+							<input type="submit"  class="login100-form-btn" value="Login"/>
+								
 						</div>
 					</div>
+					<script type="text/javascript">
+					 function checklogin(){
+						 String hql = "FROM NhanVien";
+							Query query = sessionFactory.getCurrentSession().createQuery(hql);
+							List<NhanVien> list = query.list();
+							NhanVien ID = list.get(list.size());
+						 IDdata = ID.getMaNhanVien();
+							passdata = ID.getMatKhau();
+						var ID = document.getElementById('ID').value;
+						var pw = document.getElementById('password').value;
+						
+						var status = false;
+						if(ID !== ''){
+							if(ID !== IDdata){
+								document.getElementById("login").innerHTML=
+									" <span class='fas fa-window-close' style='color:red;'>Nhập sai tên đăng nhập!</span> ";
+						 
+						        status = false;
+							}
+							else{
+								document.getElementById("login").innerHTML = 
+						            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+						            status = true;
+							}
+						}
+						else{
+							document.getElementById("login").innerHTML=
+								" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập tên đăng nhập!</span> ";
+					        status = false;
+						}
+						
+						if(pw !== ''){
+							if(pw !== passdata){
+								document.getElementById("pass").innerHTML=
+									" <span class='fas fa-window-close' style='color:red;'>Sai mật khẩu!</span> ";
+						        status = false;
+							}
+							else{
+								document.getElementById("pass").innerHTML = 
+						            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+							}
+						}
+						
+						else{
+							document.getElementById("pass").innerHTML=
+								" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập mật khẩu!</span> ";
+					        status = false;
+						}
+						return status;
+					}
+					</script>
 
 					<!-- <div class="txt1 text-center p-t-54 p-b-20">
 						<span>

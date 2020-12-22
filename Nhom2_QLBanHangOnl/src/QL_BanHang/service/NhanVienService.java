@@ -19,4 +19,6 @@ public interface NhanVienService {
 	public NhanVien getNhanVien(String manv);
 	
 	public void deleteNhanVien(NhanVien nhanvien);
+	
+	public String genratemaNV();
 }
