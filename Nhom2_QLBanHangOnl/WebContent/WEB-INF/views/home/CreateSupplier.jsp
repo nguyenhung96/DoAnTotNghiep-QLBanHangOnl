@@ -12,6 +12,9 @@
 
 	width: 184% !important;
 }
+.ThongbaoEr{
+margin: 0 auto;
+}
 </style>
 </head>
 <body>
@@ -35,37 +38,42 @@
 						</div>
 						<div class="panel-body">
 							<form:form method="POST"
-								action="/Nhom2_QLBanHangOnl/home/savesupplier.do">
+								action="/Nhom2_QLBanHangOnl/home/savesupplier.do" onsubmit="return CreateSupplier()">
 								<table>
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-5"><form:label path="maNhaCungCap">Mã nhà CC</form:label></td>
-										<td class="col-md-8"><form:input path="maNhaCungCap"
-												class="form-control " value="${nhacungcap.maNhaCungCap}" /></td>
+										<td class="col-md-8"><form:input id="MaNCC" path="maNhaCungCap"
+												class="form-control " value="${nhacungcap.maNhaCungCap}" />
+												<span class="ThongbaoEr" id="checkMaNCC"></span></td>
 									</tr>
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-5"><form:label path="tenNhaCungCap">Tên nhà CC</form:label></td>
-										<td class="col-md-8"><form:input class="form-control "
-												path="tenNhaCungCap" value="${nhacungcap.tenNhaCungCap}" /></td>
+										<td class="col-md-8"><form:input id="TenNCC" class="form-control "
+												path="tenNhaCungCap" value="${nhacungcap.tenNhaCungCap}" />
+												<span class="ThongbaoEr" id="checkTenNCC"></span></td>
 									</tr>
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-5"><form:label path="email">Email</form:label></td>
-										<td class="col-md-8"><form:input path="email"
-												class="form-control " value="${nhacungcap.email}" /></td>
+										<td class="col-md-8"><form:input id="Email" path="email"
+												class="form-control " value="${nhacungcap.email}" />
+												<span class="ThongbaoEr" id="checkEmail"></span></td>
 									</tr>
 
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-5"><form:label path="SDT">Số ĐT</form:label></td>
-										<td class="col-md-8"><form:input path="SDT"
-												class="form-control " value="${nhacungcap.SDT}" /></td>
+										<td class="col-md-8"><form:input id="SDT" path="SDT"
+												class="form-control " value="${nhacungcap.SDT}" />
+												<span class="ThongbaoEr" id="checkSDT"></span></td>
 									</tr>
 									<tr class="form-group col-md-11">
 										<td class="col-md-5"><form:label path="diaChi">Địa chỉ</form:label></td>
-										<td class="col-md-8"><form:input path="diaChi"
-												class="form-control " value="${nhacungcap.diaChi}" /></td>
+										<td class="col-md-8"><form:input id="Diachi" path="diaChi"
+												class="form-control " value="${nhacungcap.diaChi}" />
+												<span class="ThongbaoEr" id="checkDiachi"></span></td>
 									</tr>
 									<tr>
 
@@ -73,11 +81,87 @@
 											class="btn btn-mini btn-primary glyphicon glyphicon-plus-sign btncreate"
 											value="Lưu" /></td>
 									</tr>
-
+								<script>
+								function CreateSupplier(){
+									var MaNCC = document.getElementById('MaNCC').value;
+									var TenNCC = document.getElementById('TenNCC').value;
+									var emailID = document.getElementById('Email').value;
+									var SDT = document.getElementById('SDT').value;
+									var Diachi = document.getElementById('Diachi').value;
+									var regExp = /^(0[234][0-9]{8}|1[89]00[0-9]{4})$/;
+									 atpos = emailID.indexOf("@");
+							         dotpos = emailID.lastIndexOf(".");
+									
+								    var status = false;
+								    
+								    if (MaNCC == '') {
+										document.getElementById("checkMaNCC").innerHTML = 
+								            " <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập Mã nhà cung cấp!</span> ";
+								         status= false;
+									}
+									else{
+										document.getElementById("checkMaNCC").innerHTML = 
+								            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+								            status= true;
+									}
+								    if (TenNCC == '') {
+										document.getElementById("checkTenNCC").innerHTML = 
+								            " <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập tên nhà cung cấp!</span> ";
+								         status= false;
+									}
+									else{
+										document.getElementById("checkTenNCC").innerHTML = 
+								            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+								            status= true;
+									}
+								    if(emailID !==''){
+										if(atpos < 1 || ( dotpos - atpos < 2 )){
+											document.getElementById("checkEmail").innerHTML = 
+									            " <span class='fas fa-window-close' style='color:red;'>Email không đúng định dạng!</span> ";
+									         status=false;
+									}
+										else{
+											document.getElementById("checkEmail").innerHTML = 
+									            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+										}
+									}
+									else{
+										document.getElementById("checkEmail").innerHTML = 
+											" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập email!</span> ";
+									}
+								    if(SDT!==''){
+										if(regExp.test(SDT) == false){
+										document.getElementById("checkSDT").innerHTML = 
+								            " <span class='fas fa-window-close' style='color:red;'>Số điện thoại không đúng định dạng!</span> ";
+								         status=false;
+										}
+										else{
+											document.getElementById("checkSDT").innerHTML = 
+									            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+										}
+									}
+									else{
+										document.getElementById("checkSDT").innerHTML = 
+								            " <span class='fas fa-window-close' style='color:red;'>Bạn chưa nhập số điện thoại!</span> ";
+								         status=false;
+									}
+								    
+								    if(Diachi ==''){
+										document.getElementById("checkDiachi").innerHTML = 
+											" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập địa chỉ!</span> ";
+											status = false;
+									}
+									else{
+										document.getElementById("checkDiachi").innerHTML = 
+								            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+									}
+									return status;
+								}
+								</script>
 								</table>
 							</form:form>
 						</div>
-					</div>
+					</div>	
 				</div>
 			</div>
 

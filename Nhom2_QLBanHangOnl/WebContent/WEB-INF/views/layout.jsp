@@ -40,7 +40,7 @@
 	</div>
 	<div class="footer">
 		<p>
-			&copy; 2020 Novus Admin Panel. All Rights Reserved | Design by <a
+			&copy; FPT Polytechnic | Design by <a
 				href="https://www.facebook.com/thienpham20042000" target="_blank">Team
 				đồ án</a>
 		</p>

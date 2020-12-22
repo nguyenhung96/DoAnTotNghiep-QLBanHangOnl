@@ -14,4 +14,6 @@ public interface NhanVienDao {
 	public NhanVien getNhanVien(String manv);
 	
 	public void deleteNhanVien(NhanVien nhanvien);
+	
+	public String genratemaNV();
 }
