@@ -77,15 +77,16 @@
 				<ul>
 					<li class="dropdown profile_details_drop "><a href="#"
 						class="dropdown-toggle " data-toggle="dropdown"
-						aria-expanded="false"> <%-- <%-- 								<c:forEach var="nv" items="${nhanvien}">
-									<div class="user-name">
-										<span>${nv.maNhanVien}</span>
-										<span style="color: orange;">${nv.chucVu}</span>
+						aria-expanded="false"> 	
+						<c:forEach var="map" items="${sessionScope.nhanviendangnhap}">					
+									<div class="user-name" >
+										<span>${map.value.nhanvien.maNhanVien}</span>
+										<span style="color: orange;">${map.value.nhanvien.hoTenNV}</span>
 									</div>
-										</c:forEach> --%> --%> <i class="fa fa-angle-down lnr"></i> <i
+									</c:forEach>
+									 <i class="fa fa-angle-down lnr"></i> <i
 							class="fa fa-angle-up lnr"></i>
 							<div class="clearfix"></div>
-
 					</a>
 						<ul class="dropdown-menu drp-mnu">
 							<li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>
