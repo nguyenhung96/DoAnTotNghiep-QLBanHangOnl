@@ -91,52 +91,33 @@ background: border-box !important;
 					</div>
 					<script type="text/javascript">
 					 function checklogin(){
-						 String hql = "FROM NhanVien";
-							Query query = sessionFactory.getCurrentSession().createQuery(hql);
-							List<NhanVien> list = query.list();
-							NhanVien ID = list.get(list.size());
-						 IDdata = ID.getMaNhanVien();
-							passdata = ID.getMatKhau();
+						 
 						var ID = document.getElementById('ID').value;
 						var pw = document.getElementById('password').value;
 						
 						var status = false;
-						if(ID !== ''){
-							if(ID !== IDdata){
-								document.getElementById("login").innerHTML=
-									" <span class='fas fa-window-close' style='color:red;'>Nhập sai tên đăng nhập!</span> ";
-						 
-						        status = false;
-							}
-							else{
-								document.getElementById("login").innerHTML = 
-						            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
-						            status = true;
-							}
-						}
-						else{
+						if(ID == ''){
 							document.getElementById("login").innerHTML=
 								" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập tên đăng nhập!</span> ";
 					        status = false;
 						}
+							else{
+								document.getElementById("login").innerHTML = 
+						            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+						            status = true;
+							
+						}
 						
-						if(pw !== ''){
-							if(pw !== passdata){
-								document.getElementById("pass").innerHTML=
-									" <span class='fas fa-window-close' style='color:red;'>Sai mật khẩu!</span> ";
-						        status = false;
+						if(pw == ''){
+							document.getElementById("pass").innerHTML=
+								" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập mật khẩu!</span> ";
+					        status = false;
 							}
 							else{
 								document.getElementById("pass").innerHTML = 
 						            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
 							}
-						}
 						
-						else{
-							document.getElementById("pass").innerHTML=
-								" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập mật khẩu!</span> ";
-					        status = false;
-						}
 						return status;
 					}
 					</script>
