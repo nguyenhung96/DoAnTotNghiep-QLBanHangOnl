@@ -28,28 +28,23 @@ background: border-box !important;
 						Login
 					</span>
 
-					<tr class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
-						<span class="label-input100">Username</span>
-						<td><input id="ID" class="input100" type="text" name="j_username" placeholder="Tên đăng nhập" /></td>
-						<span class="focus-input100" data-symbol="&#xf206;"></span>
+					<tr class="wrap-input100 validate-input m-b-23" >
+						<td><span class="label-input100">Username</span></td>
+						<td><input id="ID" class="input100" type="text" name="j_username" placeholder="Tên đăng nhập" />
+						<span id="login"></span></td>
+						<td><span class="focus-input100" data-symbol="&#xf206;"></span></td>
 					</tr>
-						<span id="login"></span>
-					<tr class="wrap-input100 validate-input" data-validate="Password is required">
-						<span class="label-input100">Password</span>
-						<td><input id="password" class="input100" type="password" name="j_password" placeholder="Mật khẩu" /></td>
-						<span class="focus-input100" data-symbol="&#xf190;"></span>
+						
+					<tr class="wrap-input100 validate-input" >
+						<td><span class="label-input100">Password</span></td>
+						<td><input id="password" class="input100" type="password" name="j_password" placeholder="Mật khẩu" />
+						<span id="pass"></span></td>
+						<td><span class="focus-input100" data-symbol="&#xf190;"></span></td>
 					</tr>
-					<span id="pass"></span>
-					<br>
-					<br>
 					
-					<tr class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<input type="submit"  class="login100-form-btn" value="submit"/>
-								
-						</div>
-					</tr>
+				
+					
+					
 					<script type="text/javascript">
 					 function checklogin(){
 						 
@@ -59,7 +54,7 @@ background: border-box !important;
 						var status = false;
 						if(ID == ''){
 							document.getElementById("login").innerHTML=
-								" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập tên đăng nhập!</span> ";
+								" <span  style='color:red;'>Vui lòng nhập tên đăng nhập!</span> ";
 					        status = false;
 						}
 							else{
@@ -71,7 +66,7 @@ background: border-box !important;
 						
 						if(pw == ''){
 							document.getElementById("pass").innerHTML=
-								" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập mật khẩu!</span> ";
+								" <span  style='color:red;'>Vui lòng nhập mật khẩu!</span> ";
 					        status = false;
 							}
 							else{
@@ -83,6 +78,15 @@ background: border-box !important;
 					}
 					</script>
 </table>
+<br>
+<br>
+<tr class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<input type="submit"  class="login100-form-btn" value="submit"/>
+								
+						</div>
+					</tr>
 				</form>
 			</div>
 		</div>

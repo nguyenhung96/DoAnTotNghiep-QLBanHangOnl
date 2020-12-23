@@ -15,4 +15,6 @@ public interface KhachHangDao {
 	public void deleteKhachHang(KhachHang khachhang);
 	
 	public String genratemaKH();
+	
+	public int demKhachHang();
 }

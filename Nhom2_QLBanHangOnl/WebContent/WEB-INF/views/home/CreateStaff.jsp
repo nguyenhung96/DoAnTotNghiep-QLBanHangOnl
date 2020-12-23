@@ -34,7 +34,7 @@ margin: 0 auto;
 						</div>
 						<div class="panel-body">
 							<form:form method="POST"
-								action="/Nhom2_QLBanHangOnl/home/savenhanvien.do" onsubmit="return CreateStaff()">
+								action="/Nhom2_QLBanHangOnl/admin/savenhanvien.do" onsubmit="return CreateStaff()">
 								<table>
 
 									<tr class="form-group col-md-11">

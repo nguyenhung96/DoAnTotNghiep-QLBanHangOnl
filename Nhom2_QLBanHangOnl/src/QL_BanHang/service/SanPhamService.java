@@ -20,5 +20,7 @@ public interface SanPhamService {
 	public void updateImage	(SanPham sanpham, String tenhinh);
 	
 	public String locationfolder();
+	
+	public String autoGenrate();
 }
 

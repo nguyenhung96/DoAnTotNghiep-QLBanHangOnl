@@ -53,4 +53,13 @@ public class KhachHangDaoImpl implements KhachHangDao {
 
 	}
 
+	@Override
+	public int demKhachHang() {
+		String hql = "FROM KhachHang";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<KhachHang> list = query.list();
+		int sokh = list.size();
+		return sokh;
+	}
+
 }

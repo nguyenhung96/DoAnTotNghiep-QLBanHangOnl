@@ -3,11 +3,13 @@ package QL_BanHang.dao;
 import java.io.File;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import QL_BanHang.model.NhaCungCap;
+import QL_BanHang.model.NhanVien;
 import QL_BanHang.model.NhomSanPham;
 import QL_BanHang.model.SanPham;
 
@@ -58,5 +60,26 @@ public class SanPhamDaoImpl implements SanPhamDao {
 		String basePath = new File("").getAbsolutePath();
 		System.out.println(basePath);
 		return basePath;
+	}
+
+	@Override
+	public String autoGenrate() {
+		int coso = 0;
+		String hql = "FROM SanPham";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<SanPham> list = query.list();
+		SanPham lastId = list.get(list.size() - 1);
+		coso = Integer.parseInt(lastId.getMaSP().toString().substring(2)) + 1;
+		if (list.size() == 0) {
+			coso = 1;
+			return "SP00" + coso;
+		} else if (coso < 10) {
+			return "SP00" + coso;
+		} else if (10 <= coso && 100 > coso) {
+			return "SP0" + coso;
+		} else {
+			return "SP" + coso;
+		}
+
 	}
 }

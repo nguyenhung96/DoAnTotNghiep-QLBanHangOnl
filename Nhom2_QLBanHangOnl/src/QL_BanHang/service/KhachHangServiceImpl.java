@@ -38,4 +38,9 @@ public class KhachHangServiceImpl implements KhachHangService {
 		return khachhangDao.genratemaKH();
 	}
 
+	@Override
+	public int demKhachHang() {
+		return khachhangDao.demKhachHang();
+	}
+
 }

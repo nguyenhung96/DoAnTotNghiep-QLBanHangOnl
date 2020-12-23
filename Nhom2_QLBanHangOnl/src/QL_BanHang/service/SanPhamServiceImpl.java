@@ -46,5 +46,10 @@ public class SanPhamServiceImpl implements SanPhamService {
 	public String locationfolder() {
 		return sanphamDao.folderlocation();
 	}
+
+	public String autoGenrate() {
+		
+		return sanphamDao.autoGenrate();
+	}
 	
 }

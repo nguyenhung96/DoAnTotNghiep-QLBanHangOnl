@@ -29,4 +29,6 @@ public interface SanPhamDao {
 	
 	public String folderlocation();
 	
+	public String autoGenrate();
+	
 }

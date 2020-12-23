@@ -113,7 +113,13 @@ public class SanPhamController {
 
 	private SanPham prepareModel(SanPhamBean sanphamBean) {
 		SanPham sanpham = new SanPham();
-		sanpham.setMaSP(sanphamBean.getMaSP());
+		String masp = null;
+		if (sanphamBean.getMaSP().isEmpty()) {
+			masp = sanphamService.autoGenrate();
+		} else {
+			masp = sanphamBean.getMaSP();
+		}
+		sanpham.setMaSP(masp);
 		sanpham.setTenSP(sanphamBean.getTenSP());
 		sanpham.setThongTinSP(sanphamBean.getThongTinSP());
 		sanpham.setHinh(sanpham.getHinh()); 
@@ -121,6 +127,13 @@ public class SanPhamController {
 		sanpham.setNhomsanpham(nhomsanphamService.getNhomSanPham(sanphamBean.getId_NhomSP()));
 		sanpham.setNhacungcap(nhacungcapService.getNhaCungCap(sanphamBean.getMaNhaCungCap()));
 		sanpham.setEnable(sanphamBean.getEnable());
+		sanphamBean.setMaSP(null);
+		return sanpham;
+	}
+	
+	private SanPham prepareModel2(SanPhamBean sanphamBean) {
+		SanPham sanpham = new SanPham();
+		sanpham.setMaSP(sanphamBean.getMaSP());
 		sanphamBean.setMaSP(null);
 		return sanpham;
 	}

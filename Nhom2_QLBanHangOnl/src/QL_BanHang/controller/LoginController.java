@@ -27,16 +27,18 @@ import QL_BanHang.bean.LoginBean;
 import QL_BanHang.bean.NhanVienBean;
 import QL_BanHang.model.NhanVien;
 import QL_BanHang.model.SanPham;
+import QL_BanHang.service.KhachHangService;
 import QL_BanHang.service.NhanVienService;
 
 @Controller
 public class LoginController {
+	@Autowired KhachHangService khachhangservice;
 
 	@RequestMapping(value="/home/index", method = RequestMethod.GET)
 	public String executeSecurity(ModelMap model, Principal principal ) {
 		String name = principal.getName();
 		model.addAttribute("author", name);
-		model.addAttribute("message", "Welcome To Login Form Based Spring Security Example!!!");
+		model.addAttribute("sokhachhang", khachhangservice.demKhachHang());
 		return "home/index";
  
 	}

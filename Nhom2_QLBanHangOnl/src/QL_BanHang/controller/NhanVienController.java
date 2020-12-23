@@ -26,7 +26,7 @@ public class NhanVienController {
 	public ModelAndView saveNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
 		NhanVien nhanvien = prepareModel(nhanvienBean);
 		nhanvienService.addNhanVien(nhanvien);
-		return new ModelAndView("redirect:/home/nhansu.do");
+		return new ModelAndView("redirect:/admin/nhansu.do");
 	}
 
 	@RequestMapping(value = "admin/nhansu", method = RequestMethod.GET)
@@ -45,11 +45,11 @@ public class NhanVienController {
 
 	@RequestMapping(value = "admin/deletenhanvien", method = RequestMethod.GET)
 	public ModelAndView editNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
-		nhanvienService.deleteNhanVien(prepareModel(nhanvienBean));
+		nhanvienService.deleteNhanVien(prepareModel1(nhanvienBean));
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("nhanvien", null);
 		model.put("nhanvienList", prepareListofBean(nhanvienService.listNhanVien()));
-		return new ModelAndView("redirect:/home/nhansu.do");
+		return new ModelAndView("redirect:/admin/nhansu.do");
 	}
 
 	@RequestMapping(value = "admin/editnhanvien", method = RequestMethod.GET)
@@ -62,7 +62,13 @@ public class NhanVienController {
 
 	private NhanVien prepareModel(NhanVienBean nhanvienBean) {
 		NhanVien nhanvien = new NhanVien();
-		nhanvien.setMaNhanVien(nhanvienBean.getMaNhanVien());
+		String manv = null;
+		if (nhanvienBean.getMaNhanVien().isEmpty()) {
+			manv = nhanvienService.genratemaNV();
+		} else {
+			manv = nhanvienBean.getMaNhanVien();
+		}
+		nhanvien.setMaNhanVien(manv);
 		nhanvien.setHoTenNV(nhanvienBean.getHoTenNV());
 		nhanvien.setMatKhau(nhanvienBean.getMatKhau());
 		nhanvien.setEmail(nhanvienBean.getEmail());
@@ -75,7 +81,12 @@ public class NhanVienController {
 		nhanvienBean.setMaNhanVien(null);
 		return nhanvien;
 	}
-
+	private NhanVien prepareModel1(NhanVienBean nhanvienBean) {
+		NhanVien nhanvien = new NhanVien();
+		nhanvien.setMaNhanVien(nhanvienBean.getMaNhanVien());
+		nhanvienBean.setMaNhanVien(null);
+		return nhanvien;
+	}
 	private List<NhanVienBean> prepareListofBean(List<NhanVien> nhanvienList) {
 		List<NhanVienBean> beans = null;
 		if (nhanvienList != null && !nhanvienList.isEmpty()) {

@@ -11,11 +11,11 @@ import QL_BanHang.model.KhachHang;
 import QL_BanHang.model.NhanVien;
 
 @Repository("nhanvienDao")
-public class NhanVienDaoImpl  implements NhanVienDao{
+public class NhanVienDaoImpl implements NhanVienDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public void addNhanVien(NhanVien nhanvien) {
 		sessionFactory.getCurrentSession().saveOrUpdate(nhanvien);
 	}
@@ -30,9 +30,11 @@ public class NhanVienDaoImpl  implements NhanVienDao{
 	}
 
 	public void deleteNhanVien(NhanVien nhanvien) {
-		sessionFactory.getCurrentSession().createQuery("DELETE FROM NhanVien WHERE MaNhanVien = '"+ nhanvien.getMaNhanVien()+"'").executeUpdate();
+		sessionFactory.getCurrentSession()
+				.createQuery("DELETE FROM NhanVien WHERE MaNhanVien = '" + nhanvien.getMaNhanVien() + "'")
+				.executeUpdate();
 	}
-	
+
 	public String genratemaNV() {
 		int coso = 0;
 		String hql = "FROM NhanVien";

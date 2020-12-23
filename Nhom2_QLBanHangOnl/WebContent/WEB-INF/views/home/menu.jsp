@@ -25,7 +25,7 @@
 						class="fa fa-book nav_icon"></i>Đơn hàng</span></a></li>
 				<li><a href="home/khachhang.do"><i
 						class="fa fa-th-large nav_icon"></i>Khách hàng</span></a></li>
-				<li><a href="home/nhansu.do"><i
+				<li><a href="admin/nhansu.do"><i
 						class="fa fa-table nav_icon"></i>Nhân sự</a></li>
 				<li><a href="Revenue.html"><i class="fa fa-table nav_icon"></i>Thống
 						kê doanh thu</a></li>

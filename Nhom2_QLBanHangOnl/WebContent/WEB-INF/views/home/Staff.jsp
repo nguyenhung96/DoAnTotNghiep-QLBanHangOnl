@@ -117,7 +117,7 @@
 									<div class="col-md-4">
 										<a style="float: right;"
 											class="btn btn-mini btn-primary btncreate"
-											href="home/createstaff.do"> <i
+											href="admin/createstaff.do"> <i
 											class="glyphicon glyphicon-plus-sign"></i> Thêm nhân viên
 										</a>
 									</div>
@@ -160,14 +160,14 @@
 												<td>
 													<div class="hidden-phone visible-desktop action-buttons">
 														<a
-															href="home/editnhanvien.do?MaNhanVien=${nhanvien.maNhanVien}"
+															href="admin/editnhanvien.do?MaNhanVien=${nhanvien.maNhanVien}"
 															class="btn btn-minier btn-success" id="btnEdit"
 															title="Chỉnh sửa thông tin"> <i
 															class="glyphicon glyphicon-edit"></i>
 														</a> 
 														
 														<a
-															href="home/deletenhanvien.do?MaNhanVien=${nhanvien.maNhanVien}"
+															href="admin/deletenhanvien.do?MaNhanVien=${nhanvien.maNhanVien}"
 															class="btn btn-minier btn-danger" title="Xóa nhân viên">
 															<i class="glyphicon glyphicon-trash"></i>
 														</a>
