@@ -91,7 +91,6 @@ public class DonHangController {
 		}
 		return beans;
 	}
-
 	private DonHangBean prepareDonHangBean(DonHang donhang) {
 		DonHangBean bean = new DonHangBean();
 		bean.setMaDonHang(donhang.getMaDonHang());
