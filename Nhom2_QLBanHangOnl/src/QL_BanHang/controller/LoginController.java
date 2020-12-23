@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import QL_BanHang.bean.DangNhapBean;
-import QL_BanHang.bean.LoginBean;
 import QL_BanHang.bean.NhanVienBean;
 import QL_BanHang.model.NhanVien;
 import QL_BanHang.model.SanPham;
@@ -32,36 +31,37 @@ import QL_BanHang.service.NhanVienService;
 
 @Controller
 public class LoginController {
-	@Autowired KhachHangService khachhangservice;
+	@Autowired
+	KhachHangService khachhangservice;
 
-	@RequestMapping(value="/home/index", method = RequestMethod.GET)
-	public String executeSecurity(ModelMap model, Principal principal ) {
+	@RequestMapping(value = "/home/index", method = RequestMethod.GET)
+	public String executeSecurity(ModelMap model, Principal principal) {
 		String name = principal.getName();
 		model.addAttribute("author", name);
 		model.addAttribute("sokhachhang", khachhangservice.demKhachHang());
 		return "home/index";
- 
+
 	}
- 
-	@RequestMapping(value="/login/login", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/login/login", method = RequestMethod.GET)
 	public String login(ModelMap model) {
- 
+
 		return "login/Login";
- 
+
 	}
- 
-	@RequestMapping(value="/login/fail2login", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/login/fail2login", method = RequestMethod.GET)
 	public String loginerror(ModelMap model) {
- 
+
 		model.addAttribute("error", "true");
 		return "login/Login";
- 
+
 	}
- 
-	@RequestMapping(value="/logout", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(ModelMap model) {
- 
+
 		return "login/Login";
- 
+
 	}
 }

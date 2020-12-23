@@ -39,9 +39,19 @@ public class DonHangServiceImpl implements DonHangService {
 		return donhangDao.listDonHangChiTiet(madh);
 	}
 
-	@Override
 	public void DuyetDonHang(DonHang donhang) {
 		donhangDao.DuyetDonHang(donhang);
+
+	}
+
+	public String autoGenrate() {
+
+		return donhangDao.autoGenrate();
+	}
+
+	@Override
+	public void createdonhangchitiet(DonHangChiTiet donHangChiTiet) {
+		donhangDao.createdonhangchitiet(donHangChiTiet);
 
 	}
 }

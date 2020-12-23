@@ -71,7 +71,7 @@ public class KhachHangController {
 			
 		khachhang.setMaKH(makh);
 		khachhang.setHoTenKH(khachhangBean.getHoTenKH());
-		khachhang.setMatKhau(khachhangBean.getMatKhau());
+		khachhang.setMatKhau("123");
 		khachhang.setSDT(khachhangBean.getSDT());
 		khachhang.setEmail(khachhangBean.getEmail());
 		khachhang.setDiaChi(khachhangBean.getDiaChi());

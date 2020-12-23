@@ -45,25 +45,6 @@ public class DonHangController {
 		model.put("donhangList", prepareListofBean(donhangService.listDonHang()));
 		return new ModelAndView("home/OrderList", model);
 	}
-
-	/*
-	 * @RequestMapping(value = "home/createorder", method = RequestMethod.GET)
-	 * public ModelAndView addDonHang(@ModelAttribute("command") DonHangBean
-	 * donhangBean, BindingResult result) { Map<String, Object> model = new
-	 * HashMap<String, Object>(); model.put("donhangList",
-	 * prepareListofBean(donhangService.listDonHang())); return new
-	 * ModelAndView("home/CreateOrder", model); }
-	 */
-
-	/*
-	 * @RequestMapping(value = "home/deleteorder", method = RequestMethod.GET)
-	 * public ModelAndView editDonHang(@ModelAttribute("command") DonHangBean
-	 * donhangBean, BindingResult result) {
-	 * donhangService.deleteDonHang(prepareModel(donhangBean)); Map<String, Object>
-	 * model = new HashMap<String, Object>(); model.put("donhang", null);
-	 * model.put("donhangList", prepareListofBean(donhangService.listDonHang()));
-	 * return new ModelAndView("redirect:/home/order.do"); }
-	 */
 	@RequestMapping(value = "home/detailorder", method = RequestMethod.GET)
 	public ModelAndView editDonHang(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -76,10 +57,7 @@ public class DonHangController {
 	private DonHang prepareModel(DonHangBean donhangBean) {
 		DonHang donhang = new DonHang();
 		donhang.setMaDonHang(donhangBean.getMaDonHang());
-		/*
-		 * donhang.setKhachhang(khachhangService.getKhachHang(donhangBean.getMaKH()));
-		 */
-		 donhang.setNhanvien(nhanvienService.getNhanVien(donhangBean.getMaNhanVien()));
+		donhang.setNhanvien(nhanvienService.getNhanVien(donhangBean.getMaNhanVien()));
 		donhang.setNgayDat(donhangBean.getNgayDat());
 		donhang.setTongTien(donhangBean.getTongTien());
 		donhang.setTrangThai(donhangBean.getTrangThai());
@@ -95,7 +73,12 @@ public class DonHangController {
 			for (DonHang donhang : donhangList) {
 				bean = new DonHangBean();
 				bean.setMaDonHang(donhang.getMaDonHang());
-				bean.setMaNhanVien(donhang.getNhanvien().getMaNhanVien());
+				try {
+					bean.setMaNhanVien(donhang.getNhanvien().getMaNhanVien());
+				}catch(Exception e) {
+					bean.setMaNhanVien("chưa được duyệt");
+				}
+		
 				bean.setMaKH(donhang.getKhachhang().getMaKH());
 				bean.setNgayDat(donhang.getNgayDat());
 				bean.setTongTien(donhang.getTongTien());
@@ -103,7 +86,7 @@ public class DonHangController {
 				bean.setDiaChi(donhang.getKhachhang().getDiaChi());
 				bean.setTrangThaiString(donhang.getTrangThai());
 				beans.add(bean);
-		
+
 			}
 		}
 		return beans;
@@ -112,7 +95,11 @@ public class DonHangController {
 	private DonHangBean prepareDonHangBean(DonHang donhang) {
 		DonHangBean bean = new DonHangBean();
 		bean.setMaDonHang(donhang.getMaDonHang());
-		bean.setMaNhanVien(donhang.getNhanvien().getMaNhanVien());
+		try {
+			bean.setMaNhanVien(donhang.getNhanvien().getMaNhanVien());
+		}catch(Exception e) {
+			bean.setMaNhanVien("...");
+		}
 		bean.setMaKH(donhang.getKhachhang().getMaKH());
 		bean.setNgayDat(donhang.getNgayDat());
 		bean.setTongTien(donhang.getTongTien());

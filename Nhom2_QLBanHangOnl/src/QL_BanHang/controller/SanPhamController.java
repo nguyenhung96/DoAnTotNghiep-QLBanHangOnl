@@ -1,20 +1,24 @@
 package QL_BanHang.controller;
 
-import java.io.File;
+import java.io.File; 
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.jasper.tagplugins.jstl.core.If;
 import org.apache.taglibs.standard.lang.jstl.test.beans.PublicBean1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +27,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import QL_BanHang.bean.KhachHangBean;
 import QL_BanHang.bean.SanPhamBean;
+import QL_BanHang.model.Cart;
+import QL_BanHang.model.DonHang;
+import QL_BanHang.model.DonHangChiTiet;
+import QL_BanHang.model.KhachHang;
 import QL_BanHang.model.SanPham;
+import QL_BanHang.service.DonHangService;
+import QL_BanHang.service.KhachHangService;
 import QL_BanHang.service.NhaCungCapService;
 import QL_BanHang.service.NhomSanPhamService;
 import QL_BanHang.service.SanPhamService;
@@ -38,6 +49,112 @@ public class SanPhamController {
 	private NhaCungCapService nhacungcapService;
 	@Autowired
 	private NhomSanPhamService nhomsanphamService;
+	@Autowired
+	private KhachHangService khachhangService;
+	@Autowired
+	private DonHangService donhangService;
+
+	// Nga
+	@RequestMapping(value = "Trangchu/index", method = RequestMethod.GET)
+	public ModelAndView ShowTrangChu() {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
+
+		return new ModelAndView("pages/index", model);
+	}
+	@RequestMapping(value = "pages/opencheckout", method = RequestMethod.GET)
+	public ModelAndView opencheckout(ModelMap mm, HttpSession session,@ModelAttribute("khachhangcheckout") KhachHang khachhang) {
+	     HashMap<Long, Cart> cartItems = (HashMap<Long, Cart>) session.getAttribute("myCartItems");
+		return new ModelAndView("pages/checkout");
+	}
+	
+	@RequestMapping(value = "pages/checkout", method = RequestMethod.POST)
+	public ModelAndView checkout(ModelMap mm, HttpSession session,@ModelAttribute("khachhangcheckout") KhachHangBean khachhangBean, DonHang donhang) {
+	     HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
+	     KhachHang khachhang = prepareModelKhachHang(khachhangBean);
+			khachhangService.addKhachHang(khachhang);
+	     if (cartItems == null) {
+	            cartItems = new HashMap<>();
+	        }
+	     long millis=System.currentTimeMillis();  
+	     Date date=new Date(millis); 
+	   donhang.setMaDonHang(donhangService.autoGenrate()); //Làm 1 hàm tự động tạo mã đơn hàng
+	     donhang.setKhachhang(khachhang);
+	     donhang.setNgayDat(date);
+	     donhang.setTrangThai(1);
+	     donhang.setTongTien(totalPrice(cartItems)); //Lấy dữ liệu tổng tiền trên sessio
+	     donhangService.addDonHang(donhang);
+	     for (Map.Entry<String, Cart> entry : cartItems.entrySet()) {
+	            DonHangChiTiet donhangchitiet = new DonHangChiTiet();
+
+	            donhangchitiet.setDonhang(donhang);
+	            donhangchitiet.setSanpham(entry.getValue().getSanpham());
+	            donhangchitiet.setSoLuong(entry.getValue().getSoluong());
+	            donhangService.createdonhangchitiet(donhangchitiet); //Tạo don hang chi tiet
+	        }
+	        cartItems = new HashMap<>();
+	        session.setAttribute("myCartItems", cartItems);
+	        session.setAttribute("myCartTotal", 0);
+	        session.setAttribute("myCartNum", 0);
+	     
+	     
+	     
+		return new ModelAndView("pages/success");
+	}
+	
+	@RequestMapping(value = "pages/cart", method = RequestMethod.GET)
+	public ModelAndView showGioHang(ModelMap mm, HttpSession session, String maSP) {
+		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
+
+		return new ModelAndView("pages/cart", model);
+	}
+
+	// nga test 1
+	@RequestMapping(value = "cart/{maSP}", method = RequestMethod.GET)
+	public String test(ModelMap mm, HttpSession session, @PathVariable("maSP") String maSP) {
+		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
+		if (cartItems == null) {
+			cartItems = new HashMap<>();
+		}
+		SanPham sanpham = sanphamService.getSanPham(maSP);
+
+		if (cartItems.containsKey(maSP)) {
+			Cart item = cartItems.get(maSP);
+			item.setSanpham(sanpham);
+			item.setSoluong(item.getSoluong() + 1);
+			cartItems.put(maSP, item);
+		} else {
+			Cart item = new Cart();
+			item.setSanpham(sanpham);
+			item.setSoluong(1);
+			cartItems.put(maSP, item);
+		}
+
+		session.setAttribute("myCartItems", cartItems);
+		session.setAttribute("myCartTotal", totalPrice(cartItems));
+		session.setAttribute("myCartNum", cartItems.size());
+		System.out.print("dut");
+		return "redirect:/pages/cart.do";
+	}
+
+	// chi tiết sản phẩm
+	@RequestMapping(value = "product-details/{maSP}", method = RequestMethod.GET)
+	public String chitietSanPham(ModelMap mm, @PathVariable("maSP") String MaSP) {
+		mm.put("sanpham", sanphamService.getSanPham(MaSP));
+		System.out.println("tesst1");
+		return "pages/product-details";
+	}
+
+	private float totalPrice(HashMap<String, Cart> cartItems) {
+		int count = 0;
+		for (Map.Entry<String, Cart> list : cartItems.entrySet()) {
+			count += list.getValue().getSanpham().getGiaSP() * list.getValue().getSoluong();
+		}
+		return count;
+	}
+	// Nga
 
 	@RequestMapping(value = "home/savesanpham", method = RequestMethod.POST)
 	public ModelAndView saveSanPham(@ModelAttribute("command") SanPhamBean sanphamBean, BindingResult result) {
@@ -122,7 +239,7 @@ public class SanPhamController {
 		sanpham.setMaSP(masp);
 		sanpham.setTenSP(sanphamBean.getTenSP());
 		sanpham.setThongTinSP(sanphamBean.getThongTinSP());
-		sanpham.setHinh(sanpham.getHinh()); 
+		sanpham.setHinh(sanpham.getHinh());
 		sanpham.setGiaSP(sanphamBean.getGiaSP());
 		sanpham.setNhomsanpham(nhomsanphamService.getNhomSanPham(sanphamBean.getId_NhomSP()));
 		sanpham.setNhacungcap(nhacungcapService.getNhaCungCap(sanphamBean.getMaNhaCungCap()));
@@ -130,7 +247,7 @@ public class SanPhamController {
 		sanphamBean.setMaSP(null);
 		return sanpham;
 	}
-	
+
 	private SanPham prepareModel2(SanPhamBean sanphamBean) {
 		SanPham sanpham = new SanPham();
 		sanpham.setMaSP(sanphamBean.getMaSP());
@@ -182,4 +299,24 @@ public class SanPhamController {
 		sanpham.setHinh(sanphamBean.getHinh());
 		return sanpham;
 	}
+	
+	//Nga
+	private KhachHang prepareModelKhachHang(KhachHangBean khachhangBean) {
+		KhachHang khachhang = new KhachHang();
+		String makh = null;
+		if (khachhangBean.getMaKH().isEmpty()) {
+			makh = khachhangService.genratemaKH();
+		} else {
+			makh = khachhangBean.getMaKH();
+		}
+		khachhang.setMaKH(makh);
+		khachhang.setHoTenKH(khachhangBean.getHoTenKH());
+		khachhang.setMatKhau("123");;
+		khachhang.setSDT(khachhangBean.getSDT());
+		khachhang.setEmail(khachhangBean.getEmail());
+		khachhang.setDiaChi(khachhangBean.getDiaChi());
+		khachhangBean.setMaKH(null);
+		return khachhang;
+	}
+	//Nga
 }

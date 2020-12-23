@@ -19,4 +19,8 @@ public interface DonHangService {
 
 	public void DuyetDonHang(DonHang donhang);
 
+	public String autoGenrate();
+
+	public void createdonhangchitiet(DonHangChiTiet donHangChiTiet);
+
 }

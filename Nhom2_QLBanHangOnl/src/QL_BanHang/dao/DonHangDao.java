@@ -19,5 +19,8 @@ public interface DonHangDao {
 	
 	public void DuyetDonHang(DonHang donhang);
 	
+	public String autoGenrate();
+	
+	public void createdonhangchitiet(DonHangChiTiet donHangChiTiet);
 
 }
