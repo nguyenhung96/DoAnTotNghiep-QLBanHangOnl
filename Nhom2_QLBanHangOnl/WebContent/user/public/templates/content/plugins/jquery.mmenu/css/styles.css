@@ -1,0 +1,169 @@
+.navbar-container {
+  background: #ff7d00;
+  padding-top: 3px;
+  position: relative;
+  z-index: 9;
+}
+.navbar-container .navbar-content {
+  position: relative;
+  z-index: 20;
+  background: #f90;
+}
+.navbar-d,
+.navbar-d ul,
+.navbar-d ul li,
+.navbar-d ul li a,
+.navbar-d #menu-button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  line-height: 1;
+  display: block;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.navbar-d:after,
+.navbar-d > ul:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0;
+}
+.navbar-d {
+  position: relative;
+  z-index: 9;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.navbar-d > ul > li {
+  float: left;
+  margin: 0 10px;
+}
+.navbar-d > ul > li:first-child {
+  margin-left: 0;
+}
+.navbar-d > ul > li:hover, 
+.navbar-d > ul > li.active, 
+.navbar-d > ul > li.active:hover {
+
+}
+.navbar-d.align-center > ul {
+  font-size: 0;
+  text-align: center;
+}
+.navbar-d.align-center > ul > li {
+  display: inline-block;
+  float: none;
+}
+.navbar-d.align-center ul ul {
+  text-align: left;
+}
+.navbar-d.align-right > ul > li {
+  float: right;
+}
+.navbar-d > ul > li > a {
+  padding: 18px 10px 12px;
+  text-decoration: none;
+  display: block;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: -3px;
+  overflow: hidden;
+}
+.navbar-d > ul > li.active > a, 
+.navbar-d > ul > li:hover > a {
+  background: url("/uploads/others/menu-hover.png") 0px 0px no-repeat;
+}
+.navbar-d > ul > li.has-sub > a {
+  padding-right: 30px;
+}
+.navbar-d > ul > li.has-sub > a:after {
+  position: absolute;
+  top: 50%;
+  margin-top: -1px;
+  right: 11px;
+  width: 8px;
+  height: 2px;
+  display: block;
+  background: #fff;
+  content: '';
+}
+.navbar-d > ul > li.active > a:before, 
+.navbar-d > ul > li.active > a:after, 
+.navbar-d > ul > li.has-sub:hover > a:after {
+  background: #fff;
+}
+.navbar-d ul ul {
+  position: absolute;
+  left: -9999px;
+  -webkit-box-shadow: 0 1px 2px #bbb;
+  box-shadow: 0 1px 2px #bbb;
+}
+.navbar-d.align-right ul ul {
+  text-align: right;
+}
+.navbar-d ul ul li {
+  height: 0;
+  -webkit-transition: all .25s ease;
+  -moz-transition: all .25s ease;
+  -ms-transition: all .25s ease;
+  -o-transition: all .25s ease;
+  transition: all .25s ease;
+}
+.navbar-d li:hover > ul {
+  left: auto;
+}
+.navbar-d.align-right li:hover > ul {
+  left: auto;
+  right: 0;
+}
+.navbar-d li:hover > ul > li {
+  height: 100%;
+  background: #fff;
+}
+.navbar-d ul ul ul {
+  margin-left: 100%;
+  top: 0;
+}
+.navbar-d.align-right ul ul ul {
+  margin-left: 0;
+  margin-right: 100%;
+}
+.navbar-d ul ul li a {
+  padding: 7px 0px;
+  margin: 0px 12px;
+  width: 200px;
+  font-size: 13px;
+  text-decoration: none;
+  text-transform: none;
+  color: #282828;
+  font-weight: 400;
+  line-height: 1.4;
+  border-bottom: 1px solid rgba(150, 150, 150, 0.15);
+}
+.navbar-d ul ul li:last-child > a,
+.navbar-d ul ul li.last-item > a {
+  border-bottom: 0;
+}
+.navbar-d ul ul li:hover > a, 
+.navbar-d ul ul li a:hover {
+  color: #f90;
+}
+.navbar-d ul ul li.has-sub > a:after {
+  position: absolute;
+  top: 16px;
+  right: 11px;
+  width: 8px;
+  height: 2px;
+  display: block;
+  background: #dddddd;
+  content: '';
+}
