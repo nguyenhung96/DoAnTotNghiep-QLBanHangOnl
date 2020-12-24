@@ -49,8 +49,8 @@ public class LoginController {
 		model.addAttribute("author", name);
 		model.addAttribute("sokhachhang", khachhangservice.demKhachHang());
 		model.addAttribute("sosanpham", sanphamservice.demSanPham());
-		model.addAttribute("donhangdanggiao", donHangService.demdonhangdanggiao());
-		model.addAttribute("donhangchuaduyet", donHangService.demdonhangchuaduyet());
+		//model.addAttribute("donhangdanggiao", donHangService.demdonhangdanggiao());
+		//model.addAttribute("donhangchuaduyet", donHangService.demdonhangchuaduyet());
 		NhanVien nhanVien = nhanvienService.getNhanVien(name);
 		session.setAttribute("nhanviendangnhap", nhanVien);
 		return "home/index";

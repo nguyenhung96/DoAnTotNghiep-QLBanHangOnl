@@ -12,77 +12,77 @@
 	rel="stylesheet">
 <script
 	src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-	
-	<style>
-	h2 {
-			text-align: center;
-			}
-			/* Định dạng cho bảng dữ liệu*/
-			table {
-				margin: auto;
-				border-collapse: collapse;
-				border-spacing: 0;
-				width: 90%;
-				border: 1px solid #ddd;
-			}
-			/* Định dạng cho các cột*/
-			th, td {
-				border: none;
-				text-align: left;
-				padding: 8px;
-				vertical-align: middle !important;
-			}
-			/* Tạo thanh sroll ngang nếu chiều dài nội dung quá lớn*/
-			#table {
-			overflow-x: auto;
-			}
-			/* Thiết lập màu nền cho các ô*/
-			tr:nth-child(even){
-			background-color: #f2f2f2;
-			}
-			@media screen and (max-width: 1100px) {
-				.profile_details-left{
-					display: none;
-				}
-			}
-			@media screen and (min-width: 1100px) {
-				input.col-md-5, select.col-md-5{
-					width: 30%;
-				}
-			}
 
-			.modal {
-				display: block; /* Hidden by default */
-				position: fixed; /* Stay in place */
-				z-index: -1; /* Sit on top */
-				left: 0;
-				top: 0;
-				overflow: auto; /* Enable scroll if needed */
-				}
+<style>
+h2 {
+	text-align: center;
+}
+/* Định dạng cho bảng dữ liệu*/
+table {
+	margin: auto;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 90%;
+	border: 1px solid #ddd;
+}
+/* Định dạng cho các cột*/
+th, td {
+	border: none;
+	text-align: left;
+	padding: 8px;
+	vertical-align: middle !important;
+}
+/* Tạo thanh sroll ngang nếu chiều dài nội dung quá lớn*/
+#table {
+	overflow-x: auto;
+}
+/* Thiết lập màu nền cho các ô*/
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
 
-				/* Modal Content/Box */
-				.modal-content {
-				background-color: #fefefe;
-				margin: 5% auto; /* 15% from the top and centered */
-				border: 1px solid #888;
-			
-				}
+@media screen and (max-width: 1100px) {
+	.profile_details-left {
+		display: none;
+	}
+}
 
-				/* The Close Button */
-				.closeSetKey, .closeEdit {
-				color: blue;
-				float: right;
-				font-size: 28px;
-				font-weight: bold;
-				}
+@media screen and (min-width: 1100px) {
+	input.col-md-5, select.col-md-5 {
+		width: 30%;
+	}
+}
 
-				.close:hover,
-				.close:focus {
-				color: black;
-				text-decoration: none;
-				cursor: pointer;
-				}
-	</style>
+.modal {
+	display: block; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: -1; /* Sit on top */
+	left: 0;
+	top: 0;
+	overflow: auto; /* Enable scroll if needed */
+}
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe;
+	margin: 5% auto; /* 15% from the top and centered */
+	border: 1px solid #888;
+}
+
+/* The Close Button */
+.closeSetKey, .closeEdit {
+	color: blue;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+</style>
 </head>
 
 <body>
@@ -102,7 +102,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group">
-									
+
 									<div class="col-md-4">
 										<a style="float: right;"
 											class="btn btn-mini btn-primary btncreate"
@@ -137,14 +137,13 @@
 											<tr>
 												<td><c:out value="${nhanvien.maNhanVien}" /></td>
 												<td><c:out value="${nhanvien.hoTenNV}" /></td>
-												<%-- <td><c:out value="${nhanvien.matKhau}" /></td> --%>
 												<td><c:out value="${nhanvien.email}" /></td>
 												<td><c:out value="${nhanvien.SDT}" /></td>
 												<td><c:out value="${nhanvien.CMND}" /></td>
 												<td><c:out value="${nhanvien.gioiTinhString}" /></td>
 												<td><c:out value="${nhanvien.enableString}" /></td>
-												
 												<td><c:out value="${nhanvien.diaChi}" /></td>
+
 												<td>
 													<div class="hidden-phone visible-desktop action-buttons">
 														<a
@@ -152,14 +151,16 @@
 															class="btn btn-minier btn-success" id="btnEdit"
 															title="Chỉnh sửa thông tin"> <i
 															class="glyphicon glyphicon-edit"></i>
-														</a> 
-														
-														<a
+														</a> <a
 															href="admin/deletenhanvien.do?MaNhanVien=${nhanvien.maNhanVien}"
 															class="btn btn-minier btn-danger" title="Xóa nhân viên">
 															<i class="glyphicon glyphicon-trash"></i>
+														</a> <a
+															href="admin/editquyennv.do?MaNhanVien=${nhanvien.maNhanVien}"
+															class="btn btn-minier btn-success" id="btnEdit"
+															title="Phân quyền"> <i
+															class="glyphicon glyphicon-edit"></i>
 														</a>
-
 
 													</div>
 												</td>
@@ -180,42 +181,37 @@
 						<div class="row">
 							<div class="col-xm-12">
 								<div id="table">
+
 									<table class="table table-bordered" id="myTable">
 										<thead>
 											<tr>
-												<th>Mã Nhân viên</th>
-												<th>Tên sản phẩm</th>
-												<th>Thông tin sản phẩm</th>
-												<th>Loại sản phẩm</th>
-												<th>Nhà cung cấp</th>
-												<th>Số lượng</th>
-												<th>Giá bán</th>
+												<th>Mã NV</th>
+												<th>Tên NV</th>
+												<th>Quyền</th>
 												<th>Hoạt động</th>
 											</tr>
 										</thead>
 										<tbody>
-											<tr>
-												<td>SP001</td>
-												<td>Ram ddr4 2400</td>
-												<td>là sdsfsfdsfdsf dsf sdfds</td>
-												<td>Ram</td>
-												<td>Cty Đất việt</td>
-												<td>10</td>
-												<td>20000000</td>
-												<td>
-													<div class="hidden-phone visible-desktop action-buttons">
-														<a class="btn btn-mini btn-primary" id="btnSetKey"
-															title="Cấp lại mật khẩu"> <i
-															class="ace-icon fa fa-key"></i>
-														</a>
-														
-														 <a class="btn btn-mini btn-danger" href=""
-															title="Xóa tài khoản"> <i
-															class="glyphicon glyphicon-trash"></i>
-														</a>
-													</div>
-												</td>
-											</tr>
+											<c:forEach items="${quyennvList}" var="quyennv">
+												<tr>
+													<td><c:out value="${quyennv.maNhanVien}" /></td>
+													<td><c:out value="${quyennv.hoTenNV}" /></td>
+													<td><c:out value="${quyennv.quyenNV}" /></td>
+													<td>
+														<div class="hidden-phone visible-desktop action-buttons">
+															<a
+																href="admin/editnhanvien.do?MaNhanVien=${nhanvien.maNhanVien}"
+																class="btn btn-minier btn-success" id="btnEdit"
+																title="Chỉnh sửa thông tin"> <i
+																class="glyphicon glyphicon-edit"></i>
+															</a> <a class="btn btn-mini btn-primary" id="btnSetKey"
+																title="Cấp lại mật khẩu"> <i
+																class="ace-icon fa fa-key"></i>
+															</a>
+														</div>
+													</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
@@ -238,78 +234,7 @@
 								tin nhân viên
 							</h4>
 						</div>
-						<div class="panel-body">
-<%-- 						<form:form method="POST"
-								action="/Nhom2_QLBanHangOnl/home/savenhanvien.do">
-								<table>
-
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="maNhanVien">Mã nhân viên</form:label></td>
-										<td class="col-md-5"><form:input path="maNhanVien"
-												class="form-control " value="${nhanvien.maNhanVien}" /></td>
-									</tr>
-
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="hoTenNV">Tên nhân viên</form:label></td>
-										<td class="col-md-5"><form:input class="form-control "
-												path="hoTenNV" value="${nhanvien.hoTenNV}" /></td>
-									</tr>
-
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="matKhau">Mật khẩu</form:label></td>
-										<td class="col-md-5"><form:input path="matKhau"
-												class="form-control " value="${nhanvien.matKhau}" /></td>
-									</tr>
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="email">Email</form:label></td>
-										<td class="col-md-5"><form:input path="email"
-												class="form-control " value="${nhanvien.email}" /></td>
-									</tr>
-
-
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="SDT">Số ĐT</form:label></td>
-										<td class="col-md-5"><form:input path="SDT"
-												class="form-control " value="${nhanvien.SDT}" /></td>
-									</tr>
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="CMND">Số CMND</form:label></td>
-										<td class="col-md-5"><form:input path="CMND"
-												class="form-control " value="${nhanvien.CMND}" /></td>
-									</tr>
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="gioiTinh">Giới tính</form:label></td>
-										<td class="col-md-5"><form:input path="gioiTinh"
-												class="form-control " value="${nhanvien.gioiTinh}" /></td>
-									</tr>
-
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="chucVu">Chức vụ</form:label></td>
-										<td class="col-md-5"><form:input path="chucVu"
-												class="form-control " value="${nhanvien.chucVu}" /></td>
-									</tr>
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="hinh">Hình ảnh</form:label></td>
-										<td class="col-md-5"><form:input path="hinh"
-												class="form-control " value="${nhanvien.gioiTinh}" /></td>
-									</tr>
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="diaChi">Địa chỉ</form:label></td>
-										<td class="col-md-5"><form:input path="diaChi"
-												class="form-control " value="${nhanvien.diaChi}" /></td>
-									</tr>
-									<tr style="height: 50px;">
-									<td>
-										<a style="margin-right: 50px; float: right;" type="submit"
-											class="btn btn-mini btn-primary btncreate"> <i
-											class="glyphicon glyphicon-plus-sign"></i> Lưu
-										</a>
-										</td>
-									</tr>
-								</table>
-							</form:form> --%>
-							
-						</div>
+						<div class="panel-body"></div>
 
 					</div>
 				</div>
@@ -357,29 +282,29 @@
 	</div>
 	<script>
 		//Script mở model Edit
-			var modal = document.getElementById("editModal");
-			var modal2 = document.getElementById("setkeyModal");
-			// Get the button that opens the modal
-			var btn = document.getElementById("btnEdit");
-			var btn2 = document.getElementById("btnSetKey");
-			// Get the <span> element that closes the modal
-			var span = document.getElementsByClassName("closeEdit")[0];
-			var span2 = document.getElementsByClassName("closeSetKey")[0];
-			// When the user clicks on the button, open the modal
-			btn.onclick = function() {
+		var modal = document.getElementById("editModal");
+		var modal2 = document.getElementById("setkeyModal");
+		// Get the button that opens the modal
+		var btn = document.getElementById("btnEdit");
+		var btn2 = document.getElementById("btnSetKey");
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("closeEdit")[0];
+		var span2 = document.getElementsByClassName("closeSetKey")[0];
+		// When the user clicks on the button, open the modal
+		btn.onclick = function() {
 			modal.style.zIndex = "100";
-			}
-			btn2.onclick = function() {
+		}
+		btn2.onclick = function() {
 			modal2.style.zIndex = "100";
-			}
+		}
 
-			// When the user clicks on <span> (x), close the modal
-			span.onclick = function() {
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function() {
 			modal.style.zIndex = "-2";
-			}
-			span2.onclick = function() {
+		}
+		span2.onclick = function() {
 			modal2.style.zIndex = "-2";
-			}
+		}
 
 		//Script mở model Edit
 	</script>

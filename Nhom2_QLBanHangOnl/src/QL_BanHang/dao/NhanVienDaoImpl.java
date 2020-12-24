@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import QL_BanHang.model.KhachHang;
 import QL_BanHang.model.NhanVien;
+import QL_BanHang.model.QuyenNV;
 
 @Repository("nhanvienDao")
 public class NhanVienDaoImpl implements NhanVienDao {
@@ -54,4 +55,22 @@ public class NhanVienDaoImpl implements NhanVienDao {
 		}
 
 	}
+
+	@Override
+	public QuyenNV getquyennv(String manv) {
+		return (QuyenNV) sessionFactory.getCurrentSession().get(QuyenNV.class, manv);
+
+	}
+
+	@Override
+	public List<QuyenNV> listQuyenNhanVien() {
+		return (List<QuyenNV>) sessionFactory.getCurrentSession().createCriteria(QuyenNV.class).list();
+	}
+
+	@Override
+	public void taoquyenchonhanvien(QuyenNV quyenNV) {
+		sessionFactory.getCurrentSession().saveOrUpdate(quyenNV);
+
+	}
+
 }

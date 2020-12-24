@@ -14,7 +14,7 @@ public class NhanVienBean {
 	private int Enable;
 	private String EnableString;
 	private String GioiTinhString;
-
+	private String QuyenNV;
 	public String getMaNhanVien() {
 		return MaNhanVien;
 	}
@@ -121,6 +121,14 @@ public class NhanVienBean {
 			gioitinh = "Nữ";
 		}
 		GioiTinhString = gioitinh;
+	}
+
+	public String getQuyenNV() {
+		return QuyenNV;
+	}
+
+	public void setQuyenNV(String quyenNV) {
+		QuyenNV = quyenNV;
 	}
 
 }

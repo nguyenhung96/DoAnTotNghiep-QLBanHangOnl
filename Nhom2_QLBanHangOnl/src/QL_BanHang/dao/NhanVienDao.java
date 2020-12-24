@@ -3,6 +3,7 @@ package QL_BanHang.dao;
 import java.util.List; 
 
 import QL_BanHang.model.NhanVien;
+import QL_BanHang.model.QuyenNV;
 
 public interface NhanVienDao {
 
@@ -16,4 +17,10 @@ public interface NhanVienDao {
 	public void deleteNhanVien(NhanVien nhanvien);
 	
 	public String genratemaNV();
+	
+	public QuyenNV getquyennv(String manv);
+	
+	public List<QuyenNV> listQuyenNhanVien();
+	
+	public void taoquyenchonhanvien(QuyenNV quyenNV);
 }

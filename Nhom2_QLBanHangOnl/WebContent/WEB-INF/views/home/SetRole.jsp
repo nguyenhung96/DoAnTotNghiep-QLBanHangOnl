@@ -35,7 +35,7 @@
 						</div>
 						<div class="panel-body">
 							<form:form method="POST"
-								action="/Nhom2_QLBanHangOnl/admin/savenhanvien.do"
+								action="/Nhom2_QLBanHangOnl/admin/luuquyennv.do"
 								onsubmit="return CreateStaff()">
 								<table>
 
@@ -49,61 +49,16 @@
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="hoTenNV">Tên nhân viên</form:label></td>
 										<td class="col-md-5"><form:input id="TenNV"
-												class="form-control " path="hoTenNV"
+												class="form-control " path="hoTenNV" readonly="true"
 												value="${nhanvien.hoTenNV}" /> <span id="checkTenNV"></span></td>
 									</tr>
-
 									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="matKhau">Mật khẩu</form:label></td>
-										<td class="col-md-5"><form:input id="pass" path="matKhau"
-												type="password" class="form-control "
-												value="${nhanvien.matKhau}" /> <span id="checkpass"></span></td>
-
-									</tr>
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="email">Email</form:label></td>
-										<td class="col-md-5"><form:input id="email" path="email"
-												class="form-control " value="${nhanvien.email}" /> <span
-											id="checkEmail"></span></td>
-									</tr>
-
-
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="SDT">Số ĐT</form:label></td>
-										<td class="col-md-5"><form:input id="SDT" path="SDT"
-												class="form-control " value="${nhanvien.SDT}" /> <span
-											id="checkSDT"></span></td>
-									</tr>
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="CMND">Số CMND</form:label></td>
-										<td class="col-md-5"><form:input type="number" id="CMND"
-												path="CMND" class="form-control " value="${nhanvien.CMND}" />
-											<span id="checkCMND"></span></td>
-									</tr>
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="gioiTinh">Giới tính</form:label></td>
-										<td class="col-md-5"><form:input id="Gioitinh"
-												path="gioiTinh" class="form-control "
-												value="${nhanvien.gioiTinh}" /> <span id="checkGioitinh"></span></td>
-									</tr>
-
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="enable">Trạng thái</form:label></td>
-										<td class="col-md-5"><form:select id="stt" path="enable"
-												class="form-control">
-												<option value="${nhanvien.enable}">${nhanvien.enableString}</option>
-												<option value="1">Bật</option>
-												<option value="2">Tắt</option>
-
+										<td class="col-md-3"><form:label path="quyenNV"></form:label></td>
+										<td class="col-md-5"><form:select class="form-control"
+												path="quyenNV">
+												<option value="ROLE_ADMIN">ROLE_ADMIN</option>
+												<option value="ROLE_USER">ROLE_USER</option>
 											</form:select></td>
-
-									</tr>
-
-									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="diaChi">Địa chỉ</form:label></td>
-										<td class="col-md-5"><form:input id="Diachi"
-												path="diaChi" class="form-control "
-												value="${nhanvien.diaChi}" /> <span id="checkDiachi"></span></td>
 									</tr>
 									<tr>
 

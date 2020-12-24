@@ -14,6 +14,9 @@
 					<a
 						href="http://localhost:8080/Nhom2_QLBanHangOnl/Trangchu/index.do"><img
 						src="" alt="" />ĐỒ ÁN</a>
+						<a
+						href="http://localhost:8080/Nhom2_QLBanHangOnl/login/login.do"><img
+						src="" alt="" />Đăng nhập</a>
 				</div>
 
 
