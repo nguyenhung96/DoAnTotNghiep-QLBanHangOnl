@@ -77,101 +77,8 @@
 					</div>
 					<!--/blog-post-area-->
 
-					<div class="rating-area">
-						<ul class="ratings">
-							<li class="rate-this">Đánh giá của khách hàng sử dụng :</li>
-							<li>
-								<i class="fa fa-star color"></i>
-								<i class="fa fa-star color"></i>
-								<i class="fa fa-star color"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-							</li>
-							<li class="color">(6 votes)</li>
-						</ul>
-						<ul class="tag">
-							<li>TAG:</li>
-							<li><a class="color" href="">Máy tính <span>/</span></a></li>
-							<li><a class="color" href="">Linh kiện máy tính <span>/</span></a></li>
-							<li><a class="color" href="">Case</a></li>
-						</ul>
-					</div>
-					<!--/rating-area-->
-
-					<div class="socials-share">
-						<a href=""><img src="images/blog/socials.png" alt=""></a>
-					</div>
-					<!--/socials-share-->
-
-					<div class="media commnets">
-						<a class="pull-left" href="#">
-							<img class="media-object" src="images/blog/man-one.jpg" alt="">
-						</a>
-						<div class="media-body">
-							<h4 class="media-heading">Nguyễn Văn Hão</h4>
-							<p>Sản phẩm rất tốt, uy tín, chất lượng. Sẽ ủng hộ shop tiếp.</p>
-							<div class="blog-socials">
-								<ul>
-									<li><a href=""><i class="fa fa-facebook"></i></a></li>
-									<li><a href=""><i class="fa fa-twitter"></i></a></li>
-									<li><a href=""><i class="fa fa-dribbble"></i></a></li>
-									<li><a href=""><i class="fa fa-google-plus"></i></a></li>
-								</ul>
-								<a class="btn btn-primary" href="">Xem thêm</a>
-							</div>
-						</div>
-					</div>
-					<!--Comments-->
-					<div class="response-area">
+					
 						
-						<ul class="media-list">
-							<li class="media">
-
-								<a class="pull-left" href="#">
-									<img class="media-object" src="images/blog/man-two.jpg" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Nguyễn Văn Hai</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 5, 2018</li>
-									</ul>
-									<p>Rất hài lòng với sản phẩm. Uy tín, chất lượng.
-									</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
-							<li class="media second-media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="images/blog/man-three.jpg" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Phạm Văn Tiến</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 8, 2017</li>
-									</ul>
-									<p>Sản phẩm chất lượng, bền, uy tín.
-									</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
-							<li class="media">
-								<a class="pull-left" href="#">
-									<img class="media-object" src="images/blog/man-four.jpg" alt="">
-								</a>
-								<div class="media-body">
-									<ul class="sinlge-post-meta">
-										<li><i class="fa fa-user"></i>Phí Văn Tín</li>
-										<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-										<li><i class="fa fa-calendar"></i> DEC 18, 2016</li>
-									</ul>
-									<p>Chất lượng khỏi phải bàn, cho shop đánh giá tốt nhất.
-									</p>
-									<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-								</div>
-							</li>
-						</ul>
 					</div>
 					<!--/Response-area-->
 					<%-- <div class="replay-box">
@@ -222,37 +129,25 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="single-widget">
-							<h2>Danh sách</h2>
+							<h2>Hỗ trợ khách hàng</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">so1</a></li>
-								<li><a href="#">so2</a></li>
-								<li><a href="#">so3</a></li>
-								<li><a href="#">so4</a></li>
-								<li><a href="#">so5</a></li>
+								<li><a href="#">Thẻ ưu đãi</a></li>
+								<li><a href="#">Trung tâm bảo hành</a></li>
+								<li><a href="#">Thanh toán và giao hàng</a></li>
+								<li><a href="#">Dịch vụ sửa chữa</a></li>
+								<li><a href="#">doanh nghiệp thân thiết</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-2">
 						<div class="single-widget">
-							<h2>Sản phẩm</h2>
+							<h2>Chính sách Mua hàng và Bảo hành</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">SO1 </a></li>
-								<li><a href="#">SO2</a></li>
-								<li><a href="#">SO3</a></li>
-								<li><a href="#">SO4</a></li>
-								<li><a href="#">SO5</a></li>
-							</ul>
-						</div>
-					</div>
-					<div class="col-sm-2">
-						<div class="single-widget">
-							<h2>Thương hiệu</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">SO1</a></li>
-								<li><a href="#">SO2</a></li>
-								<li><a href="#">SO3</a></li>
-								<li><a href="#">SO4</a></li>
-								<li><a href="#">SO5</a></li>
+								<li><a href="#">Quy định chung </a></li>
+								<li><a href="#">Chính sách bảo mật thong tin</a></li>
+								<li><a href="#">Chính sách vận chuyển lắp đặt</a></li>
+								<li><a href="#">Chính sách đổi trả</a></li>
+								<li><a href="#">Quy định giá cả</a></li>
 							</ul>
 						</div>
 					</div>
@@ -260,10 +155,22 @@
 						<div class="single-widget">
 							<h2>Về chúng tôi</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">GIỚI THIỆU</a></li>
-								<li><a href="#">HÃNG</a></li>
-								<li><a href="#">LIÊN HỆ</a></li>
-								<li><a href="#">GÓP Ý</a></li>
+								<li><a href="#">Giới thiệu</a></li>
+								<li><a href="#">Thông tin liên hệ</a></li>
+								<li><a href="#">Hỏi đáp</a></li>
+								<li><a href="#">Tin công nghệ</a></li>
+								<li><a href="#">Tuyển dụng</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<div class="single-widget">
+							<h2>Phương thức thanh toán</h2>
+							<ul class="nav nav-pills nav-stacked">
+								<li><a href="#">Hỗ trợ khách hàng</a></li>
+								<li><a href="#">Liên hệ báo giá</a></li>
+								<li><a href="#">Hợp tác</a></li>
+								
 
 							</ul>
 						</div>
@@ -273,9 +180,13 @@
 							<h2>Phone</h2>
 							<form action="#" class="searchform">
 								<input type="text" placeholder="Your phone..." />
-								<button type="submit" class="btn btn-default"><i
-										class="fa fa-arrow-circle-o-right"></i></button>
-								<p> Chúng tôi sẽ liên lạc cho bạn trong vòng 24 tiếng<br />Cảm ơn quý khách!</p>
+								<button type="submit" class="btn btn-default">
+									<i class="fa fa-arrow-circle-o-right"></i>
+								</button>
+								<p>
+									chúng tôi sẽ liên lạc tư vấn cho bạn trong vòng 24 giờ <br />Cảm
+									ơn quý khách!
+								</p>
 							</form>
 						</div>
 					</div>
@@ -287,14 +198,16 @@
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull-left">Copyright © 2020 Đồ án. All rights reserved.</p>
-					<p class="pull-center">Designed by <span><a target="_blank" href="#">Đồ án</a></span></p>
+					<p class="pull-left">Copyright © 2020 DỒ ÁN. All rights
+						reserved.</p>
+					<p class="pull-right">
+						Designed by <span><a target="_blank" href="#">DỒ ÁN</a></span>
+					</p>
 				</div>
 			</div>
 		</div>
-
+		<article></article>
 	</footer>
-	<!--/Footer-->
 
 
 	<script src="js/jquery.js"></script>

@@ -36,217 +36,195 @@
 	</header>
 
 
-	<section>
+
+	<section id="chitietsp">
 		<div class="container">
 			<div class="row">
-				<main id="content" class="CONTENT-CONTENT">
-					<div id="columns" class="">
-						<div id="content-sidebar" class="content-sidebar col-md-12">
-							<div class="PRODUCT-DETAIL single-product-page">
-								<div class="col-wrapper-main container ">
-									<div class="product-view clearfix">
-									<c:forEach var="sanpham" items="${sanphamList}">
-										<div class="row product-collateral primary_block">
-											<div class="col-md-5 product-left-column">
-												<div
-													class="owl-w-effectt owl-carousel owl-theme owl-loaded owl-drag">
 
-													<div class="owl-stage-outer">
-														<div class="owl-stage"
-															style="transform: translate3d(-858px, 0px, 0px); transition: all 0s ease 0s; width: 2145px;">
-
-															<div class="owl-item cloned" style="width: 429px;">
-															
-																<div class="item">
-																	<a class="fancybox_room"
-																		href="/uploads/product/THIT_BI/camera-ben-phai-vietmap-r001-2.jpg">
-																		Nga <img src="productImg/${sanpham.hinh}" alt="" />
-																	</a>
-																</div>
-																	
-															</div>
-														</div>
-													</div>
-
-												</div>
-											</div>
-											<div class="col-md-4 product-center-column">
-												<h1 itemprop="name">${sanpham.tenSP}</h1>
-												<div class="category" itemprop="category">
-													<span>Category: </span> <a href="thiet-bi-dinh-vi/"
-														title="THIẾT BỊ ĐỊNH VỊ">
-														<h2 class="h5">${sanpham.tenSP}</h2>
-													</a>
-												</div>
-												<div class="thongtin">
-													<p>
-														Mã sản phẩm:${sanpham.maSP} <span></span>
-													</p>
-													|
-													<p>
-														Người dùng đánh giá: <i class="fa fa-star-o"></i><i
-															class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i
-															class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
-													</p>
-												</div>
-												<div class="clearfix">
-													<div class="js-qty">
-														<button type="button"
-															class="control-quantity control-minus">−</button>
-														<input name="idtin" id="idtin" type="hidden" value="226">
-														<input type="text" name="quantity" size="5" id="qty"
-															class="slsp" style="text-align: center" value="1">
-														<button type="button" class="control-quantity control-add">+</button>
-													</div>
-													<div>
-														Giá bán:
-														<div class="price"> ${sanpham.giaSP}</div>
-													</div>
-												</div>
-												<div class="t-mota" itemprop="description2">
-													<ul class="list">
-														<li><i class="fa fa-check-square-o"></i><span
-															style="font-size: 14pt; font-family: 'times new roman', times, serif;"><strong>Camera
-																	HD hiển thị hình ảnh rõ nét</strong></span></li>
-														<li><i class="fa fa-check-square-o"></i><span
-															style="font-size: 14pt; font-family: 'times new roman', times, serif;"><strong>Thiết
-																	kế chuẩn IP68 chống bụi, chống nước</strong></span></li>
-														<li><i class="fa fa-check-square-o"></i><span
-															style="font-size: 14pt; font-family: 'times new roman', times, serif;"><strong>Quan
-																	sát góc rộng lên đến 170 độ</strong></span></li>
-														<li><i class="fa fa-check-square-o"></i><span
-															style="font-size: 14pt; font-family: 'times new roman', times, serif;"><strong>Quan
-																	sát tốt cả ngày và đêm</strong></span></li>
-														<li><i class="fa fa-check-square-o"></i><span
-															style="font-size: 14pt; font-family: 'times new roman', times, serif;"><strong>Thiết
-																	kế nhỏ gọn Nhỏ gọn, thời trang , tiện dụng</strong></span></li>
-														<li><i class="fa fa-check-square-o"></i><span
-															style="font-size: 14pt; font-family: 'times new roman', times, serif;"><strong>Sử
-																	dụng nguồn trực tiếp của xe Hoạt động đồng bộ theo xe</strong></span></li>
-													</ul>
-													
-												</div>
-												</c:forEach>
-												<div class="clearfix"></div>
-												<div class="socialsharing_product no-print">
-													<ul class="social-sharing list-unstyled">
-														
-														
-													</ul>
-												</div>
-												<div class="clearfix"></div>
-											</div>
-											<div class="col-md-3">
-												<div class="t-mota2">
-													<p>
-														<span style="font-size: 8pt;"><strong><span
-																style="color: #ff6600;">CHÚNG TÔI LUÔN CAM KẾT MANG ĐẾN </span></strong></span>
-													</p>
-													<ul>
-														<li><i class="fa fa-caret-right"></i><span
-															style="font-size: 8pt; color: #000000;"><strong>Sản
-																	phẩm 100% chính hãng</strong></span></li>
-														<li><i class="fa fa-caret-right"></i><span
-															style="font-size: 8pt; color: #000000;"><strong>Giá
-																	cạnh tranh</strong></span></li>
-														<li><i class="fa fa-caret-right"></i><span
-															style="font-size: 8pt; color: #000000;"><strong>Giao
-																	hàng miễn phí</strong></span></li>
-													</ul>
-
-
-												</div>
-												<div class="quantity_wanted_p">
-													<button type="button" name="addcart" idtin="226"
-														id="addcart2" class="btn adtocart2">
-														<i class="fa fa-shopping-bag"></i> <span
-															id="AddToCartText">Mua ngay</span>
-													</button>
-												</div>
-												<div class="quantity_wanted_p">
-													<button type="button" name="addcart" idtin="226"
-														id="addcart" class="btn adtocart">
-														<i class="fa fa-shopping-cart"></i> <span
-															id="AddToCartText">Thêm vào giỏ hàng</span>
-													</button>
-												</div>
-
-											</div>
-											<div class="clearfix"></div>
-										</div>
-										<div class="product-collateral foreign_block col-md-9">
-
-										</div>
-
-									</div>
-								</div>
-
-								<div class="relatived-product container">
-									<div class="relatived-product-title">
-										<div class="h3" id="lienquan">Sản phẩm liên quan</div>
-									</div>
-									<c:forEach var="sanpham" items="${sanphamList}">
-							<div class="col-sm-4">
-
-								<div class="product-image-wrapper">
-									<div class="single-products">
-
-										<div class="productinfo text-center">
-											<img src="productImg/${sanpham.hinh}" alt="" height="237px" />
-											<h2>${sanpham.maSP}</h2>
-											<p>${sanpham.tenSP}</p>
-											<p class="dollar">
-												<span class="in-dollar">$</span><span>${sanpham.giaSP}</span>
-											</p>
-
-											<a
-												href="${pageContext.request.contextPath}/cart/${sanpham.maSP}.do"
-												class="btn btn-default add-to-cart"><i
-												class="fa fa-shopping-cart"></i>Add to cart</a>
-										</div>
-										<div class="product-overlay">
-											<div class="overlay-content ">
-												<a
-													href="${pageContext.request.contextPath}/product-details/${sanpham.maSP}.do">${sanpham.tenSP}</a>
-												<p>${sanpham.thongTinSP}</p>
-												<p>${sanpham.tenNhomSP}</p>
-												<a
-													href="${pageContext.request.contextPath}/cart/${sanpham.maSP}.do"
-													class="btn btn-default add-to-cart"><i
-													class="fa fa-shopping-cart"></i>Add to cart</a>
-											</div>
-										</div>
-									</div>
-									<div class="choose">
-										<ul class="nav nav-pills nav-justified">
-											<li><a
-												href="${pageContext.request.contextPath}/product-details/${sanpham.maSP}.do"><i
-													class="fa fa-plus-square"></i>Xem chi tiết sản phẩm</a></li>
-
-										</ul>
-									</div>
-
-								</div>
+				<div class="col-sm-9 padding-right">
+					<div class="product-details">
+						<!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img src="productImg/${sanpham.hinh}" alt="" />
 
 							</div>
 
-						</c:forEach>
-
-					</div>
-								</div>
-							</div>
 
 						</div>
-	</section>
-	</div>
+						<div class="col-sm-7">
+
+							<div class="product-information">
+								<!--/product-information-->
+								<img src="images/product-details/new.jpg" class="newarrival"
+									alt="" />
+								<h2>${sanpham.tenSP}${sanpham.thongTinSP}</h2>
+								<p>
+									Mã sản phẩm : <strong>${sanpham.maSP}</strong>
+								</p>
+								<img src="images/product-details/rating.png" alt="" /> <span>
+									<span onChange="format_curency(this);">US
+										${sanpham.giaSP}</span>
+									
+								</span>
+								
 
 
+							</div>
+							<div class="css-ji66tv">
+								<button data-track-content="true" data-content-name="buyNow"
+									data-content-target="cart" class="css-33xjxx">
+									<a href="pages/opencheckout.do"><strong>MUA NGAY</strong></a>
+									
+								</button>
+								<button data-track-content="true" data-content-name="addToCart"
+									data-content-target="productDetail" class="css-bkwyxf">
+									 <a
+										href="${pageContext.request.contextPath}/cart/${sanpham.maSP}.do"><strong>
+											<i class="fa fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG
+									</strong></a>
+								</button>
+							</div>
+							<!--/product-information-->
 
-	<div class="clearfix"></div>
-	</div>
-	</main>
-	</div>
-	</div>
+						</div>
+
+					</div>
+					<!--/product-details-->
+
+					
+					<!--/category-tab-->
+
+					
+
+				</div>
+				<!--/recommended_items-->
+				<div class="col-sm-3" id="hinh">
+					<img alt="" src="productImg/Capture.PNG">
+				</div>
+
+			</div>
+			<div>
+			<div class="recommended_items">
+						<!--recommended_items-->
+						<h2 class="title text-center">recommended items</h2>
+
+						<div id="recommended-item-carousel" class="carousel slide"
+							data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">
+									<div class="col-sm-3">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="productImg/1.jpg" alt="" />
+													<h2>17.000.000</h2>
+													<p>Laptop ACER Aspire 5 A515-55-37HD NX.HSMSV.006</p>
+													<button type="button" class="btn btn-default add-to-cart">
+														<i class="fa fa-shopping-cart"></i>Add to cart
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="productImg/2.jpg" alt="" />
+													<h2>15.000.000</h2>
+													<p>Laptop ASUS D509DA EJ800T</p>
+													<button type="button" class="btn btn-default add-to-cart">
+														<i class="fa fa-shopping-cart"></i>Add to cart
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="productImg/3.jpg" alt="" />
+													<h2>16.000.000</h2>
+													<p>Laptop ASUS Vivobook A512DA EJ1448Tn</p>
+													<button type="button" class="btn btn-default add-to-cart">
+														<i class="fa fa-shopping-cart"></i>Add to cart
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-3">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="productImg/4.jpg" alt="" />
+													<h2>16.000.000</h2>
+													<p>Laptop Dell Vostro 15 3591 V5I3308W</p>
+													<button type="button" class="btn btn-default add-to-cart">
+														<i class="fa fa-shopping-cart"></i>Add to cart
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item">
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend1.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<button type="button" class="btn btn-default add-to-cart">
+														<i class="fa fa-shopping-cart"></i>Add to cart
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend2.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<button type="button" class="btn btn-default add-to-cart">
+														<i class="fa fa-shopping-cart"></i>Add to cart
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend3.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<button type="button" class="btn btn-default add-to-cart">
+														<i class="fa fa-shopping-cart"></i>Add to cart
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<a class="left recommended-item-control"
+								href="#recommended-item-carousel" data-slide="prev"> <i
+								class="fa fa-angle-left"></i>
+							</a> <a class="right recommended-item-control"
+								href="#recommended-item-carousel" data-slide="next"> <i
+								class="fa fa-angle-right"></i>
+							</a>
+						</div>
+					</div></div>
+		</div>
 	</section>
 
 	<footer id="footer">
@@ -340,7 +318,11 @@
 	<!--/Footer-->
 
 
-
+	<script>
+		function format_curency(a) {
+			a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+		}
+	</script>
 
 	<script src="js/jquery.js"></script>
 	<script src="js/price-range.js"></script>

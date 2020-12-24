@@ -23,34 +23,34 @@
 			<div class="row-one">
 				<div class="col-md-4 widget">
 					<div class="stats-left ">
-						<h5>Sản Phẩm</h5>
-						<h4>Đã bán</h4>
+						<h5>SẢN PHẨM</h5>
+						<h4>Đã Bán</h4>
 					</div>
 					<div class="stats-right">
-						<label> 45</label>
+						<label> ${sosanpham}</label>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="col-md-4 widget states-mdl">
 					<div class="stats-left">
-						<h5>Today</h5>
-						<h4>Khách hàng</h4>
+						<h5>ĐƠN HÀNG</h5>
+						<h4>Đang Giao</h4>
 					</div>
 					<div class="stats-right">
-						<label>${sokhachhang}</label>
+						<label>${donhangdanggiao}</label>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="col-md-4 widget states-last">
-					<div class="stats-left">
-						<h5>Today</h5>
-						<h4>Đơn hàng</h4>
-					</div>
-					<div class="stats-right">
-						<label>51</label>
-					</div>
-					<div class="clearfix"></div>
-				</div>
+                        <div class="stats-left">
+                            <h5>ĐƠN HÀNG</h5>
+                            <h4>Chưa Duyệt</h4>
+                        </div>
+                        <div class="stats-right">
+                          		<label>${donhangchuaduyet}</label>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="charts">

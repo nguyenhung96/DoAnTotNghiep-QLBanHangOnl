@@ -96,10 +96,20 @@ tr:nth-child(even) {
 					<div class="widget-box">
 						<div class="widget-header width-border">
 							<h4 class="widget-title">
-								<span class="glyphicon glyphicon-info-sign"></span> Thông Tin
+								<span class="glyphicon glyphicon-info-sign"></span> Trạng Thái
 								Đơn Hàng
 							</h4>
+							<table>
+								<tr>
+									<td><span>${donhang.trangThaiString}</span> <input
+										id="Trangthai" value="${donhang.trangThai}"
+										style="visibility: hidden" /></td>
+
+								</tr>
+							</table>
 						</div>
+						<br> <br>
+
 						<div class="widget-body">
 							<form:form method="PÓ"
 								action="/Nhom2_QLBanHangOnl/home/duyetdonhang.do">
@@ -131,18 +141,11 @@ tr:nth-child(even) {
 									<tr class="form-group">
 										<td><form:label class="col-sm-5" for="lbloaiSP"
 												path="maNhanVien">Nhân Viên</form:label></td>
-										<%-- <td><form:input path="maNhanVien"
-												class="form-control col-sm-7 " value="${donhang.maNhanVien}" />
-										</td> --%>
-										<td><form:select class="form-control col-sm-7"
-												path="maNhanVien">
-												<option value="-1">Chọn nhân viên</option>
-												<c:forEach var="c" items="${nhanvienList}">
-													<option value="${c.maNhanVien}"
-														${donhang.maNhanVien == c.maNhanVien ? 'selected=""' : ''}>${c.hoTenNV}</option>
-												</c:forEach>
-											</form:select></td>
-
+										<td><form:input path="maNhanVien" id="MaNhanVien"
+												class="form-control col-sm-7 " value="${donhang.maNhanVien}"  readonly="true"/>
+											<form:input path="maNhanVienDuyetDon" id="MaNhanVien" style="display:none"
+												class="form-control col-sm-7 " 
+												value="${sessionScope.nhanviendangnhap.maNhanVien}" /></td>
 									</tr>
 									<tr class="form-group">
 										<td><form:label class="col-sm-5" for="lbloaiSP"
@@ -152,7 +155,6 @@ tr:nth-child(even) {
 										</td>
 
 									</tr>
-
 									<tr class=" width-border col-sm-12">
 										<h4 class="widget-title">
 											<span class="glyphicon glyphicon-info-sign"></span> Thông Tin
@@ -163,12 +165,12 @@ tr:nth-child(even) {
 										<td><form:label class="col-sm-5" for="lbloaiSP"
 												path="tongTien">Tổng tiền hàng</form:label></td>
 										<td><form:label class="col-sm-5" for="lbloaiSP"
-												path="tongTien">${donhang.tongTien}</form:label></td>
+												path="tongTien">${donhang.tongTienString}</form:label></td>
 
 									</tr>
 									<tr>
 
-										<td colspan="2"><input type="submit"
+										<td colspan="2"><input type="submit" id="btnduyet"
 											class="btn btn-mini btn-primary glyphicon glyphicon-plus-sign btncreate"
 											value="Duyệt đơn hàng" /></td>
 									</tr>
@@ -181,18 +183,37 @@ tr:nth-child(even) {
 			</div>
 		</div>
 		<div style="height: 50px;">
-			<a style="float: right; margin-right: 35px;"
+			<a style="float: right; margin-right: 35px;" id="btnin"
 				class="btn btn-mini btn-primary btncreate" href="#"> <i
 				class="glyphicon glyphicon-print"></i> In
-			</a> <a style="float: right; margin-right: 5px;"
+			</a> <a id="btnhuydon" style="float: right; margin-right: 5px;"
 				class="btn btn-mini btn-primary btncreate"
-				href="home/duyetdonhang.do??MaDonHang=${donhang.maDonHang}maNhanVien=${donhang.maNhanVien}">
-				<i class="glyphicon glyphicon-floppy-save"></i> Duyệt đơn hàng
+				href="home/huydonhang.do?MaDonHang=${donhang.maDonHang}"> <i
+				class="glyphicon glyphicon-floppy-save"></i> Hủy đơn hàng
+			</a> <a id="btnhoanthanh" style="float: right; margin-right: 5px;"
+				class="btn btn-mini btn-primary btncreate"
+				href="home/completedonhang.do?MaDonHang=${donhang.maDonHang}"> <i
+				class="glyphicon glyphicon-floppy-save"></i> Hoàn thành
 			</a>
 		</div>
 
 	</div>
-
-	</div>
+	<script>
+		var manhanvien = document.getElementById('MaNhanVien').value;
+		var trangthai = document.getElementById('Trangthai').value;
+		if (trangthai == "1") {
+			document.getElementById("btnhoanthanh").style.display = 'none';
+		} else if (trangthai == "2") {
+			document.getElementById("btnduyet").style.display = 'none';
+		} else if (trangthai == "3") {
+			document.getElementById("btnduyet").style.display = 'none';
+			document.getElementById("btnhoanthanh").style.display = 'none';
+			document.getElementById("btnhuydon").style.display = 'none';
+		} else if (trangthai == "4") {
+			document.getElementById("btnduyet").style.display = 'none';
+			document.getElementById("btnhoanthanh").style.display = 'none';
+			document.getElementById("btnhuydon").style.display = 'none';
+		}
+	</script>
 </body>
 </html>

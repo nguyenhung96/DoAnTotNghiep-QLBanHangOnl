@@ -35,12 +35,6 @@ public class DonHangDaoImpl implements DonHangDao {
 				.createQuery("DELETE FROM DonHang WHERE MaDonHang = '" + donhang.getMaDonHang() + "'").executeUpdate();
 	}
 
-	/*
-	 * public List<DonHangChiTiet> listDonHangChiTiet(String madh) {
-	 * sessionFactory.getCurrentSession().
-	 * createQuery("select * FROM DonHangChiTiet WHERE MaDonHang = '" + madh +
-	 * "'").executeUpdate(); return null; }
-	 */
 	@SuppressWarnings("unchecked")
 	public List<DonHangChiTiet> listDonHangChiTiet(String madh) {
 		return (List<DonHangChiTiet>) sessionFactory.getCurrentSession()
@@ -77,6 +71,47 @@ public class DonHangDaoImpl implements DonHangDao {
 	public void createdonhangchitiet(DonHangChiTiet donHangChiTiet) {
 		sessionFactory.getCurrentSession().saveOrUpdate(donHangChiTiet);
 
+	}
+
+	@Override
+	public void HuyDonHang(String madh) {
+		sessionFactory.getCurrentSession()
+				.createQuery("update DonHang set TrangThai = 4 where MaDonHang = '" + madh + "'").executeUpdate();
+
+	}
+
+	@Override
+	public void completeDonHang(String madh) {
+		sessionFactory.getCurrentSession()
+				.createQuery("update DonHang set TrangThai = 3 where MaDonHang = '" + madh + "'").executeUpdate();
+
+	}
+
+	@Override
+	public int demsanphamdaban() {
+		String hql = "FROM KhachHang";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<KhachHang> list = query.list();
+		int sosp = list.size();
+		return sosp;
+	}
+
+	@Override
+	public int demdonhangdanggiao() {
+		String hql = "FROM DonHang where TrangThai= 2";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<DonHang> list = query.list();
+		int sosp = list.size();
+		return sosp;
+	}
+
+	@Override
+	public int demdonhangchuaduyet() {
+		String hql = "FROM DonHang where TrangThai= 1";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<DonHang> list = query.list();
+		int sosp = list.size();
+		return sosp;
 	}
 
 }

@@ -1,5 +1,6 @@
 package QL_BanHang.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,13 +39,26 @@ public class DonHangController {
 		donhangService.DuyetDonHang(donhang);
 		return new ModelAndView("redirect:/home/order.do");
 	}
-
+	
+	@RequestMapping(value = "home/huydonhang", method = RequestMethod.GET)
+	public ModelAndView huyDonHang(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
+		DonHang donhang = donhangService.getDonHang(donhangBean.getMaDonHang());
+		donhangService.HuyDonHang(donhang.getMaDonHang());
+		return new ModelAndView("redirect:/home/order.do");
+	}
+	@RequestMapping(value = "home/completedonhang", method = RequestMethod.GET)
+	public ModelAndView completeDonHang(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
+		DonHang donhang = donhangService.getDonHang(donhangBean.getMaDonHang());
+		donhangService.completeDonHang(donhang.getMaDonHang());
+		return new ModelAndView("redirect:/home/order.do");
+	}
 	@RequestMapping(value = "home/order", method = RequestMethod.GET)
 	public ModelAndView listDonHang() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("donhangList", prepareListofBean(donhangService.listDonHang()));
 		return new ModelAndView("home/OrderList", model);
 	}
+
 	@RequestMapping(value = "home/detailorder", method = RequestMethod.GET)
 	public ModelAndView editDonHang(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -57,7 +71,7 @@ public class DonHangController {
 	private DonHang prepareModel(DonHangBean donhangBean) {
 		DonHang donhang = new DonHang();
 		donhang.setMaDonHang(donhangBean.getMaDonHang());
-		donhang.setNhanvien(nhanvienService.getNhanVien(donhangBean.getMaNhanVien()));
+		donhang.setNhanvien(nhanvienService.getNhanVien(donhangBean.getMaNhanVienDuyetDon()));
 		donhang.setNgayDat(donhangBean.getNgayDat());
 		donhang.setTongTien(donhangBean.getTongTien());
 		donhang.setTrangThai(donhangBean.getTrangThai());
@@ -75,13 +89,14 @@ public class DonHangController {
 				bean.setMaDonHang(donhang.getMaDonHang());
 				try {
 					bean.setMaNhanVien(donhang.getNhanvien().getMaNhanVien());
-				}catch(Exception e) {
+				} catch (Exception e) {
 					bean.setMaNhanVien("chưa được duyệt");
 				}
-		
+
 				bean.setMaKH(donhang.getKhachhang().getMaKH());
 				bean.setNgayDat(donhang.getNgayDat());
-				bean.setTongTien(donhang.getTongTien());
+				DecimalFormat formatter = new DecimalFormat("###,###,###");
+				bean.setTongTienString(formatter.format(donhang.getTongTien()));
 				bean.setTrangThai(donhang.getTrangThai());
 				bean.setDiaChi(donhang.getKhachhang().getDiaChi());
 				bean.setTrangThaiString(donhang.getTrangThai());
@@ -91,13 +106,14 @@ public class DonHangController {
 		}
 		return beans;
 	}
+
 	private DonHangBean prepareDonHangBean(DonHang donhang) {
 		DonHangBean bean = new DonHangBean();
 		bean.setMaDonHang(donhang.getMaDonHang());
 		try {
 			bean.setMaNhanVien(donhang.getNhanvien().getMaNhanVien());
-		}catch(Exception e) {
-			bean.setMaNhanVien("...");
+		} catch (Exception e) {
+			bean.setMaNhanVien("");
 		}
 		bean.setMaKH(donhang.getKhachhang().getMaKH());
 		bean.setNgayDat(donhang.getNgayDat());
@@ -105,7 +121,8 @@ public class DonHangController {
 		bean.setTrangThai(donhang.getTrangThai());
 		bean.setTrangThaiString(donhang.getTrangThai());
 		bean.setDiaChi(donhang.getKhachhang().getDiaChi());
-		bean.setTongTien(donhang.getTongTien());
+		DecimalFormat formatter = new DecimalFormat("###,###,###");
+		bean.setTongTienString(formatter.format(donhang.getTongTien()));
 		return bean;
 	}
 
@@ -114,14 +131,16 @@ public class DonHangController {
 		if (list != null && !list.isEmpty()) {
 			beans = new ArrayList<ChiTietDonHangBean>();
 			ChiTietDonHangBean bean = null;
+
 			for (DonHangChiTiet donhang : list) {
 
 				bean = new ChiTietDonHangBean();
 				bean.setId(donhang.getId());
 				bean.setTenSanPham(donhang.getSanpham().getTenSP());
 				bean.setSoLuong(donhang.getSoLuong());
-				bean.setDonGia(donhang.getSanpham().getGiaSP());
-				bean.setTongTien(donhang.getSanpham().getGiaSP() * donhang.getSoLuong());
+				DecimalFormat formatter = new DecimalFormat("###,###,###");
+				bean.setDonGia( formatter.format(donhang.getSanpham().getGiaSP()).toString());
+				bean.setTongTien( formatter.format(donhang.getSanpham().getGiaSP() * donhang.getSoLuong()));
 
 				beans.add(bean);
 			}

@@ -16,7 +16,7 @@
 				<li><a href="#"><i class="fa fa-cogs nav_icon"></i>Sản phẩm<span
 						class="fa arrow"></span></a>
 					<ul class="nav nav-second-level collapse">
-						<li><a href="home/createproduct.do">Thêm sản phẩm mới</a></li>
+
 						<li><a href="home/sanpham.do">Danh sách sản phẩm</a></li>
 						<li><a href="home/producttype.do">Loại sản phẩm</a></li>
 						<li><a href="home/supplier.do">Nhà cung cấp</a></li>
@@ -27,8 +27,7 @@
 						class="fa fa-th-large nav_icon"></i>Khách hàng</span></a></li>
 				<li><a href="admin/nhansu.do"><i
 						class="fa fa-table nav_icon"></i>Nhân sự</a></li>
-				<li><a href="Revenue.html"><i class="fa fa-table nav_icon"></i>Thống
-						kê doanh thu</a></li>
+
 			</ul>
 			<!-- //sidebar-collapse -->
 		</nav>
@@ -77,15 +76,13 @@
 				<ul>
 					<li class="dropdown profile_details_drop "><a href="#"
 						class="dropdown-toggle " data-toggle="dropdown"
-						aria-expanded="false"> <c:forEach var="map"
-								items="${sessionScope.nhanviendangnhap}">
-								<div class="user-name">
-									<span>${map.value.nhanvien.maNhanVien}</span> <span
-										style="color: orange;">${map.value.nhanvien.hoTenNV}</span>
-								</div>
-							</c:forEach> <i class="fa fa-angle-down lnr"></i> <i
+						aria-expanded="false">
+
+							<div class="user-name">
+								<span style="color: orange;">${sessionScope.nhanviendangnhap.maNhanVien}</span>
+								<span style="color: orange;">${sessionScope.nhanviendangnhap.hoTenNV}</span>
+							</div> <i class="fa fa-angle-down lnr"></i> <i
 							class="fa fa-angle-up lnr"></i>
-							<div class="clearfix"></div>
 					</a>
 						<ul class="dropdown-menu drp-mnu">
 							<li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>

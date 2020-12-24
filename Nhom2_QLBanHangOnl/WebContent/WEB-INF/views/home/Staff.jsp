@@ -102,18 +102,7 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="form-group">
-									<div class="autocomplete col-md-8 " id="suggestProduct">
-										<span class="input-icon input-icon-right" style="width: 100%;">
-											<input type="text"
-											placeholder="Nhập tên hoặc mã sản phẩm và nhấn Tìm kiếm"
-											class="ng-dirty" id="txtSuggestProduct" autocomplete="off">
-											<i class="icon-remove red ng-hide" style="cursor: pointer;"></i>
-											<button class="btn btn-mini btn-primary" name="search"
-												onclick="return true;" type="submit" value="Search">
-												<span>Tìm kiếm</span> <i class="ace-icon fa fa-search"></i>
-											</button>
-										</span>
-									</div>
+									
 									<div class="col-md-4">
 										<a style="float: right;"
 											class="btn btn-mini btn-primary btncreate"
@@ -133,13 +122,12 @@
 										<tr>
 											<th>Mã NV</th>
 											<th>Tên NV</th>
-											<th>Mật Khẩu</th>
+											<!-- <th>Mật Khẩu</th> -->
 											<th>Email</th>
 											<th>SĐT</th>
 											<th>Số CMND</th>
 											<th>Giới Tính</th>
 											<th>TrangThai</th>
-											<th>Ảnh</th>
 											<th>Địa Chỉ</th>
 											<th>Hoạt động</th>
 										</tr>
@@ -149,13 +137,13 @@
 											<tr>
 												<td><c:out value="${nhanvien.maNhanVien}" /></td>
 												<td><c:out value="${nhanvien.hoTenNV}" /></td>
-												<td><c:out value="${nhanvien.matKhau}" /></td>
+												<%-- <td><c:out value="${nhanvien.matKhau}" /></td> --%>
 												<td><c:out value="${nhanvien.email}" /></td>
 												<td><c:out value="${nhanvien.SDT}" /></td>
 												<td><c:out value="${nhanvien.CMND}" /></td>
 												<td><c:out value="${nhanvien.gioiTinhString}" /></td>
 												<td><c:out value="${nhanvien.enableString}" /></td>
-												<td><c:out value="${nhanvien.hinh}" /></td>
+												
 												<td><c:out value="${nhanvien.diaChi}" /></td>
 												<td>
 													<div class="hidden-phone visible-desktop action-buttons">

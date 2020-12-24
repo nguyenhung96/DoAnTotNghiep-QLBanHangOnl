@@ -98,7 +98,7 @@ tr:nth-child(even) {
 									<td>${donhang.maNhanVien}</td>
 									<td>${donhang.ngayDat}</td>
 									<td>${donhang.trangThaiString}</td>
-									<td>${donhang.tongTien}</td>
+									<td>${donhang.tongTienString}</td>
 
 									<td><a
 										href="home/detailorder.do?MaDonHang=${donhang.maDonHang}">Chi

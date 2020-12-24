@@ -34,12 +34,7 @@
 		<jsp:include page="nav.jsp"></jsp:include>
 		
 	</header>
-	<div class="col-sm-3">
-				<jsp:include page="danhmucsp.jsp"></jsp:include>
-					
-				</div>
-	<section>
-	</section>
+	
 	<section>
 		<div class="container">
 			<div class="row">
@@ -55,14 +50,10 @@
 							<div class="product-image-wrapper" >
 								<div class="single-products">
 								
-									<div class="productinfo text-center">
+									<div class="productinfo text-center producttsp">
 										<img src="productImg/${sanpham.hinh}" alt="" height="237px" />
-										<h2>${sanpham.maSP}</h2>
-										<p>${sanpham.tenSP}</p>
-										 <p class="dollar"><span class="in-dollar">$</span><span>${sanpham.giaSP}</span></p>
-										
-										<a href="${pageContext.request.contextPath}/cart/${sanpham.maSP}.do" class="btn btn-default add-to-cart"><i
-											class="fa fa-shopping-cart"></i>Add to cart</a>
+									
+										<br>
 									</div>
 									<div class="product-overlay">
 										<div class="overlay-content ">

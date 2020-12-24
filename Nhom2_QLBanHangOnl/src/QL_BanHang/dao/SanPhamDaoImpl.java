@@ -82,4 +82,12 @@ public class SanPhamDaoImpl implements SanPhamDao {
 		}
 
 	}
+	@Override
+	public int demSanPham() {
+		String hql = "FROM SanPham";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<SanPham> list = query.list();
+		int sosp = list.size();
+		return sosp;
+	}
 }

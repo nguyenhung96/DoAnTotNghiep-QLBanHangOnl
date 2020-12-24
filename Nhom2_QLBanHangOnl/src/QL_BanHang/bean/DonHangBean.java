@@ -32,6 +32,11 @@ public class DonHangBean {
 	private String GhiChu;
 
 	private String TrangThaiString;
+	
+	private String TongTienString;
+	
+	private String MaNhanVienDuyetDon;
+	
 
 	public String getMaDonHang() {
 		return MaDonHang;
@@ -104,11 +109,32 @@ public class DonHangBean {
 	public void setTrangThaiString(int trangThai) {
 		String trangthai = null;
 		if (trangThai == 1) {
-			trangthai = "Chờ duyệt";
+			trangthai = "Chưa duyệt";
 		} else if (trangThai == 2) {
-			trangthai = "Đã duyệt";
+			trangthai = "Đang giao";
+		} else if (trangThai == 4) {
+			trangthai = "Đơn bị hủy";
+		} else if (trangThai == 3) {
+			trangthai = "Hoàn thành";
 		}
+		
 		TrangThaiString = trangthai;
+	}
+
+	public String getTongTienString() {
+		return TongTienString;
+	}
+
+	public void setTongTienString(String tongTienString) {
+		TongTienString = tongTienString;
+	}
+
+	public String getMaNhanVienDuyetDon() {
+		return MaNhanVienDuyetDon;
+	}
+
+	public void setMaNhanVienDuyetDon(String maNhanVienDuyetDon) {
+		MaNhanVienDuyetDon = maNhanVienDuyetDon;
 	}
 
 }

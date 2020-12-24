@@ -22,5 +22,7 @@ public interface SanPhamService {
 	public String locationfolder();
 	
 	public String autoGenrate();
+	
+	public int demSanPham();
 }
 

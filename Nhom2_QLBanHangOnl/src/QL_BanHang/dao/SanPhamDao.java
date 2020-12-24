@@ -31,4 +31,6 @@ public interface SanPhamDao {
 	
 	public String autoGenrate();
 	
+	public int demSanPham();
+	
 }

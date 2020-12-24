@@ -25,19 +25,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="form-group">
-						<div class="autocomplete col-md-8 " id="suggestProduct">
-							<span class="input-icon input-icon-right" style="width: 100%;">
-								<input type="text" ng-model="searchParam"
-								placeholder="Nhập tên hoặc mã sản phẩm và nhấn Tìm kiếm"
-								class="ng-dirty" id="txtSuggestProduct" autocomplete="off">
-								<i class="icon-remove red ng-hide" style="cursor: pointer;"
-								ng-show="searchParam"></i>
-								<button class="btn btn-mini btn-primary" name="search"
-									onclick="return true;" type="submit" value="Search">
-									<span>Tìm kiếm</span> <i class="ace-icon fa fa-search"></i>
-								</button>
-							</span>
-						</div>
+						
 						<div class="col-md-4">
 							<a style="float: right;"
 								class="btn btn-mini btn-primary btncreate"

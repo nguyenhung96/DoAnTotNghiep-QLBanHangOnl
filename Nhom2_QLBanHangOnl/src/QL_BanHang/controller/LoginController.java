@@ -26,26 +26,40 @@ import QL_BanHang.bean.DangNhapBean;
 import QL_BanHang.bean.NhanVienBean;
 import QL_BanHang.model.NhanVien;
 import QL_BanHang.model.SanPham;
+import QL_BanHang.service.DonHangService;
 import QL_BanHang.service.KhachHangService;
 import QL_BanHang.service.NhanVienService;
+import QL_BanHang.service.SanPhamService;
 
 @Controller
 public class LoginController {
 	@Autowired
 	KhachHangService khachhangservice;
 
+	@Autowired
+	SanPhamService sanphamservice;
+	@Autowired
+	NhanVienService nhanvienService;
+	@Autowired
+	DonHangService donHangService;
+
 	@RequestMapping(value = "/home/index", method = RequestMethod.GET)
-	public String executeSecurity(ModelMap model, Principal principal) {
+	public String executeSecurity(ModelMap model, Principal principal, HttpSession session) {
 		String name = principal.getName();
 		model.addAttribute("author", name);
 		model.addAttribute("sokhachhang", khachhangservice.demKhachHang());
+		model.addAttribute("sosanpham", sanphamservice.demSanPham());
+		model.addAttribute("donhangdanggiao", donHangService.demdonhangdanggiao());
+		model.addAttribute("donhangchuaduyet", donHangService.demdonhangchuaduyet());
+		NhanVien nhanVien = nhanvienService.getNhanVien(name);
+		session.setAttribute("nhanviendangnhap", nhanVien);
 		return "home/index";
 
 	}
 
 	@RequestMapping(value = "/login/login", method = RequestMethod.GET)
-	public String login(ModelMap model) {
-
+	public String login(ModelMap model, Principal principal) {
+		
 		return "login/Login";
 
 	}

@@ -12,7 +12,7 @@
 			<div class="col-sm-2">
 				<div class="logo pull-left">
 					<a
-						href="http://localhost:8090/Nhom2_QLBanHangOnl/Trangchu/index.do"><img
+						href="http://localhost:8080/Nhom2_QLBanHangOnl/Trangchu/index.do"><img
 						src="" alt="" />ĐỒ ÁN</a>
 				</div>
 
@@ -34,15 +34,14 @@
 			</div>
 
 			<div class="col-sm-7">
-				<div class="shop-menu pull-right">
+				<div class="shop-menu ">
 
 					<ul class="nav navbar-nav">
 						<li><a href="goto.do?query=gioithieu"> Giới thiệu</a></li>
 						<li><a href="Trangchu/Sanpham.do"> Sản Phẩm</a></li>
 						<li><a href="goto.do?query=tintuc"> Tin tức</a></li>
-						<li><a href="goto.do?query=donhang">Đơn hàng</a></li>
 						<li><a href="goto.do?query=lienhe">Liên hệ</a></li>
-						<li><a href="login/login.do">Đăng nhập</a></li>
+						
 					</ul>
 					
 					<ul class="giohang ">

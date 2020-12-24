@@ -54,4 +54,34 @@ public class DonHangServiceImpl implements DonHangService {
 		donhangDao.createdonhangchitiet(donHangChiTiet);
 
 	}
+
+	@Override
+	public void HuyDonHang(String madh) {
+		donhangDao.HuyDonHang(madh);
+		
+	}
+
+	@Override
+	public void completeDonHang(String madh) {
+		donhangDao.completeDonHang(madh);
+		
+	}
+
+	@Override
+	public int demsanphamdaban() {
+		
+		return donhangDao.demsanphamdaban();
+	}
+
+	@Override
+	public int demdonhangdanggiao() {
+
+		return donhangDao.demdonhangdanggiao();
+	}
+
+	@Override
+	public int demdonhangchuaduyet() {
+
+		return donhangDao.demdonhangchuaduyet();
+	}
 }

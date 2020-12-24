@@ -24,7 +24,7 @@ margin: 0 auto;
 				</h3>
 			</div>
 			<div class="panel-body">
-				<div class="row col-md-12">
+				<div class="row col-md-12"> cos
 					<div class="panel panel-default">
 						<div class="panel-title">
 							<h4>
@@ -52,7 +52,7 @@ margin: 0 auto;
 
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="matKhau">Mật khẩu</form:label></td>
-										<td class="col-md-5"><form:input id="pass" path="matKhau"
+										<td class="col-md-5"><form:input id="pass" path="matKhau" type="password"
 												class="form-control " value="${nhanvien.matKhau}" />
 												<span id="checkpass"></span></td>
 												

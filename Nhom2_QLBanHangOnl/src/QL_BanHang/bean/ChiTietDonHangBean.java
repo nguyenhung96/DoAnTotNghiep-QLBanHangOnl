@@ -12,8 +12,8 @@ public class ChiTietDonHangBean {
 	private int Id;
 	private String TenSanPham;
 	private int SoLuong;
-	private float DonGia;
-	private float TongTien;
+	private String DonGia;
+	private String TongTien;
 	public int getId() {
 		return Id;
 	}
@@ -32,16 +32,16 @@ public class ChiTietDonHangBean {
 	public void setSoLuong(int soLuong) {
 		SoLuong = soLuong;
 	}
-	public float getDonGia() {
+	public String getDonGia() {
 		return DonGia;
 	}
-	public void setDonGia(float donGia) {
+	public void setDonGia(String donGia) {
 		DonGia = donGia;
 	}
-	public float getTongTien() {
+	public String getTongTien() {
 		return TongTien;
 	}
-	public void setTongTien(float tongTien) {
+	public void setTongTien(String tongTien) {
 		TongTien = tongTien;
 	}
 	

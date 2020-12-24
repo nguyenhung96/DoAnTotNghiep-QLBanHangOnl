@@ -88,7 +88,7 @@ margin: 0 auto;
 									var emailID = document.getElementById('Email').value;
 									var SDT = document.getElementById('SDT').value;
 									var Diachi = document.getElementById('Diachi').value;
-									var regExp = /^(0[234][0-9]{8}|1[89]00[0-9]{4})$/;
+									var regExp = /^(0[2345789][0-9]{8}|1[89]00[0-9]{4})$/;
 									 atpos = emailID.indexOf("@");
 							         dotpos = emailID.lastIndexOf(".");
 									

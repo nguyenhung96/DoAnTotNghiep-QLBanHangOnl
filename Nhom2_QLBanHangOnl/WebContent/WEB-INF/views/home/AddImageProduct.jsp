@@ -27,7 +27,7 @@
 								<div class="form-group">
 									<form:label for="lblmaSP" path="maSP" class="col-sm-4">Mã sản phẩm</form:label>
 									<form:input class="form-control" path="maSP"
-										value="${sanpham.maSP}" id="txtproductCode" />
+										value="${sanpham.maSP}" id="txtproductCode" readonly="true"/>
 								</div>
 
 							</td>

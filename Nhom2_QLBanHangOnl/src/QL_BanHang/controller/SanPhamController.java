@@ -1,6 +1,6 @@
 package QL_BanHang.controller;
 
-import java.io.File; 
+import java.io.File;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -55,6 +55,14 @@ public class SanPhamController {
 	private DonHangService donhangService;
 
 	// Nga
+	@RequestMapping(value = "Trangchu/Sanpham", method = RequestMethod.GET)
+	public ModelAndView ShowSanPham() {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
+		System.out.print("nga111");
+		return new ModelAndView("pages/product", model);
+	}
+
 	@RequestMapping(value = "Trangchu/index", method = RequestMethod.GET)
 	public ModelAndView ShowTrangChu() {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -62,46 +70,47 @@ public class SanPhamController {
 
 		return new ModelAndView("pages/index", model);
 	}
+
 	@RequestMapping(value = "pages/opencheckout", method = RequestMethod.GET)
-	public ModelAndView opencheckout(ModelMap mm, HttpSession session,@ModelAttribute("khachhangcheckout") KhachHang khachhang) {
-	     HashMap<Long, Cart> cartItems = (HashMap<Long, Cart>) session.getAttribute("myCartItems");
+	public ModelAndView opencheckout(ModelMap mm, HttpSession session,
+			@ModelAttribute("khachhangcheckout") KhachHang khachhang) {
+		HashMap<Long, Cart> cartItems = (HashMap<Long, Cart>) session.getAttribute("myCartItems");
 		return new ModelAndView("pages/checkout");
 	}
-	
-	@RequestMapping(value = "pages/checkout", method = RequestMethod.POST)
-	public ModelAndView checkout(ModelMap mm, HttpSession session,@ModelAttribute("khachhangcheckout") KhachHangBean khachhangBean, DonHang donhang) {
-	     HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
-	     KhachHang khachhang = prepareModelKhachHang(khachhangBean);
-			khachhangService.addKhachHang(khachhang);
-	     if (cartItems == null) {
-	            cartItems = new HashMap<>();
-	        }
-	     long millis=System.currentTimeMillis();  
-	     Date date=new Date(millis); 
-	   donhang.setMaDonHang(donhangService.autoGenrate()); //Làm 1 hàm tự động tạo mã đơn hàng
-	     donhang.setKhachhang(khachhang);
-	     donhang.setNgayDat(date);
-	     donhang.setTrangThai(1);
-	     donhang.setTongTien(totalPrice(cartItems)); //Lấy dữ liệu tổng tiền trên sessio
-	     donhangService.addDonHang(donhang);
-	     for (Map.Entry<String, Cart> entry : cartItems.entrySet()) {
-	            DonHangChiTiet donhangchitiet = new DonHangChiTiet();
 
-	            donhangchitiet.setDonhang(donhang);
-	            donhangchitiet.setSanpham(entry.getValue().getSanpham());
-	            donhangchitiet.setSoLuong(entry.getValue().getSoluong());
-	            donhangService.createdonhangchitiet(donhangchitiet); //Tạo don hang chi tiet
-	        }
-	        cartItems = new HashMap<>();
-	        session.setAttribute("myCartItems", cartItems);
-	        session.setAttribute("myCartTotal", 0);
-	        session.setAttribute("myCartNum", 0);
-	     
-	     
-	     
+	@RequestMapping(value = "pages/checkout", method = RequestMethod.POST)
+	public ModelAndView checkout(ModelMap mm, HttpSession session,
+			@ModelAttribute("khachhangcheckout") KhachHangBean khachhangBean, DonHang donhang) {
+		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
+		KhachHang khachhang = prepareModelKhachHang(khachhangBean);
+		khachhangService.addKhachHang(khachhang);
+		if (cartItems == null) {
+			cartItems = new HashMap<>();
+		}
+		long millis = System.currentTimeMillis();
+		Date date = new Date(millis);
+		donhang.setMaDonHang(donhangService.autoGenrate()); // Làm 1 hàm tự động tạo mã đơn hàng
+		donhang.setKhachhang(khachhang);
+		donhang.setNgayDat(date);
+		donhang.setTrangThai(1);
+		donhang.setTongTien(totalPrice(cartItems)); // Lấy dữ liệu tổng tiền trên sessio
+		donhangService.addDonHang(donhang);
+		for (Map.Entry<String, Cart> entry : cartItems.entrySet()) {
+			DonHangChiTiet donhangchitiet = new DonHangChiTiet();
+
+			donhangchitiet.setDonhang(donhang);
+			donhangchitiet.setSanpham(entry.getValue().getSanpham());
+			donhangchitiet.setSoLuong(entry.getValue().getSoluong());
+			donhangService.createdonhangchitiet(donhangchitiet); // Tạo don hang chi tiet
+		}
+		cartItems = new HashMap<>();
+		session.setAttribute("myCartItems", cartItems);
+		session.setAttribute("myCartTotal", 0);
+		session.setAttribute("myCartNum", 0);
+
 		return new ModelAndView("pages/success");
 	}
-	
+
 	@RequestMapping(value = "pages/cart", method = RequestMethod.GET)
 	public ModelAndView showGioHang(ModelMap mm, HttpSession session, String maSP) {
 		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
@@ -299,8 +308,8 @@ public class SanPhamController {
 		sanpham.setHinh(sanphamBean.getHinh());
 		return sanpham;
 	}
-	
-	//Nga
+
+	// Nga
 	private KhachHang prepareModelKhachHang(KhachHangBean khachhangBean) {
 		KhachHang khachhang = new KhachHang();
 		String makh = null;
@@ -311,12 +320,13 @@ public class SanPhamController {
 		}
 		khachhang.setMaKH(makh);
 		khachhang.setHoTenKH(khachhangBean.getHoTenKH());
-		khachhang.setMatKhau("123");;
+		khachhang.setMatKhau("123");
+		;
 		khachhang.setSDT(khachhangBean.getSDT());
 		khachhang.setEmail(khachhangBean.getEmail());
 		khachhang.setDiaChi(khachhangBean.getDiaChi());
 		khachhangBean.setMaKH(null);
 		return khachhang;
 	}
-	//Nga
+	// Nga
 }

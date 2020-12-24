@@ -40,35 +40,109 @@
 				<h3>Nhập thông tin để đặt hàng</h3>
 			</div>
 			<div class="row">
+			
 				<form:form method="POST"
 					action="${pageContext.request.contextPath}/pages/checkout.do"
-					modelAttribute="khachhangcheckout">
+					modelAttribute="khachhangcheckout" onsubmit="return checkdathang()">
 					<div style="visibility: hidden">
 						<form:input path="MaKH"  />
 					</div>
 					<div>
 						<span>Tên của bạn</span>
-						<form:input path="hoTenKH" />
+						<form:input id="Ten" path="hoTenKH" />
 					</div>
+					<span id="checkTen"></span>
 					<div>
 						<span>Số điện thoại</span>
-						<form:input path="SDT" />
+						<form:input id="SDT" path="SDT" />
 					</div>
+					<span id="checkSDT"></span>
 					<div>
 						<span>Email</span>
-						<form:input path="Email" />
+						<form:input id="email" path="Email" />
 					</div>
+					<span id="checkEmail"></span>
 					<div>
 						<span>Địa Chỉ</span>
-						<form:input path="diaChi" />
+						<form:input id="diachi" path="diaChi" />
 					</div>
+					<span id="checkdiachi"></span>
+					<div id="btndathang">
 					<input type="submit" value="Đặt hàng">
+					</div>
 				</form:form>
+				
+				
 			</div>
 		</div>
 	</section>
-	<!--/#do_action-->
-
+	
+			<script type="text/javascript">
+			function checkdathang(){
+				var tenKH= document.getElementById('Ten').value;
+				var SDT= document.getElementById('SDT').value;
+				var emailID= document.getElementById('email').value;
+				var diachi= document.getElementById('diachi').value;
+				var status = false;
+				var regExp = /^(0[2345789][0-9]{8}|1[89]00[0-9]{4})$/;
+				atpos = emailID.indexOf("@");
+		         dotpos = emailID.lastIndexOf(".");
+				if (tenKH == ''){
+					
+					document.getElementById("checkTen").innerHTML=
+						" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập tên !</span> ";
+			        status = false;
+				}
+				else{
+					document.getElementById("checkTenSP").innerHTML = 
+			            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+					status = true;
+				}
+				if(SDT!==''){
+					if(regExp.test(SDT) == false){
+					document.getElementById("checkSDT").innerHTML = 
+			            " <span class='fas fa-window-close' style='color:red;'>Số điện thoại không đúng định dạng!</span> ";
+			         status=false;
+					}
+					else{
+						document.getElementById("checkSDT").innerHTML = 
+				            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+					}
+				}
+				else{
+					document.getElementById("checkSDT").innerHTML = 
+			            " <span class='fas fa-window-close' style='color:red;'>Bạn chưa nhập số điện thoại!</span> ";
+			         status=false;
+				}
+				if(emailID !==''){
+					if(atpos < 1 || ( dotpos - atpos < 2 )){
+						document.getElementById("checkEmail").innerHTML = 
+				            " <span class='fas fa-window-close' style='color:red;'>Email không đúng định dạng!</span> ";
+				         status=false;
+				}
+					else{
+						document.getElementById("checkEmail").innerHTML = 
+				            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+					}
+				}
+				else{
+					document.getElementById("checkEmail").innerHTML = 
+						" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập email!</span> ";
+				}
+				if(diachi ==''){
+					document.getElementById("checkdiachi").innerHTML = 
+						" <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập địa chỉ!</span> ";
+						status = false;
+				}
+				else{
+					document.getElementById("checkdiachi").innerHTML = 
+			            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
+				}
+				return status;
+				
+			}
+			</script>
+	
 	<footer id="footer">
 		<!--Footer-->
 		<div class="footer-widget">

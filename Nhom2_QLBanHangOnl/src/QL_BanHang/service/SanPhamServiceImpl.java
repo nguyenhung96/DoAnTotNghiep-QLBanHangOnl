@@ -52,4 +52,8 @@ public class SanPhamServiceImpl implements SanPhamService {
 		return sanphamDao.autoGenrate();
 	}
 	
+	@Override
+	public int demSanPham() {
+		return sanphamDao.demSanPham();
+	}
 }
