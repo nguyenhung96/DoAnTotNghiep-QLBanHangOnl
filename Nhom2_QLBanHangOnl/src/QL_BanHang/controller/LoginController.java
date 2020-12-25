@@ -12,6 +12,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -42,6 +44,8 @@ public class LoginController {
 	NhanVienService nhanvienService;
 	@Autowired
 	DonHangService donHangService;
+	@Autowired
+	private JavaMailSender mailSender;
 
 	@RequestMapping(value = "/home/index", method = RequestMethod.GET)
 	public String executeSecurity(ModelMap model, Principal principal, HttpSession session) {
@@ -49,17 +53,63 @@ public class LoginController {
 		model.addAttribute("author", name);
 		model.addAttribute("sokhachhang", khachhangservice.demKhachHang());
 		model.addAttribute("sosanpham", sanphamservice.demSanPham());
-		//model.addAttribute("donhangdanggiao", donHangService.demdonhangdanggiao());
-		//model.addAttribute("donhangchuaduyet", donHangService.demdonhangchuaduyet());
+		model.addAttribute("donhangdanggiao", donHangService.demdonhangdanggiao());
+		model.addAttribute("donhangchuaduyet", donHangService.demdonhangchuaduyet());
 		NhanVien nhanVien = nhanvienService.getNhanVien(name);
 		session.setAttribute("nhanviendangnhap", nhanVien);
 		return "home/index";
 
 	}
 
+	// Lưu và update nhân viên
+	@RequestMapping(value = "login/quenmatkhau", method = RequestMethod.GET)
+	public ModelAndView addNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		return new ModelAndView("login/ForgotPassword", model);
+	}
+
+	// Lưu và update nhân viên
+	@RequestMapping(value = "login/checkcode", method = RequestMethod.POST)
+	public String checkcode(ModelMap model, @ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
+		if (nhanvienBean.getCodeNhap() == nhanvienBean.getCode()) {
+			return ("login/login.do");
+		}else {
+			model.addAttribute("msg","Mã không đúng");
+			 return ("login/CheckCode");
+		}
+
+		
+
+	}
+
+	// Lưu và update nhân viên
+	@RequestMapping(value = "login/quenmatkhaumail", method = RequestMethod.POST)
+	public ModelAndView saveNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result,
+			HttpSession session) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		try {
+			NhanVien nhanvien = nhanvienService.getNhanVien(nhanvienBean.getMaNhanVien());
+			int code = (int) Math.floor(((Math.random() * 899999) + 100000));
+			System.out.println(code);
+			// sendmail
+			SimpleMailMessage email = new SimpleMailMessage();
+			email.setTo(nhanvien.getEmail());
+			email.setSubject("Đặt lại mật khẩu");
+			email.setText("Mã xác nhận: " + code);
+			mailSender.send(email);
+			// Day code va nv len session
+			session.setAttribute("code", code);
+			session.setAttribute("nvsetmk", nhanvien.getMaNhanVien());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return new ModelAndView("login/CheckCode");
+	}
+
 	@RequestMapping(value = "/login/login", method = RequestMethod.GET)
 	public String login(ModelMap model, Principal principal) {
-		
+
 		return "login/Login";
 
 	}
@@ -77,5 +127,21 @@ public class LoginController {
 
 		return "login/Login";
 
+	}
+
+	private NhanVien prepareModel(NhanVienBean nhanvienBean) {
+		NhanVien nhanvien = new NhanVien();
+		nhanvien.setMaNhanVien(nhanvienBean.getMaNhanVien());
+		nhanvien.setHoTenNV(nhanvienBean.getHoTenNV());
+		nhanvien.setMatKhau(nhanvienBean.getMatKhau());
+		nhanvien.setEmail(nhanvienBean.getEmail());
+		nhanvien.setDiaChi(nhanvienBean.getDiaChi());
+		nhanvien.setCMND(nhanvienBean.getCMND());
+		nhanvien.setGioiTinh(nhanvienBean.isGioiTinh());
+		nhanvien.setHinh(nhanvienBean.getHinh());
+		nhanvien.setEnable(nhanvienBean.getEnable());
+		nhanvien.setSDT(nhanvienBean.getSDT());
+		nhanvienBean.setMaNhanVien(null);
+		return nhanvien;
 	}
 }
