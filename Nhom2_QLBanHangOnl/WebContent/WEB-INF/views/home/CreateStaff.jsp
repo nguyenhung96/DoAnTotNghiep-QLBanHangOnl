@@ -81,10 +81,11 @@
 											<span id="checkCMND"></span></td>
 									</tr>
 									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="gioiTinh">Giới tính</form:label></td>
+										<td class="col-md-3"><form:label path="gioiTinhString">Giới tính</form:label></td>
 										<td class="col-md-5"><form:input id="Gioitinh"
-												path="gioiTinh" class="form-control "
-												value="${nhanvien.gioiTinh}" /> <span id="checkGioitinh"></span></td>
+												path="gioiTinhString" class="form-control "
+												value="${nhanvien.gioiTinhString}" /> <span
+											id="checkGioitinh"></span></td>
 									</tr>
 
 									<tr class="form-group col-md-11">
@@ -130,10 +131,8 @@
 								
 							    var status = false;
 							    
-							    if(!(document.getElementById("MaNhanVien").value = '')){
-							    	document.getElementById("pass").style.display="none"
-							    }
-							    
+						
+
 							    
 							    if (TenNV == '') {
 									document.getElementById("checkTenNV").innerHTML = 

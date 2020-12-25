@@ -23,4 +23,8 @@ public interface NhanVienDao {
 	public List<QuyenNV> listQuyenNhanVien();
 	
 	public void taoquyenchonhanvien(QuyenNV quyenNV);
+
+	List<QuyenNV> listquyennvtheoma(String manv);
+	
+	public void setpasworld(NhanVien nhanvien, String matkhau);
 }

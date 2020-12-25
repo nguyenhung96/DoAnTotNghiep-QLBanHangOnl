@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.sun.mail.util.BEncoderStream;
+
 import QL_BanHang.bean.NhanVienBean;
 import QL_BanHang.bean.QuyenNVBean;
 import QL_BanHang.model.NhanVien;
@@ -24,13 +26,16 @@ public class NhanVienController {
 	@Autowired
 	private NhanVienService nhanvienService;
 
+	// Lưu và update nhân viên
 	@RequestMapping(value = "admin/savenhanvien", method = RequestMethod.POST)
 	public ModelAndView saveNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
 		NhanVien nhanvien = prepareModel(nhanvienBean);
+		System.out.println(nhanvienBean.getMaNhanVien());
 		nhanvienService.addNhanVien(nhanvien);
 		return new ModelAndView("redirect:/admin/nhansu.do");
 	}
 
+	// TRang nhân sự
 	@RequestMapping(value = "admin/nhansu", method = RequestMethod.GET)
 	public ModelAndView listNhanVien() {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -39,6 +44,7 @@ public class NhanVienController {
 		return new ModelAndView("home/Staff", model);
 	}
 
+	// Thêm nhân viên mới
 	@RequestMapping(value = "admin/createstaff", method = RequestMethod.GET)
 	public ModelAndView addNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -46,6 +52,7 @@ public class NhanVienController {
 		return new ModelAndView("home/CreateStaff", model);
 	}
 
+	// Xóa nhân viên
 	@RequestMapping(value = "admin/deletenhanvien", method = RequestMethod.GET)
 	public ModelAndView editNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
 		nhanvienService.deleteNhanVien(prepareModel1(nhanvienBean));
@@ -55,6 +62,7 @@ public class NhanVienController {
 		return new ModelAndView("redirect:/admin/nhansu.do");
 	}
 
+	// Chọn nhân viên để edit
 	@RequestMapping(value = "admin/editnhanvien", method = RequestMethod.GET)
 	public ModelAndView deleteNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, QuyenNVBean quyennvBean,
 			BindingResult result) {
@@ -64,6 +72,7 @@ public class NhanVienController {
 		return new ModelAndView("home/CreateStaff", model);
 	}
 
+	// Chọn nhân viên để phân quyền
 	@RequestMapping(value = "admin/editquyennv", method = RequestMethod.GET)
 	public ModelAndView editquyenNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, QuyenNVBean quyennvBean,
 			BindingResult result) {
@@ -73,6 +82,7 @@ public class NhanVienController {
 		return new ModelAndView("home/SetRole", model);
 	}
 
+	// Cấp quyền cho nhân viên
 	@RequestMapping(value = "admin/luuquyennv", method = RequestMethod.POST)
 	public ModelAndView savequyenNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, QuyenNVBean quyennvBean,
 			BindingResult result) {
@@ -81,7 +91,27 @@ public class NhanVienController {
 		model.put("listuyennv", prepareListofBeanQuyenNV(nhanvienService.listQuyenNhanVien()));
 		QuyenNV quyenNV = prepareModelquyennv(nhanvienBean);
 		nhanvienService.taoquyenchonhanvien(quyenNV);
-		return new ModelAndView("home/SetRole", model);
+		return new ModelAndView("redirect:/admin/nhansu.do", model);
+	}
+	// Cấp lại mật khẩu
+	@RequestMapping(value = "admin/setpassword", method = RequestMethod.GET)
+	public ModelAndView setPassword(@ModelAttribute("command") NhanVienBean nhanvienBean, QuyenNVBean quyennvBean,
+			BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("nhanvien", prepareNhanVienBean(nhanvienService.getNhanVien(quyennvBean.getMaNhanVien())));
+		model.put("quyennv", prepareQuyenNhanVienBean(nhanvienService.getNhanVien(quyennvBean.getMaNhanVien())));
+		return new ModelAndView("home/SetPassword");
+	}
+	
+	// Cấp lại mật khẩu
+	@RequestMapping(value = "admin/savepassword", method = RequestMethod.POST)
+	public ModelAndView savetPassword(@ModelAttribute("command") NhanVienBean nhanvienBean, QuyenNVBean quyennvBean,
+			BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		NhanVien nhanvien = nhanvienService.getNhanVien(quyennvBean.getMaNhanVien());
+		
+		nhanvienService.setpasworld(nhanvien, nhanvienBean.getMatKhau());
+		return new ModelAndView("redirect:/admin/nhansu.do");
 	}
 
 	private NhanVien prepareModel(NhanVienBean nhanvienBean) {
@@ -108,14 +138,23 @@ public class NhanVienController {
 
 	// chuyen dl tu bean nhanvien ve model quyennv
 	private QuyenNV prepareModelquyennv(NhanVienBean nhanvienBean) {
+		List<QuyenNV> listquyennv = nhanvienService.listquyennvtheoma(nhanvienBean.getMaNhanVien());
 		QuyenNV quyenNV = new QuyenNV();
-
-		quyenNV.setNhanVien(nhanvienService.getNhanVien(nhanvienBean.getMaNhanVien()));
-		quyenNV.setQuyenNV(nhanvienBean.getQuyenNV());
-		nhanvienBean.setMaNhanVien(null);
+		if (listquyennv.isEmpty() == true) {
+			quyenNV.setNhanVien(nhanvienService.getNhanVien(nhanvienBean.getMaNhanVien()));
+			quyenNV.setQuyenNV(nhanvienBean.getQuyenNV());
+			nhanvienBean.setMaNhanVien(null);
+		} else {
+			QuyenNV quyennv = listquyennv.get(listquyennv.size() - 1);
+			quyenNV.setId(quyennv.getId());
+			quyenNV.setNhanVien(quyennv.getNhanVien());
+			quyenNV.setQuyenNV(nhanvienBean.getQuyenNV());
+			nhanvienBean.setMaNhanVien(null);
+		}
 		return quyenNV;
 	}
 
+//
 	private NhanVien prepareModel1(NhanVienBean nhanvienBean) {
 		NhanVien nhanvien = new NhanVien();
 		nhanvien.setMaNhanVien(nhanvienBean.getMaNhanVien());
@@ -181,6 +220,13 @@ public class NhanVienController {
 		bean.setSDT(nhanvien.getSDT());
 		bean.setEnable(nhanvien.getEnable());
 		bean.setEnableString(nhanvien.getEnable());
+		bean.setGioiTinhString(nhanvien.isGioiTinh());
+		return bean;
+	}
+	private QuyenNVBean prepareQuyenNhanVienBean(NhanVien nhanvien) {
+		QuyenNVBean bean = new QuyenNVBean();
+		bean.setMaNhanVien(nhanvien.getMaNhanVien());
+		bean.setHoTenNV(nhanvien.getHoTenNV());
 		return bean;
 	}
 }

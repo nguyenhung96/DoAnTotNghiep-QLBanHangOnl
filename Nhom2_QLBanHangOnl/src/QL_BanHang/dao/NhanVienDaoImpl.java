@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import QL_BanHang.model.DonHang;
 import QL_BanHang.model.KhachHang;
 import QL_BanHang.model.NhanVien;
 import QL_BanHang.model.QuyenNV;
@@ -71,6 +72,21 @@ public class NhanVienDaoImpl implements NhanVienDao {
 	public void taoquyenchonhanvien(QuyenNV quyenNV) {
 		sessionFactory.getCurrentSession().saveOrUpdate(quyenNV);
 
+	}
+
+	// lay list quyen theo ma
+	@Override
+	public List<QuyenNV> listquyennvtheoma(String manv) {
+		String hql = "FROM QuyenNV where MaNhanVien ='" + manv + "'";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		List<QuyenNV> list = query.list();
+		return list;
+	}
+
+	// Cấp lại mật khẩu
+	public void setpasworld(NhanVien nhanvien, String matkhau) {
+		sessionFactory.getCurrentSession().createQuery("Update NhanVien set MatKhau = '" + matkhau
+				+ "' where MaNhanVien ='" + nhanvien.getMaNhanVien() + "'").executeUpdate();
 	}
 
 }

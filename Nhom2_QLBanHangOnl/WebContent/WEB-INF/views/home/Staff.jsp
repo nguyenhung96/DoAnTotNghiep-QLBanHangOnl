@@ -200,11 +200,12 @@ tr:nth-child(even) {
 													<td>
 														<div class="hidden-phone visible-desktop action-buttons">
 															<a
-																href="admin/editnhanvien.do?MaNhanVien=${nhanvien.maNhanVien}"
+																href="admin/editquyennv.do?MaNhanVien=${quyennv.maNhanVien}"
 																class="btn btn-minier btn-success" id="btnEdit"
-																title="Chỉnh sửa thông tin"> <i
+																title="Phân quyền"> <i
 																class="glyphicon glyphicon-edit"></i>
 															</a> <a class="btn btn-mini btn-primary" id="btnSetKey"
+																href="admin/setpassword.do?MaNhanVien=${quyennv.maNhanVien}"
 																title="Cấp lại mật khẩu"> <i
 																class="ace-icon fa fa-key"></i>
 															</a>
@@ -280,33 +281,5 @@ tr:nth-child(even) {
 		</div>
 		<!-- Setkey model popup-->
 	</div>
-	<script>
-		//Script mở model Edit
-		var modal = document.getElementById("editModal");
-		var modal2 = document.getElementById("setkeyModal");
-		// Get the button that opens the modal
-		var btn = document.getElementById("btnEdit");
-		var btn2 = document.getElementById("btnSetKey");
-		// Get the <span> element that closes the modal
-		var span = document.getElementsByClassName("closeEdit")[0];
-		var span2 = document.getElementsByClassName("closeSetKey")[0];
-		// When the user clicks on the button, open the modal
-		btn.onclick = function() {
-			modal.style.zIndex = "100";
-		}
-		btn2.onclick = function() {
-			modal2.style.zIndex = "100";
-		}
-
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-			modal.style.zIndex = "-2";
-		}
-		span2.onclick = function() {
-			modal2.style.zIndex = "-2";
-		}
-
-		//Script mở model Edit
-	</script>
 </body>
 </html>

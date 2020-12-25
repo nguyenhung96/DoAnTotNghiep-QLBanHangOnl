@@ -62,5 +62,17 @@ public class NhanVienServiceImpl implements NhanVienService {
 		
 	}
 
+	@Override
+	public List<QuyenNV> listquyennvtheoma(String manv) {
+	
+		return nhanvienDao.listquyennvtheoma(manv);
+	}
+
+	@Override
+	public void setpasworld(NhanVien nhanvien, String matkhau) {
+	nhanvienDao.setpasworld(nhanvien, matkhau);
+		
+	}
+
 
 }

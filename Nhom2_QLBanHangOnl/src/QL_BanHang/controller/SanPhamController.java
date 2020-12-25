@@ -78,7 +78,7 @@ public class SanPhamController {
 		return new ModelAndView("pages/checkout");
 	}
 
-	@RequestMapping(value = "pages/checkout", method = RequestMethod.POST)
+	 @RequestMapping(value = "pages/checkout", method = RequestMethod.POST)
 	public ModelAndView checkout(ModelMap mm, HttpSession session,
 			@ModelAttribute("khachhangcheckout") KhachHangBean khachhangBean, DonHang donhang) {
 		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
@@ -111,14 +111,7 @@ public class SanPhamController {
 		return new ModelAndView("pages/success");
 	}
 
-	@RequestMapping(value = "pages/cart", method = RequestMethod.GET)
-	public ModelAndView showGioHang(ModelMap mm, HttpSession session, String maSP) {
-		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
 
-		return new ModelAndView("pages/cart", model);
-	}
 
 	// nga test 1
 	@RequestMapping(value = "cart/{maSP}", method = RequestMethod.GET)
@@ -146,6 +139,15 @@ public class SanPhamController {
 		session.setAttribute("myCartNum", cartItems.size());
 		System.out.print("dut");
 		return "redirect:/pages/cart.do";
+	}
+	
+		@RequestMapping(value = "pages/cart", method = RequestMethod.GET)
+	public ModelAndView showGioHang(ModelMap mm, HttpSession session, String maSP) {
+		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
+
+		return new ModelAndView("pages/cart", model);
 	}
 
 	// chi tiết sản phẩm
