@@ -1,13 +1,17 @@
 package QL_BanHang.controller;
 
+import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import QL_BanHang.bean.ChiTietDonHangBean;
 import QL_BanHang.bean.DonHangBean;
+import QL_BanHang.bean.KhachHangBean;
 import QL_BanHang.bean.NhanVienBean;
+import QL_BanHang.model.Cart;
 import QL_BanHang.model.DonHang;
 import QL_BanHang.model.DonHangChiTiet;
+import QL_BanHang.model.KhachHang;
 import QL_BanHang.model.NhanVien;
 import QL_BanHang.service.DonHangService;
 import QL_BanHang.service.KhachHangService;
@@ -39,19 +46,21 @@ public class DonHangController {
 		donhangService.DuyetDonHang(donhang);
 		return new ModelAndView("redirect:/home/order.do");
 	}
-	
+
 	@RequestMapping(value = "home/huydonhang", method = RequestMethod.GET)
 	public ModelAndView huyDonHang(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
 		DonHang donhang = donhangService.getDonHang(donhangBean.getMaDonHang());
 		donhangService.HuyDonHang(donhang.getMaDonHang());
 		return new ModelAndView("redirect:/home/order.do");
 	}
+
 	@RequestMapping(value = "home/completedonhang", method = RequestMethod.GET)
 	public ModelAndView completeDonHang(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
 		DonHang donhang = donhangService.getDonHang(donhangBean.getMaDonHang());
 		donhangService.completeDonHang(donhang.getMaDonHang());
 		return new ModelAndView("redirect:/home/order.do");
 	}
+
 	@RequestMapping(value = "home/order", method = RequestMethod.GET)
 	public ModelAndView listDonHang() {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -67,6 +76,10 @@ public class DonHangController {
 		model.put("nhanvienList", nhanvienService.listNhanVien());
 		return new ModelAndView("home/DetailOrder", model);
 	}
+
+	// Chức năng in hóa đơn
+
+	// Chức năng in hóa đơn
 
 	private DonHang prepareModel(DonHangBean donhangBean) {
 		DonHang donhang = new DonHang();
@@ -139,12 +152,20 @@ public class DonHangController {
 				bean.setTenSanPham(donhang.getSanpham().getTenSP());
 				bean.setSoLuong(donhang.getSoLuong());
 				DecimalFormat formatter = new DecimalFormat("###,###,###");
-				bean.setDonGia( formatter.format(donhang.getSanpham().getGiaSP()).toString());
-				bean.setTongTien( formatter.format(donhang.getSanpham().getGiaSP() * donhang.getSoLuong()));
-
+				bean.setDonGia(formatter.format(donhang.getSanpham().getGiaSP()).toString());
+				bean.setTongTien(formatter.format(donhang.getSanpham().getGiaSP() * donhang.getSoLuong()));
 				beans.add(bean);
 			}
 		}
 		return beans;
+	}
+
+	@RequestMapping(value = "home/print", method = RequestMethod.GET)
+	public ModelAndView print(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		DonHang donhang = donhangService.getDonHang(donhangBean.getMaDonHang());
+		model.put("DonHang", donhang);
+		model.put("listDonhangchitiet", donhangService.listDonHangChiTiet(donhangBean.getMaDonHang()));
+		return new ModelAndView("pdfView", model);
 	}
 }

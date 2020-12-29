@@ -25,7 +25,7 @@
 			style="background-image: url('template/images/bg-01.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form:form class="login100-form validate-form"
-					action="/Nhom2_QLBanHangOnl/login/checkcode.do" method='POST'
+					action="/Nhom2_QLBanHangOnl/login/resetpass.do" method='POST'
 					onsubmit="return checklogin()">
 					<table>
 						<span class="login100-form-title p-b-49"> Mã xác nhận đã
@@ -34,15 +34,21 @@
 						<tr class="wrap-input100 validate-input m-b-23">
 
 							<td><form:input id="ID" class="input100" type="text"
-									style="display:none" value="${sessionScope.code}" path="code" /></td>
-							<td><form:label class="label-input100" path="codeNhap">Nhập mã xác nhận</form:label></td>
-							<td><form:input id="ID" class="input100" type="text"
-									path="codeNhap" /></td>
+									style="display:none" value="${sessionScope.nvsetmk}"
+									path="maNhanVien" /></td>
+							<td><form:label class="label-input100" path="matKhau">Nhập mật khẩu mới</form:label></td>
+							<td><form:input id="ID" class="input100" type="password"
+									path="matKhau" /></td>
+							<td><form:label class="label-input100" path="matKhauNhap">Nhập lại mật</form:label></td>
+							<td><form:input id="ID" class="input100" type="password"
+									path="matKhauNhap" /></td>
 							<td><span class="focus-input100" data-symbol="&#xf206;">${msg}</span></td>
 						</tr>
 
 						<script type="text/javascript">
+						
 							function checklogin() {
+								alert(${msg1});
 
 								var ID = document.getElementById('ID').value;
 								var pw = document.getElementById('password').value;
@@ -61,7 +67,7 @@
 							}
 						</script>
 					</table>
-
+					<lable style="color:red">${msg}</lable>
 					<br>
 
 					<br>

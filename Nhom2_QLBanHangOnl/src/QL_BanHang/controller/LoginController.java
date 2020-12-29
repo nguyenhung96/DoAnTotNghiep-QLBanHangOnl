@@ -61,25 +61,36 @@ public class LoginController {
 
 	}
 
-	// Lưu và update nhân viên
+	// Chức năng quên mật khẩu
 	@RequestMapping(value = "login/quenmatkhau", method = RequestMethod.GET)
 	public ModelAndView addNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		return new ModelAndView("login/ForgotPassword", model);
 	}
 
-	// Lưu và update nhân viên
 	@RequestMapping(value = "login/checkcode", method = RequestMethod.POST)
-	public String checkcode(ModelMap model, @ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
+	public String checkcode(ModelMap model, @ModelAttribute("command") NhanVienBean nhanvienBean,
+			BindingResult result) {
 		if (nhanvienBean.getCodeNhap() == nhanvienBean.getCode()) {
-			return ("login/login.do");
-		}else {
-			model.addAttribute("msg","Mã không đúng");
-			 return ("login/CheckCode");
+			return ("login/ResetPass");
+		} else {
+			model.addAttribute("msg", "Mã xác nhận không đúng");
+			return ("login/CheckCode");
 		}
+	}
 
-		
-
+	@RequestMapping(value = "login/resetpass", method = RequestMethod.POST)
+	public String resetpass(ModelMap model, @ModelAttribute("command") NhanVienBean nhanvienBean,
+			BindingResult result) {
+		if (nhanvienBean.getMatKhau().equals(nhanvienBean.getMatKhauNhap())) {
+			NhanVien nhanvien = nhanvienService.getNhanVien(nhanvienBean.getMaNhanVien());
+			String matkhau = nhanvienBean.getMatKhau();
+			nhanvienService.setpasworld(nhanvien, matkhau);
+			return ("redirect:/login/login.do");
+		} else {
+			model.addAttribute("msg", "Mật khẩu nhập lại không đúng");
+			return ("login/ResetPass");
+		}
 	}
 
 	// Lưu và update nhân viên
@@ -106,7 +117,9 @@ public class LoginController {
 		}
 		return new ModelAndView("login/CheckCode");
 	}
+	// Chức năng quên mật khẩu
 
+	// Login
 	@RequestMapping(value = "/login/login", method = RequestMethod.GET)
 	public String login(ModelMap model, Principal principal) {
 
@@ -129,19 +142,33 @@ public class LoginController {
 
 	}
 
-	private NhanVien prepareModel(NhanVienBean nhanvienBean) {
-		NhanVien nhanvien = new NhanVien();
-		nhanvien.setMaNhanVien(nhanvienBean.getMaNhanVien());
-		nhanvien.setHoTenNV(nhanvienBean.getHoTenNV());
-		nhanvien.setMatKhau(nhanvienBean.getMatKhau());
-		nhanvien.setEmail(nhanvienBean.getEmail());
-		nhanvien.setDiaChi(nhanvienBean.getDiaChi());
-		nhanvien.setCMND(nhanvienBean.getCMND());
-		nhanvien.setGioiTinh(nhanvienBean.isGioiTinh());
-		nhanvien.setHinh(nhanvienBean.getHinh());
-		nhanvien.setEnable(nhanvienBean.getEnable());
-		nhanvien.setSDT(nhanvienBean.getSDT());
-		nhanvienBean.setMaNhanVien(null);
-		return nhanvien;
+	// Profile
+	// Chức năng quên mật khẩu
+	@RequestMapping(value = "home/profile", method = RequestMethod.GET)
+	public ModelAndView profile(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result,
+			Principal principal) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		String name = principal.getName();
+		NhanVienBean nhanvien = prepareNhanVienBean(nhanvienService.getNhanVien(name));
+		model.put("nhanvien", nhanvien);
+		return new ModelAndView("home/Profile", model);
 	}
+
+	private NhanVienBean prepareNhanVienBean(NhanVien nhanvien) {
+		NhanVienBean bean = new NhanVienBean();
+		bean.setMaNhanVien(nhanvien.getMaNhanVien());
+		bean.setHoTenNV(nhanvien.getHoTenNV());
+		bean.setMatKhau(nhanvien.getMatKhau());
+		bean.setEmail(nhanvien.getEmail());
+		bean.setDiaChi(nhanvien.getDiaChi());
+		bean.setCMND(nhanvien.getCMND());
+		bean.setGioiTinh(nhanvien.isGioiTinh());
+		bean.setHinh(nhanvien.getHinh());
+		bean.setSDT(nhanvien.getSDT());
+		bean.setEnable(nhanvien.getEnable());
+		bean.setEnableString(nhanvien.getEnable());
+		bean.setGioiTinhString(nhanvien.isGioiTinh());
+		return bean;
+	}
+
 }

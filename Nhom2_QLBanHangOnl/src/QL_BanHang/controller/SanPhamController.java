@@ -111,8 +111,6 @@ public class SanPhamController {
 		return new ModelAndView("pages/success");
 	}
 
-
-
 	// nga test 1
 	@RequestMapping(value = "cart/{maSP}", method = RequestMethod.GET)
 	public String test(ModelMap mm, HttpSession session, @PathVariable("maSP") String maSP) {

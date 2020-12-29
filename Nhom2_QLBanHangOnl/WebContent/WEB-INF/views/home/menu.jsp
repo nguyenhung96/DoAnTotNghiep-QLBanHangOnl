@@ -86,7 +86,7 @@
 					</a>
 						<ul class="dropdown-menu drp-mnu">
 							<li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>
-							<li><a href="#"><i class="fa fa-user"></i> Thông tin tài
+							<li><a href="home/profile.do"><i class="fa fa-user"></i> Thông tin tài
 									khoản</a></li>
 							<li><a href='<c:url value="/j_spring_security_logout" />'><i
 									class="fa fa-sign-out"></i> Đăng xuất</a></li>

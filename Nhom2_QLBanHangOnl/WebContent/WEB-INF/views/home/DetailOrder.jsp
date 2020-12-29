@@ -142,9 +142,10 @@ tr:nth-child(even) {
 										<td><form:label class="col-sm-5" for="lbloaiSP"
 												path="maNhanVien">Nhân Viên</form:label></td>
 										<td><form:input path="maNhanVien" id="MaNhanVien"
-												class="form-control col-sm-7 " value="${donhang.maNhanVien}"  readonly="true"/>
-											<form:input path="maNhanVienDuyetDon" id="MaNhanVien" style="display:none"
-												class="form-control col-sm-7 " 
+												class="form-control col-sm-7 " value="${donhang.maNhanVien}"
+												readonly="true" /> <form:input path="maNhanVienDuyetDon"
+												id="MaNhanVien" style="display:none"
+												class="form-control col-sm-7 "
 												value="${sessionScope.nhanviendangnhap.maNhanVien}" /></td>
 									</tr>
 									<tr class="form-group">
@@ -184,7 +185,8 @@ tr:nth-child(even) {
 		</div>
 		<div style="height: 50px;">
 			<a style="float: right; margin-right: 35px;" id="btnin"
-				class="btn btn-mini btn-primary btncreate" href="#"> <i
+				class="btn btn-mini btn-primary btncreate"
+				href="home/print.do?MaDonHang=${donhang.maDonHang}"> <i
 				class="glyphicon glyphicon-print"></i> In
 			</a> <a id="btnhuydon" style="float: right; margin-right: 5px;"
 				class="btn btn-mini btn-primary btncreate"

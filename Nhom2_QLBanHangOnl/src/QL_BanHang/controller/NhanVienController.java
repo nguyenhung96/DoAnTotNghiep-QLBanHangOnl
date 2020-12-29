@@ -90,9 +90,15 @@ public class NhanVienController {
 		model.put("nhanvien", prepareNhanVienBean(nhanvienService.getNhanVien(nhanvienBean.getMaNhanVien())));
 		model.put("listuyennv", prepareListofBeanQuyenNV(nhanvienService.listQuyenNhanVien()));
 		QuyenNV quyenNV = prepareModelquyennv(nhanvienBean);
-		nhanvienService.taoquyenchonhanvien(quyenNV);
+		try {
+			nhanvienService.taoquyenchonhanvien(quyenNV);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	
 		return new ModelAndView("redirect:/admin/nhansu.do", model);
 	}
+
 	// Cấp lại mật khẩu
 	@RequestMapping(value = "admin/setpassword", method = RequestMethod.GET)
 	public ModelAndView setPassword(@ModelAttribute("command") NhanVienBean nhanvienBean, QuyenNVBean quyennvBean,
@@ -102,14 +108,13 @@ public class NhanVienController {
 		model.put("quyennv", prepareQuyenNhanVienBean(nhanvienService.getNhanVien(quyennvBean.getMaNhanVien())));
 		return new ModelAndView("home/SetPassword");
 	}
-	
+
 	// Cấp lại mật khẩu
 	@RequestMapping(value = "admin/savepassword", method = RequestMethod.POST)
 	public ModelAndView savetPassword(@ModelAttribute("command") NhanVienBean nhanvienBean, QuyenNVBean quyennvBean,
 			BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		NhanVien nhanvien = nhanvienService.getNhanVien(quyennvBean.getMaNhanVien());
-		
 		nhanvienService.setpasworld(nhanvien, nhanvienBean.getMatKhau());
 		return new ModelAndView("redirect:/admin/nhansu.do");
 	}
@@ -223,6 +228,7 @@ public class NhanVienController {
 		bean.setGioiTinhString(nhanvien.isGioiTinh());
 		return bean;
 	}
+
 	private QuyenNVBean prepareQuyenNhanVienBean(NhanVien nhanvien) {
 		QuyenNVBean bean = new QuyenNVBean();
 		bean.setMaNhanVien(nhanvien.getMaNhanVien());

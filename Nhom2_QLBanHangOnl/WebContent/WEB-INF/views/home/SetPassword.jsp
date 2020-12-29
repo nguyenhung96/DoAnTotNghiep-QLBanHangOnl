@@ -130,6 +130,7 @@ tr:nth-child(even) {
 												value="${nhanvien.matKhau}" /> <span id="checkpass2"></span></td>
 
 									</tr>
+									<tr><td><span>${msg}</span></td></tr>
 									<tr>
 
 										<td colspan="2"><input type="submit"
