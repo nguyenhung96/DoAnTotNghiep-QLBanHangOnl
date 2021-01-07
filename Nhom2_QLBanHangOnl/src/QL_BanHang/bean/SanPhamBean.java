@@ -1,6 +1,8 @@
 package QL_BanHang.bean;
 
 
+import java.text.DecimalFormat;
+
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -16,6 +18,7 @@ public class SanPhamBean {
 	private int Enable;
 	private String EnableString;
 	private MultipartFile multipartFile;
+	private String GiaFormat;
 
 	public String getMaSP() {
 		return MaSP;
@@ -109,6 +112,15 @@ public class SanPhamBean {
 
 	public void setMultipartFile(MultipartFile multipartFile) {
 		this.multipartFile = multipartFile;
+	}
+
+	public String getGiaFormat() {
+		return GiaFormat;
+	}
+
+	public void setGiaFormat(float giaSP) {
+		DecimalFormat formatter = new DecimalFormat("###,###,###");
+		GiaFormat = formatter.format(giaSP);
 	}
 
 }

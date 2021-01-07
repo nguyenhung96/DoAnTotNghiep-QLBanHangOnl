@@ -70,8 +70,8 @@ public class NhanVienDaoImpl implements NhanVienDao {
 
 	@Override
 	public void taoquyenchonhanvien(QuyenNV quyenNV) {
-		sessionFactory.getCurrentSession().saveOrUpdate(quyenNV);
-
+		sessionFactory.getCurrentSession().save(quyenNV);
+	
 	}
 
 	// lay list quyen theo ma

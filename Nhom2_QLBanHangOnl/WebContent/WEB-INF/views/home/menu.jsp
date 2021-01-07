@@ -23,6 +23,8 @@
 					</ul> <!-- /nav-second-level --></li>
 				<li class=""><a href="home/order.do"><i
 						class="fa fa-book nav_icon"></i>Đơn hàng</span></a></li>
+				<li class=""><a href="home/createorder.do"><i
+						class="fa fa-book nav_icon"></i>Tạo đơn hàng</span></a></li>
 				<li><a href="home/khachhang.do"><i
 						class="fa fa-th-large nav_icon"></i>Khách hàng</span></a></li>
 				<li><a href="admin/nhansu.do"><i
@@ -86,8 +88,8 @@
 					</a>
 						<ul class="dropdown-menu drp-mnu">
 							<li><a href="#"><i class="fa fa-cog"></i> Cài đặt</a></li>
-							<li><a href="home/profile.do"><i class="fa fa-user"></i> Thông tin tài
-									khoản</a></li>
+							<li><a href="home/profile.do"><i class="fa fa-user"></i>
+									Thông tin tài khoản</a></li>
 							<li><a href='<c:url value="/j_spring_security_logout" />'><i
 									class="fa fa-sign-out"></i> Đăng xuất</a></li>
 						</ul></li>

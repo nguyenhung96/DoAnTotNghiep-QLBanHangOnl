@@ -8,6 +8,12 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
+<base href="${pageContext.servletContext.contextPath}/">
+<link
+	href="http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"
+	rel="stylesheet">
+<script
+	src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 <style>
 .widget-title {
 	color: #0b87c9;
@@ -64,7 +70,7 @@ tr:nth-child(even) {
 				<div class="row col-md-8">
 					<div class="form-group"></div>
 					<div class="table">
-						<table class="table table-bordered" id="myTable">
+						<table class="table table-bordered">
 							<thead>
 								<tr>
 									<th>STT</th>
@@ -76,18 +82,32 @@ tr:nth-child(even) {
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="c" items="${donhangList}">
+								<c:set var="count" value="0"></c:set>
+								<c:forEach var="map" items="${sessionScope.orderItems}">
+									<c:set var="count" value="${count+1}"></c:set>
 									<tr>
-										<td>${c.id}</td>
-										<td>${c.tenSanPham}</td>
-										<td>${c.soLuong}</td>
-										<td>${c.donGia}</td>
-										<td>${c.tongTien}</td>
-										<td><a class="red"> <i
+										<td><c:out value="${count}" /></td>
+										<td><c:out value="${map.value.sanpham.tenSP}" /></td>
+										<td><a class="cart_quantity_up" href="home/increas/${map.value.sanpham.maSP}.do"> + </a> <input
+											class="cart_quantity_input" type="text" name="quantity"
+											value="${map.value.soluong}" autocomplete="off" size="2">
+											<a class="cart_quantity_down" href="home/sub/${map.value.sanpham.maSP}.do"> - </a></td>
+										<td><c:out value="${map.value.giaSPFormat}" /></td>
+										<td><c:out value="${map.value.thanhTienFormat}" /></td>
+										<td><a class="red"
+											href="home/remove/${map.value.sanpham.maSP}.do"> <i
 												class="glyphicon glyphicon-trash"></i>
 										</a></td>
 									</tr>
 								</c:forEach>
+								<tr>
+									<td></td>
+									<td></td>
+									<td></td>
+
+									<td colspan="3"><c:out
+											value="${sessionScope.orderTotalFormat}" /></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>
@@ -96,77 +116,27 @@ tr:nth-child(even) {
 					<div class="widget-box">
 						<div class="widget-header width-border">
 							<h4 class="widget-title">
-								<span class="glyphicon glyphicon-info-sign"></span> Trạng Thái
-								Đơn Hàng
+								<span class="glyphicon glyphicon-info-sign"></span> Thông Tin
+								Khách Hàng
 							</h4>
-							<table>
-								<tr>
-									<td><span>${donhang.trangThaiString}</span> <input
-										id="Trangthai" value="${donhang.trangThai}"
-										style="visibility: hidden" /></td>
-
-								</tr>
-							</table>
 						</div>
-						<br> <br>
-
 						<div class="widget-body">
 							<form:form method="POST"
-								action="/Nhom2_QLBanHangOnl/home/duyetdonhang.do">
+								action="/Nhom2_QLBanHangOnl/home/saveorder.do">
 								<table>
 									<tr class="form-group">
 										<td><form:label class="col-sm-5" for="lbloaiSP"
-												path="maDonHang">Mã đơn hàng</form:label></td>
+												path="hoTenKH">Tên khách hàng</form:label></td>
 
-										<td><form:input path="maDonHang" readonly="true"
-												class="form-control col-sm-7 " value="${donhang.maDonHang}" />
-										</td>
-
-									</tr>
-									<tr class="form-group">
-										<td><form:label class="col-sm-5" for="lbloaiSP"
-												path="maKH">Khách Hàng</form:label></td>
-										<td><form:input path="maKH" readonly="true"
-												class="form-control col-sm-7 " value="${donhang.maKH}" /></td>
+										<td><form:input path="hoTenKH"
+												class="form-control col-sm-7 " /></td>
 
 									</tr>
 									<tr class="form-group">
 										<td><form:label class="col-sm-5" for="lbloaiSP"
-												path="ngayDat">Ngày đặt</form:label></td>
-										<td><form:input path="ngayDat" readonly="true"
-												class="form-control col-sm-7 " value="${donhang.ngayDat}" />
-										</td>
+												path="sDT">Số điện thoại</form:label></td>
 
-									</tr>
-									<tr class="form-group">
-										<td><form:label class="col-sm-5" for="lbloaiSP"
-												path="maNhanVien">Nhân Viên</form:label></td>
-										<td><form:input path="maNhanVien" id="MaNhanVien"
-												class="form-control col-sm-7 " value="${donhang.maNhanVien}"
-												readonly="true" /> <form:input path="maNhanVienDuyetDon"
-												id="MaNhanVien" style="display:none"
-												class="form-control col-sm-7 "
-												value="${sessionScope.nhanviendangnhap.maNhanVien}" /></td>
-									</tr>
-									<tr class="form-group">
-										<td><form:label class="col-sm-5" for="lbloaiSP"
-												path="diaChi">Địa chỉ giao</form:label></td>
-										<td><form:input path="diaChi" readonly="true"
-												class="form-control col-sm-7 " value="${donhang.diaChi}" />
-										</td>
-
-									</tr>
-									<tr class=" width-border col-sm-12">
-										<h4 class="widget-title">
-											<span class="glyphicon glyphicon-info-sign"></span> Thông Tin
-											Thanh Toán
-										</h4>
-									</tr>
-									<tr class="form-group">
-										<td><form:label class="col-sm-5" for="lbloaiSP"
-												path="tongTien">Tổng tiền hàng</form:label></td>
-										<td><form:label class="col-sm-5" for="lbloaiSP"
-												path="tongTien">${donhang.tongTienString} VNĐ</form:label></td>
+										<td><form:input path="sDT" class="form-control col-sm-7 " /></td>
 
 									</tr>
 									<tr>
@@ -182,21 +152,63 @@ tr:nth-child(even) {
 				</div>
 				<div class="widget-box"></div>
 			</div>
+
+
+
+
 		</div>
-		<div style="height: 50px;">
-			<a style="float: right; margin-right: 35px;" id="btnin"
-				class="btn btn-mini btn-primary btncreate"
-				href="home/print.do?MaDonHang=${donhang.maDonHang}"> <i
-				class="glyphicon glyphicon-print"></i> In
-			</a> <a id="btnhuydon" style="float: right; margin-right: 5px;"
-				class="btn btn-mini btn-primary btncreate"
-				href="home/huydonhang.do?MaDonHang=${donhang.maDonHang}"> <i
-				class="glyphicon glyphicon-floppy-save"></i> Hủy đơn hàng
-			</a> <a id="btnhoanthanh" style="float: right; margin-right: 5px;"
-				class="btn btn-mini btn-primary btncreate"
-				href="home/completedonhang.do?MaDonHang=${donhang.maDonHang}"> <i
-				class="glyphicon glyphicon-floppy-save"></i> Hoàn thành
-			</a>
+
+		<div class="row">
+			<div class="col-xm-12">
+
+				<div id="table">
+
+					<table class="table table-bordered" id="myTable">
+
+						<thead>
+							<tr>
+								<th>Mã sản phẩm</th>
+								<th>Tên sản phẩm</th>
+								<th>Thông tin sản phẩm</th>
+								<th>Ảnh</th>
+								<th>Giá bán</th>
+								<th>Loại sản phẩm</th>
+								<th>Nhà cung cấp</th>
+								<th>Trạng thái</th>
+								<th>Hoạt động</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<c:forEach var="sanpham" items="${sanphamList}">
+								<tr>
+									<td><a href="#" name="txtname">${sanpham.maSP}</a></td>
+									<td>${sanpham.tenSP}</td>
+									<td>${sanpham.thongTinSP}</td>
+									<td>${sanpham.hinh}</td>
+									<td>${sanpham.giaFormat}</td>
+									<td>${sanpham.tenNhomSP}</td>
+									<td>${sanpham.maNhaCungCap}</td>
+									<td>${sanpham.enableString}</td>
+									<td>
+										<div class="hidden-phone visible-desktop action-buttons">
+											<a href="home/addtoorder/${sanpham.maSP}.do"
+												class="btn btn-minier btn-success" id="btnEdit"
+												title="Chọn sản phẩm"> <i
+												class="glyphicon glyphicon-edit"></i>
+											</a>
+										</div>
+									</td>
+
+								</tr>
+							</c:forEach>
+						</tbody>
+
+					</table>
+
+				</div>
+
+			</div>
 		</div>
 
 	</div>
@@ -217,5 +229,6 @@ tr:nth-child(even) {
 			document.getElementById("btnhuydon").style.display = 'none';
 		}
 	</script>
+
 </body>
 </html>

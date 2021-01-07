@@ -56,6 +56,7 @@
 										<td class="col-md-3"><form:label path="quyenNV"></form:label></td>
 										<td class="col-md-5"><form:select class="form-control"
 												path="quyenNV">
+												<option value="${quyennv.quyenNV}"></option>
 												<option value="ROLE_ADMIN">ROLE_ADMIN</option>
 												<option value="ROLE_USER">ROLE_USER</option>
 											</form:select></td>

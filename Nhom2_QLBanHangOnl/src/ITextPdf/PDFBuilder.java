@@ -38,12 +38,14 @@ public class PDFBuilder extends AbstractITextPdfView {
 		List<DonHangChiTiet> listDonHangChiTiet = (List<DonHangChiTiet>) model.get("listDonhangchitiet");
 		DonHang donhang = (DonHang) model.get("DonHang");
 		DecimalFormat formatter = new DecimalFormat("###,###,###");
-		doc.add(new Paragraph("HOA DON BAN HANG"));
-		doc.add(new Paragraph("Ma Don: " + donhang.getMaDonHang() + "        NgayDat: " + donhang.getNgayDat() + "        NhanVien: "
-				+ donhang.getNhanvien().getMaNhanVien()));
+		doc.add(new Paragraph("NHOM   DO   AN                                HOA DON BAN HANG"));
+		doc.add(new Paragraph("Ngay Dat: " + donhang.getNgayDat() + "                           Ma Don: " + donhang.getMaDonHang()));
+		doc.add(new Paragraph("Khach hang: "+donhang.getKhachhang().getHoTenKH()));
+		doc.add(new Paragraph("Dia chi: "+donhang.getKhachhang().getDiaChi()));
+		
 		PdfPTable table = new PdfPTable(4);
 		table.setWidthPercentage(100.0f);
-		table.setWidths(new float[] { 3.0f, 2.0f, 2.0f, 2.0f });
+		table.setWidths(new float[] { 4.0f, 1.0f, 2.0f, 2.0f });
 		table.setSpacingBefore(10);
 
 		// define font for table header row
@@ -57,7 +59,7 @@ public class PDFBuilder extends AbstractITextPdfView {
 		cell.setPhrase(new Phrase("TenSanPham", font));
 		table.addCell(cell);
 
-		cell.setPhrase(new Phrase("SoLuong", font));
+		cell.setPhrase(new Phrase("SL", font ));
 		table.addCell(cell);
 
 		cell.setPhrase(new Phrase("DonGia", font));
@@ -69,11 +71,13 @@ public class PDFBuilder extends AbstractITextPdfView {
 		for (DonHangChiTiet donhangchitiet : listDonHangChiTiet) {
 			table.addCell(donhangchitiet.getSanpham().getTenSP());
 			table.addCell(String.valueOf(donhangchitiet.getSoLuong()));
-			table.addCell(String.valueOf(donhangchitiet.getSoLuong()));
+			table.addCell(formatter.format(donhangchitiet.getSanpham().getGiaSP()));
 			table.addCell(formatter.format(donhangchitiet.getSanpham().getGiaSP() * donhangchitiet.getSoLuong()));
 		}
 		doc.add(table);
-		doc.add(new Paragraph("TongTien: " + formatter.format(donhang.getTongTien())));
+		doc.add(new Paragraph("TongTien: " + formatter.format(donhang.getTongTien())+"                              Nhan vien ban hang"));
+		doc.add(new Paragraph(" "));
+		doc.add(new Paragraph("                                                                   "+donhang.getNhanvien().getHoTenNV()));
 	}
 
 }

@@ -59,7 +59,6 @@ public class SanPhamController {
 	public ModelAndView ShowSanPham() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
-		System.out.print("nga111");
 		return new ModelAndView("pages/product", model);
 	}
 
@@ -67,7 +66,6 @@ public class SanPhamController {
 	public ModelAndView ShowTrangChu() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
-
 		return new ModelAndView("pages/index", model);
 	}
 

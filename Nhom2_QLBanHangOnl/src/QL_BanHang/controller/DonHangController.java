@@ -1,5 +1,6 @@
 package QL_BanHang.controller;
 
+import java.security.Principal;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,14 +24,17 @@ import QL_BanHang.bean.ChiTietDonHangBean;
 import QL_BanHang.bean.DonHangBean;
 import QL_BanHang.bean.KhachHangBean;
 import QL_BanHang.bean.NhanVienBean;
+import QL_BanHang.bean.SanPhamBean;
 import QL_BanHang.model.Cart;
 import QL_BanHang.model.DonHang;
 import QL_BanHang.model.DonHangChiTiet;
 import QL_BanHang.model.KhachHang;
 import QL_BanHang.model.NhanVien;
+import QL_BanHang.model.SanPham;
 import QL_BanHang.service.DonHangService;
 import QL_BanHang.service.KhachHangService;
 import QL_BanHang.service.NhanVienService;
+import QL_BanHang.service.SanPhamService;
 
 @Controller
 public class DonHangController {
@@ -39,6 +44,8 @@ public class DonHangController {
 	private NhanVienService nhanvienService;
 	@Autowired
 	private KhachHangService khachhangService;
+	@Autowired
+	private SanPhamService sanphamService;
 
 	@RequestMapping(value = "home/duyetdonhang", method = RequestMethod.POST)
 	public ModelAndView saveDonHang(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
@@ -78,8 +85,170 @@ public class DonHangController {
 	}
 
 	// Chức năng in hóa đơn
+	@RequestMapping(value = "home/print", method = RequestMethod.GET)
+	public ModelAndView print(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		DonHang donhang = donhangService.getDonHang(donhangBean.getMaDonHang());
+		model.put("DonHang", donhang);
+		model.put("listDonhangchitiet", donhangService.listDonHangChiTiet(donhangBean.getMaDonHang()));
+		return new ModelAndView("pdfView", model);
+	}
 
 	// Chức năng in hóa đơn
+	// Nhân viên tạo hóa đơn bán hàng
+	@RequestMapping(value = "home/createorder", method = RequestMethod.GET)
+	public ModelAndView taoDonHang(@ModelAttribute("command") KhachHangBean khachHangBean, BindingResult result) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("sanphamList", prepareListofBeanSP(sanphamService.listSanPham()));
+		return new ModelAndView("home/CreateOrder", model);
+	}
+
+	@RequestMapping(value = "home/addtoorder/{maSP}", method = RequestMethod.GET)
+	public String AddProductToOrder(ModelMap mm, HttpSession session, @PathVariable("maSP") String maSP) {
+		HashMap<String, Cart> orderItems = (HashMap<String, Cart>) session.getAttribute("orderItems");
+		DecimalFormat formatter = new DecimalFormat("###,###,###");
+		if (orderItems == null) {
+			orderItems = new HashMap<>();
+		}
+		SanPham sanpham = sanphamService.getSanPham(maSP);
+
+		if (orderItems.containsKey(maSP)) {
+			Cart item = orderItems.get(maSP);
+			item.setSanpham(sanpham);
+			item.setGiaSPFormat(sanpham.getGiaSP());
+			item.setSoluong(item.getSoluong() + 1);
+			item.setThanhTienFormat(sanpham.getGiaSP(), item.getSoluong());
+			orderItems.put(maSP, item);
+		} else {
+			Cart item = new Cart();
+			item.setSanpham(sanpham);
+			item.setGiaSPFormat(sanpham.getGiaSP());
+			item.setThanhTienFormat(sanpham.getGiaSP(), 1);
+			item.setSoluong(1);
+			orderItems.put(maSP, item);
+		}
+		session.setAttribute("orderItems", orderItems);
+		session.setAttribute("orderTotal", totalPrice(orderItems));
+		session.setAttribute("orderTotalFormat", formatter.format(totalPrice(orderItems)));
+		session.setAttribute("orderNum", orderItems.size());
+		return "redirect:/home/createorder.do";
+	}
+
+	// remove
+	@RequestMapping(value = "home/remove/{maSP}", method = RequestMethod.GET)
+	public String removeProductInOrder(ModelMap mm, HttpSession session, @PathVariable("maSP") String maSP) {
+		HashMap<String, Cart> orderItems = (HashMap<String, Cart>) session.getAttribute("orderItems");
+		DecimalFormat formatter = new DecimalFormat("###,###,###");
+		if (orderItems == null) {
+			orderItems = new HashMap<>();
+		}
+		if (orderItems.containsKey(maSP)) {
+			orderItems.remove(maSP);
+		}
+		session.setAttribute("orderItems", orderItems);
+		session.setAttribute("orderTotal", totalPrice(orderItems));
+		session.setAttribute("orderTotalFormat", formatter.format(totalPrice(orderItems)));
+		session.setAttribute("orderNum", orderItems.size());
+		return "redirect:/home/createorder.do";
+	}
+	// Sub
+	@RequestMapping(value = "home/sub/{maSP}", method = RequestMethod.GET)
+	public String subProductInOrder(ModelMap mm, HttpSession session, @PathVariable("maSP") String maSP) {
+		HashMap<String, Cart> orderItems = (HashMap<String, Cart>) session.getAttribute("orderItems");
+		DecimalFormat formatter = new DecimalFormat("###,###,###");
+		if (orderItems == null) {
+			orderItems = new HashMap<>();
+		}
+		if (orderItems.containsKey(maSP)) {
+			SanPham sanpham = sanphamService.getSanPham(maSP);
+			Cart item = orderItems.get(maSP);
+			item.setSanpham(sanpham);
+			item.setGiaSPFormat(sanpham.getGiaSP());
+			item.setSoluong(item.getSoluong() - 1);
+			item.setThanhTienFormat(sanpham.getGiaSP(), item.getSoluong());
+			orderItems.put(maSP, item);
+		}
+		session.setAttribute("orderItems", orderItems);
+		session.setAttribute("orderTotal", totalPrice(orderItems));
+		session.setAttribute("orderTotalFormat", formatter.format(totalPrice(orderItems)));
+		session.setAttribute("orderNum", orderItems.size());
+		return "redirect:/home/createorder.do";
+	}
+	
+	// Increas
+		@RequestMapping(value = "home/increas/{maSP}", method = RequestMethod.GET)
+		public String increasProductInOrder(ModelMap mm, HttpSession session, @PathVariable("maSP") String maSP) {
+			HashMap<String, Cart> orderItems = (HashMap<String, Cart>) session.getAttribute("orderItems");
+			DecimalFormat formatter = new DecimalFormat("###,###,###");
+			if (orderItems == null) {
+				orderItems = new HashMap<>();
+			}
+			if (orderItems.containsKey(maSP)) {
+				SanPham sanpham = sanphamService.getSanPham(maSP);
+				Cart item = orderItems.get(maSP);
+				item.setSanpham(sanpham);
+				item.setGiaSPFormat(sanpham.getGiaSP());
+				item.setSoluong(item.getSoluong() + 1);
+				item.setThanhTienFormat(sanpham.getGiaSP(), item.getSoluong());
+				orderItems.put(maSP, item);
+			}
+			session.setAttribute("orderItems", orderItems);
+			session.setAttribute("orderTotal", totalPrice(orderItems));
+			session.setAttribute("orderTotalFormat", formatter.format(totalPrice(orderItems)));
+			session.setAttribute("orderNum", orderItems.size());
+			return "redirect:/home/createorder.do";
+		}
+
+	private float totalPrice(HashMap<String, Cart> orderItems) {
+		int count = 0;
+		for (Map.Entry<String, Cart> list : orderItems.entrySet()) {
+			count += list.getValue().getSanpham().getGiaSP() * list.getValue().getSoluong();
+		}
+		return count;
+	}
+
+	// Nút hoàn tất đơn hàng
+	@RequestMapping(value = "home/saveorder", method = RequestMethod.POST)
+	public ModelAndView saveOrder(ModelMap mm, HttpSession session,
+			@ModelAttribute("khachhangcheckout") KhachHangBean khachhangBean, DonHang donhang, Principal principal) {
+		HashMap<String, Cart> orderItems = (HashMap<String, Cart>) session.getAttribute("orderItems");
+		KhachHang khachhang = prepareModelKhachHang(khachhangBean);
+		System.out.println(khachhang.getMaKH());
+		System.out.println(khachhang.getHoTenKH());
+		System.out.println(khachhang.getSDT());
+		System.out.println(khachhang.getMatKhau());
+		System.out.println(khachhang.getDiaChi());
+		NhanVien nhanvien = nhanvienService.getNhanVien(principal.getName());
+		khachhangService.addKhachHang(khachhang);
+		String madh = donhangService.autoGenrate();
+		if (orderItems == null) {
+			orderItems = new HashMap<>();
+		}
+		long millis = System.currentTimeMillis();
+		Date date = new Date(millis);
+		donhang.setMaDonHang(madh); // Làm 1 hàm tự động tạo mã đơn hàng
+		donhang.setKhachhang(khachhang);
+		donhang.setNhanvien(nhanvien);
+		donhang.setNgayDat(date);
+		donhang.setTrangThai(3);
+		donhang.setTongTien(totalPrice(orderItems)); // Lấy dữ liệu tổng tiền trên session
+		donhangService.addDonHang(donhang);
+		for (Map.Entry<String, Cart> entry : orderItems.entrySet()) {
+			DonHangChiTiet donhangchitiet = new DonHangChiTiet();
+			donhangchitiet.setDonhang(donhang);
+			donhangchitiet.setSanpham(entry.getValue().getSanpham());
+			donhangchitiet.setSoLuong(entry.getValue().getSoluong());
+			donhangService.createdonhangchitiet(donhangchitiet); // Tạo don hang chi tiet
+		}
+		orderItems = new HashMap<>();
+		session.setAttribute("orderItems", orderItems);
+		session.setAttribute("orderTotal", 0);
+		session.setAttribute("orderNum", 0);
+
+		return new ModelAndView("redirect:/home/detailorder.do?MaDonHang=" + madh);
+	}
+
+	// Nhân viên tạo hóa đơn bán hàng
 
 	private DonHang prepareModel(DonHangBean donhangBean) {
 		DonHang donhang = new DonHang();
@@ -160,12 +329,44 @@ public class DonHangController {
 		return beans;
 	}
 
-	@RequestMapping(value = "home/print", method = RequestMethod.GET)
-	public ModelAndView print(@ModelAttribute("command") DonHangBean donhangBean, BindingResult result) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		DonHang donhang = donhangService.getDonHang(donhangBean.getMaDonHang());
-		model.put("DonHang", donhang);
-		model.put("listDonhangchitiet", donhangService.listDonHangChiTiet(donhangBean.getMaDonHang()));
-		return new ModelAndView("pdfView", model);
+	// Danh sach san pham
+	private List<SanPhamBean> prepareListofBeanSP(List<SanPham> sanphamList) {
+		List<SanPhamBean> beans = null;
+		if (sanphamList != null && !sanphamList.isEmpty()) {
+
+			beans = new ArrayList<SanPhamBean>();
+			SanPhamBean bean = null;
+			for (SanPham sanpham : sanphamList) {
+				bean = new SanPhamBean();
+				bean.setMaSP(sanpham.getMaSP());
+				bean.setTenSP(sanpham.getTenSP());
+				bean.setThongTinSP(sanpham.getThongTinSP());
+				bean.setHinh(sanpham.getHinh());
+				bean.setGiaSP(sanpham.getGiaSP());
+				bean.setGiaFormat(sanpham.getGiaSP());
+				bean.setTenNhomSP(sanpham.getNhomsanpham().getTenNhomSP());
+				bean.setMaNhaCungCap(sanpham.getNhacungcap().getMaNhaCungCap());
+				bean.setId_NhomSP(sanpham.getNhomsanpham().getId());
+				bean.setEnableString(sanpham.getEnable());
+				beans.add(bean);
+			}
+		}
+		return beans;
 	}
+
+	// du lieu khach hang luu
+	private KhachHang prepareModelKhachHang(KhachHangBean khachhangBean) {
+		KhachHang khachhang = new KhachHang();
+		String makh = null;
+		makh = khachhangService.genratemaKH();
+		khachhang.setMaKH(makh);
+		khachhang.setHoTenKH(khachhangBean.getHoTenKH());
+		khachhang.setMatKhau("123");
+		khachhang.setSDT(khachhangBean.getSDT());
+		khachhang.setEmail("bantaicuahang");
+		khachhang.setDiaChi("bantaicuahang");
+		khachhangBean.setMaKH(null);
+		return khachhang;
+	}
+
 }
