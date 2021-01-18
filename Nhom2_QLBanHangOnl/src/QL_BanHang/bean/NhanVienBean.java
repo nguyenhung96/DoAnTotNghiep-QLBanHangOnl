@@ -17,6 +17,7 @@ public class NhanVienBean {
 	private String QuyenNV;
 
 	private String MatKhauNhap;
+	private String MatKhauNhap2;
 	private int Code;
 	private int CodeNhap;
 
@@ -158,6 +159,14 @@ public class NhanVienBean {
 
 	public void setMatKhauNhap(String matKhauNhap) {
 		MatKhauNhap = matKhauNhap;
+	}
+
+	public String getMatKhauNhap2() {
+		return MatKhauNhap2;
+	}
+
+	public void setMatKhauNhap2(String matKhauNhap2) {
+		MatKhauNhap2 = matKhauNhap2;
 	}
 
 }

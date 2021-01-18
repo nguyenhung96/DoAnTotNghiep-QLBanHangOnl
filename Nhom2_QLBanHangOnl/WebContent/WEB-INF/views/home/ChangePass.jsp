@@ -83,56 +83,42 @@ tr:nth-child(even) {
 		<div class="panel panel-default">
 			<div class="panel-title">
 				<h3>
-					<span class="glyphicon glyphicon-star-empty "></span> Tài khoản
+					<span class="glyphicon glyphicon-star-empty "></span> Đổi mật khẩu
 				</h3>
 			</div>
 			<div class="panel-body">
 				<div class="row col-md-12 col-sm-12">
-					<form:form>
+					<form:form action="/Nhom2_QLBanHangOnl/home/savepass.do">
 						<table>
 							<tr class="form-group">
 								<td class="col-sm-4"><form:label path="maNhanVien"
 										class="col-sm-6">Mã nhân viên: </form:label></td>
 								<td><form:label path="maNhanVien" class="col-sm-6">${nhanvien.maNhanVien}</form:label></td>
+
+							</tr>
+
+							<tr class="form-group">
+								<td class="col-sm-4"><form:label path="matKhau"
+										class="col-sm-6">Mật khẩu hiện tại </form:label></td>
+								<td><form:input path="matKhau" class="col-sm-6"></form:input>
+									<span style="color:red">${msg}</span></td>
 							</tr>
 							<tr class="form-group">
-								<td><form:label for="lblmaSP" path="hoTenNV"
-										class="col-sm-6">Tên nhân
-										viên: </form:label></td>
-								<td><form:label for="lblmaSP" path="hoTenNV"
-										class="col-sm-6">${nhanvien.hoTenNV}</form:label></td>
+								<td class="col-sm-4"><form:label path="matKhauNhap"
+										class="col-sm-6">Mật khẩu mới </form:label></td>
+								<td><form:input path="matKhauNhap" class="col-sm-6"></form:input></td>
 							</tr>
 							<tr class="form-group">
-								<td><form:label for="lbltenSP" path="gioiTinhString"
-										class="col-sm-6">Giới
-										tính: </form:label></td>
-								<td><form:label for="lbltenSP" path="gioiTinhString"
-										class="col-sm-6 text">${nhanvien.gioiTinhString}</form:label></td>
+								<td class="col-sm-4"><form:label path="matKhauNhap2"
+										class="col-sm-6">Nhập lại mật khẩu </form:label></td>
+								<td><form:input path="matKhauNhap2" class="col-sm-6"></form:input><span style="color:red">${msg1}</span></td>
 							</tr>
-							<tr class="form-group">
-								<td><form:label for="lbltenSP" path="SDT" class="col-sm-6">Số điện thoại</form:label></td>
-								<td><form:label for="lbltenSP" path="SDT"
-										class="col-sm-6 text">${nhanvien.SDT}</form:label></td>
-							</tr>
-							<tr class="form-group">
-								<td><form:label for="lbltenSP" path="diaChi"
-										class="col-sm-6">Địa chỉ</form:label></td>
-								<td><form:label for="lbltenSP" path="diaChi"
-										class="col-sm-6 text">${nhanvien.diaChi}</form:label></td>
-							</tr>
-							<tr class="form-group">
-								<td><form:label for="lblthongTinSP" path="matKhau"
-										class="col-sm-6">Mật
-										khẩu:</form:label></td>
-								<td><a class="btn btn-mini btn-primary col-sm-6"
-									href="changepass.do">Đổi mật khẩu</a></td>
-							</tr>
-							<tr class="form-group">
-								<td><form:label for="lblgia" path="quyenNV"
-										class="col-sm-8">Nhóm người
-										dùng:</form:label></td>
-								<td><form:label for="lblgia" path="quyenNV"
-										class="col-sm-4">Admin</form:label></td>
+							<tr>
+
+								<td class="col-sm-4"><label class="col-sm-6"></label></td>
+								<td class="col-sm-4"><input id="btn" type="submit"
+									class="btn btn-mini btn-primary glyphicon glyphicon-plus-sign btncreate"
+									value="Lưu mật khẩu" /></td>
 							</tr>
 						</table>
 					</form:form>

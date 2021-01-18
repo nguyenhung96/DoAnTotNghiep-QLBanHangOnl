@@ -154,6 +154,32 @@ public class LoginController {
 		return new ModelAndView("home/Profile", model);
 	}
 
+	@RequestMapping(value = "home/changepass", method = RequestMethod.GET)
+	public ModelAndView changepass(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result,
+			Principal principal) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		String name = principal.getName();
+		NhanVienBean nhanvien = prepareNhanVienBean(nhanvienService.getNhanVien(name));
+		model.put("nhanvien", nhanvien);
+		return new ModelAndView("home/ChangePass", model);
+	}
+
+	@RequestMapping(value = "home/savepass", method = RequestMethod.POST)
+	public String savepass(ModelMap model, @ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result,
+			Principal principal) {
+		String name = principal.getName();
+		NhanVien nhanvien = nhanvienService.getNhanVien(name);
+		if (nhanvienBean.getMatKhau().equals(nhanvien.getMatKhau())) {
+			if (nhanvienBean.getMatKhauNhap().equals(nhanvienBean.getMatKhauNhap2())) {
+				nhanvienService.setpasworld(nhanvien, nhanvienBean.getMatKhauNhap());
+				return ("redirect:/home/index.do");
+			}
+			model.addAttribute("msg1", "Mật khẩu nhập lại không đúng!");
+			return ("home/ChangePass");
+		}
+		model.addAttribute("msg", "Mật khẩu nhập không đúng!");
+		return ("home/ChangePass");
+	}
 	private NhanVienBean prepareNhanVienBean(NhanVien nhanvien) {
 		NhanVienBean bean = new NhanVienBean();
 		bean.setMaNhanVien(nhanvien.getMaNhanVien());

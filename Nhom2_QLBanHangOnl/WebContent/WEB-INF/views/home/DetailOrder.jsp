@@ -76,9 +76,11 @@ tr:nth-child(even) {
 								</tr>
 							</thead>
 							<tbody>
+								<c:set var="count" value="0"></c:set>
 								<c:forEach var="c" items="${donhangList}">
+									<c:set var="count" value="${count+1}"></c:set>
 									<tr>
-										<td>${c.id}</td>
+										<td>${count}</td>
 										<td>${c.tenSanPham}</td>
 										<td>${c.soLuong}</td>
 										<td>${c.donGia}</td>
