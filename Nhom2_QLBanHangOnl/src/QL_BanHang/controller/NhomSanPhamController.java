@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import QL_BanHang.bean.NhomSanPhamBean;
+import QL_BanHang.model.NhaCungCap;
 import QL_BanHang.model.NhomSanPham;
 import QL_BanHang.service.NhaCungCapService;
 import QL_BanHang.service.NhomSanPhamService;
@@ -34,47 +36,76 @@ public class NhomSanPhamController {
 
 	@RequestMapping(value = "home/saveproducttype", method = RequestMethod.POST)
 	public ModelAndView saveNhomSanPham(@ModelAttribute("command") NhomSanPhamBean nhomsanphamBean,
-			BindingResult result) {
+			BindingResult result, Model model) {
+		Map<String, Object> models = new HashMap<String, Object>();
 		NhomSanPham nhomsanpham = prepareModel(nhomsanphamBean);
+		List<Integer> maNSPs = nhomsanphamService.getMaNSP();
+		for(int maNSP : maNSPs) {
+			if(nhomsanphamBean.getId() == maNSP){					
+				model.addAttribute("messenge", "Loại sản phẩm đã có sản phẩm. Bạn không thể thay đổi thông tin!");
+				models.put("nhomsanpham", prepareNhomSanPhamBean(nhomsanphamService.getNhomSanPham(nhomsanphamBean.getId())));
+				models.put("nhomsanphamList", prepareListofBean(nhomsanphamService.listNhomSanPham()));
+				models.put("nhacungcapList", nhacungcapService.listNhaCungCap());
+				System.out.println(nhomsanphamBean.getId() );
+				return new ModelAndView("home/CreateProductType", models);
+			}
+		}
 		nhomsanphamService.addNhomSanPham(nhomsanpham);
 		return new ModelAndView("redirect:/home/producttype.do");
 	}
 
 	@RequestMapping(value = "home/producttype", method = RequestMethod.GET)
 	public ModelAndView listNhomSanPham() {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("nhomsanphamList", prepareListofBean(nhomsanphamService.listNhomSanPham()));
-
-		return new ModelAndView("home/ProductType", model);
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("nhomsanphamList", prepareListofBean(nhomsanphamService.listNhomSanPham()));
+		
+		return new ModelAndView("home/ProductType", models);
 	}
 
 	@RequestMapping(value = "home/createproducttype", method = RequestMethod.GET)
 	public ModelAndView addNhomSanPham(@ModelAttribute("command") NhomSanPhamBean nhomsanphamBean,
-			BindingResult result) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("nhomsanphamList", prepareListofBean(nhomsanphamService.listNhomSanPham()));
-		model.put("nhacungcapList", nhacungcapService.listNhaCungCap());
-		return new ModelAndView("home/CreateProductType", model);
+			BindingResult result, Model model) {
+		Map<String, Object> models = new HashMap<String, Object>();		
+		models.put("nhomsanphamList", prepareListofBean(nhomsanphamService.listNhomSanPham()));
+		models.put("nhacungcapList", nhacungcapService.listNhaCungCap());
+		model.addAttribute("messenge", "Thông tin loại sản phẩm");
+		return new ModelAndView("home/CreateProductType", models);
 	}
 
 	@RequestMapping(value = "home/deleteproducttype", method = RequestMethod.GET)
 	public ModelAndView deleteNhomSanPham(@ModelAttribute("command") NhomSanPhamBean nhomsanphamBean,
-			BindingResult result) {
-		nhomsanphamService.deleteNhomSanPham1(nhomsanphamBean.getId());
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("nhomsanpham", null);
-		model.put("nhomsanphamList", prepareListofBean(nhomsanphamService.listNhomSanPham()));
-		return new ModelAndView("redirect:/home/producttype.do");
+			BindingResult result, Model model) {
+		List<Integer> maNSPs = nhomsanphamService.getMaNSP();	
+		boolean stt= false;
+		for(int maNSP : maNSPs) {
+			if(nhomsanphamBean.getId() == maNSP){					
+				stt=true;
+				break;
+			}
+		}
+		System.out.println(stt);
+		if(stt) {
+			model.addAttribute("messenge", "Loại sản phẩm đã có sản phẩm. Bạn không thể xóa!");
+		}else {
+			nhomsanphamService.deleteNhomSanPham1(nhomsanphamBean.getId());		
+		}		
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("nhomsanpham", null);
+		models.put("nhomsanphamList", prepareListofBean(nhomsanphamService.listNhomSanPham()));
+		return new ModelAndView("home/ProductType",models);
 	}
 
 	@RequestMapping(value = "home/editproducttype", method = RequestMethod.GET)
 	public ModelAndView editNhomSanPham(@ModelAttribute("command") NhomSanPhamBean nhomsanphamBean,
-			BindingResult result) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("nhomsanpham", prepareNhomSanPhamBean(nhomsanphamService.getNhomSanPham(nhomsanphamBean.getId())));
-		model.put("nhomsanphamList", prepareListofBean(nhomsanphamService.listNhomSanPham()));
-		model.put("nhacungcapList", nhacungcapService.listNhaCungCap());
-		return new ModelAndView("home/CreateProductType", model);
+			BindingResult result, Model model) {
+		Map<String, Object> models = new HashMap<String, Object>();		
+		List<Integer> maNSPs = nhomsanphamService.getMaNSP();
+		System.out.println(maNSPs);
+		models.put("nhomsanpham", prepareNhomSanPhamBean(nhomsanphamService.getNhomSanPham(nhomsanphamBean.getId())));
+		models.put("nhomsanphamList", prepareListofBean(nhomsanphamService.listNhomSanPham()));
+		models.put("nhacungcapList", nhacungcapService.listNhaCungCap());
+		model.addAttribute("messenge", "Thông tin loại sản phẩm");
+		return new ModelAndView("home/CreateProductType", models);
 	}
 
 	private NhomSanPham prepareModel(NhomSanPhamBean nhomsanphamBean) {

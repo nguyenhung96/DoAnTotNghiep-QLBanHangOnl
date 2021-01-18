@@ -40,44 +40,44 @@
 				<h3>Nhập thông tin để đặt hàng</h3>
 			</div>
 			<div class="row">
-			
+
 				<form:form method="POST"
 					action="${pageContext.request.contextPath}/pages/checkout.do"
 					modelAttribute="khachhangcheckout" onsubmit="return checkdathang()">
 					<div style="visibility: hidden">
-						<form:input path="MaKH"  />
+						<form:input path="MaKH" />
 					</div>
 					<div>
 						<span>Tên của bạn</span>
-						<form:input id="Ten" path="hoTenKH" />
+						<form:input id="Ten" path="hoTenKH" value = "${sessionScope.tenkhachhang}" />
 					</div>
 					<span id="checkTen"></span>
 					<div>
 						<span>Số điện thoại</span>
-						<form:input id="SDT" path="SDT" />
+						<form:input id="SDT" path="SDT" type = "number" value = "${sessionScope.sdtkh}" />
 					</div>
 					<span id="checkSDT"></span>
 					<div>
 						<span>Email</span>
-						<form:input id="email" path="Email" />
+						<form:input id="email" path="Email" value = "${sessionScope.emailkh}" />
 					</div>
 					<span id="checkEmail"></span>
 					<div>
 						<span>Địa Chỉ</span>
-						<form:input id="diachi" path="diaChi" />
+						<form:input id="diachi" path="diaChi" value = "${sessionScope.diachikh}"/>
 					</div>
 					<span id="checkdiachi"></span>
 					<div id="btndathang">
-					<input type="submit" value="Đặt hàng">
+						<input type="submit" value="Đặt hàng">
 					</div>
 				</form:form>
-				
-				
+
+
 			</div>
 		</div>
 	</section>
-	
-			<script type="text/javascript">
+
+	<script type="text/javascript">
 			function checkdathang(){
 				var tenKH= document.getElementById('Ten').value;
 				var SDT= document.getElementById('SDT').value;
@@ -142,7 +142,7 @@
 				
 			}
 			</script>
-	
+
 	<footer id="footer">
 		<!--Footer-->
 		<div class="footer-widget">
@@ -222,7 +222,7 @@
 					<p class="pull-left">Copyright Â© 2020 Dá» ÃN. All rights
 						reserved.</p>
 					<p class="pull-right">
-						Designed by <span><a target="_blank" href="#">Dá» ÃN</a></span>
+						Designed by <span><a target="_blank" href="#">ĐỒ ÁN</a></span>
 					</p>
 				</div>
 			</div>

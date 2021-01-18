@@ -1,10 +1,8 @@
 package QL_BanHang.bean;
 
-
 import java.text.DecimalFormat;
 
 import org.springframework.web.multipart.MultipartFile;
-
 
 public class SanPhamBean {
 	private String MaSP;

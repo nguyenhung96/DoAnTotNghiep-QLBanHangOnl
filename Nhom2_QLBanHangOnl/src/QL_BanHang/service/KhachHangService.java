@@ -12,9 +12,15 @@ public interface KhachHangService {
 
 	public KhachHang getKhachHang(String makh);
 
+//	public KhachHang selectKhachHang(String email);
+	public List<String> getMailKH();
+
+	public KhachHang selectKhachHang(String email);
+
 	public void deleteKhachHang(KhachHang khachhang);
 
 	public String genratemaKH();
-	
+
 	public int demKhachHang();
+
 }

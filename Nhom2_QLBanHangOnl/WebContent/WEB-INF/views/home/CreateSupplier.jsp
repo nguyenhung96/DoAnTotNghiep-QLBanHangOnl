@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>Thêm Nhà Cung Cấp</title>
 <style>
 .col-md-8 input{
 
@@ -23,17 +23,16 @@ margin: 0 auto;
 		<div class="panel">
 			<div class="panel-title">
 				<h3>
-					<span class="glyphicon glyphicon-star-empty "></span> Thêm nhân
-					viên mới
+					<span class="glyphicon glyphicon-star-empty "></span> Thêm nhà cung cấp mới
 				</h3>
+				 
 			</div>
 			<div class="panel-body">
 				<div class="row col-md-12">
 					<div class="panel panel-default">
 						<div class="panel-title">
 							<h4>
-								<span class="glyphicon glyphicon-info-sign"></span> Thông tin
-								nhân viên
+								<span class="glyphicon glyphicon-info-sign"><input style="margin-left: 10px; border-style: none; width: 900px; background-color: #f2f2f2;" value="${messenge}" readonly/>
 							</h4>
 						</div>
 						<div class="panel-body">

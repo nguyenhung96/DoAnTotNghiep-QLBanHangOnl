@@ -33,7 +33,9 @@ public class NhomSanPhamServiceImpl implements NhomSanPhamService {
 	public List<NhomSanPham> listNhomSanPham() {
 		return nhomsanphamDao.listNhomSanPham();
 	}
-
+	public List<Integer> getMaNSP() {
+		return nhomsanphamDao.getMaNSP();
+	}
 	public NhomSanPham getNhomSanPham(int Id) {
 		return nhomsanphamDao.getNhomSanPham(Id);
 	}

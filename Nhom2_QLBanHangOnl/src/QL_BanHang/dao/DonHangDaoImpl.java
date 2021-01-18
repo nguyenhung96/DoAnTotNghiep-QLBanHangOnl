@@ -114,4 +114,11 @@ public class DonHangDaoImpl implements DonHangDao {
 		return sosp;
 	}
 
+	// ma khach hang
+	@SuppressWarnings("unchecked")
+	public List<DonHang> listDonHangByMaKhachHang(String makh) {
+		return (List<DonHang>) sessionFactory.getCurrentSession()
+				.createQuery(" FROM DonHang WHERE khachhang.MaKH = '" + makh + "'").list();
+	}
+
 }

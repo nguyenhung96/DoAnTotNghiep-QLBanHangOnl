@@ -151,6 +151,7 @@ public class DonHangController {
 		session.setAttribute("orderNum", orderItems.size());
 		return "redirect:/home/createorder.do";
 	}
+
 	// Sub
 	@RequestMapping(value = "home/sub/{maSP}", method = RequestMethod.GET)
 	public String subProductInOrder(ModelMap mm, HttpSession session, @PathVariable("maSP") String maSP) {
@@ -162,9 +163,39 @@ public class DonHangController {
 		if (orderItems.containsKey(maSP)) {
 			SanPham sanpham = sanphamService.getSanPham(maSP);
 			Cart item = orderItems.get(maSP);
+
+			if (item.getSoluong() > 1) {
+				item.setSoluong(item.getSoluong() - 1);
+				item.setSanpham(sanpham);
+				item.setGiaSPFormat(sanpham.getGiaSP());
+				item.setThanhTienFormat(sanpham.getGiaSP(), item.getSoluong());
+				orderItems.put(maSP, item);
+			} else {
+				orderItems.remove(maSP);
+			}
+
+		}
+		session.setAttribute("orderItems", orderItems);
+		session.setAttribute("orderTotal", totalPrice(orderItems));
+		session.setAttribute("orderTotalFormat", formatter.format(totalPrice(orderItems)));
+		session.setAttribute("orderNum", orderItems.size());
+		return "redirect:/home/createorder.do";
+	}
+
+	// Increas
+	@RequestMapping(value = "home/increas/{maSP}", method = RequestMethod.GET)
+	public String increasProductInOrder(ModelMap mm, HttpSession session, @PathVariable("maSP") String maSP) {
+		HashMap<String, Cart> orderItems = (HashMap<String, Cart>) session.getAttribute("orderItems");
+		DecimalFormat formatter = new DecimalFormat("###,###,###");
+		if (orderItems == null) {
+			orderItems = new HashMap<>();
+		}
+		if (orderItems.containsKey(maSP)) {
+			SanPham sanpham = sanphamService.getSanPham(maSP);
+			Cart item = orderItems.get(maSP);
 			item.setSanpham(sanpham);
 			item.setGiaSPFormat(sanpham.getGiaSP());
-			item.setSoluong(item.getSoluong() - 1);
+			item.setSoluong(item.getSoluong() + 1);
 			item.setThanhTienFormat(sanpham.getGiaSP(), item.getSoluong());
 			orderItems.put(maSP, item);
 		}
@@ -174,30 +205,6 @@ public class DonHangController {
 		session.setAttribute("orderNum", orderItems.size());
 		return "redirect:/home/createorder.do";
 	}
-	
-	// Increas
-		@RequestMapping(value = "home/increas/{maSP}", method = RequestMethod.GET)
-		public String increasProductInOrder(ModelMap mm, HttpSession session, @PathVariable("maSP") String maSP) {
-			HashMap<String, Cart> orderItems = (HashMap<String, Cart>) session.getAttribute("orderItems");
-			DecimalFormat formatter = new DecimalFormat("###,###,###");
-			if (orderItems == null) {
-				orderItems = new HashMap<>();
-			}
-			if (orderItems.containsKey(maSP)) {
-				SanPham sanpham = sanphamService.getSanPham(maSP);
-				Cart item = orderItems.get(maSP);
-				item.setSanpham(sanpham);
-				item.setGiaSPFormat(sanpham.getGiaSP());
-				item.setSoluong(item.getSoluong() + 1);
-				item.setThanhTienFormat(sanpham.getGiaSP(), item.getSoluong());
-				orderItems.put(maSP, item);
-			}
-			session.setAttribute("orderItems", orderItems);
-			session.setAttribute("orderTotal", totalPrice(orderItems));
-			session.setAttribute("orderTotalFormat", formatter.format(totalPrice(orderItems)));
-			session.setAttribute("orderNum", orderItems.size());
-			return "redirect:/home/createorder.do";
-		}
 
 	private float totalPrice(HashMap<String, Cart> orderItems) {
 		int count = 0;
@@ -367,6 +374,16 @@ public class DonHangController {
 		khachhang.setDiaChi("bantaicuahang");
 		khachhangBean.setMaKH(null);
 		return khachhang;
+	}
+
+	// TRi
+	@RequestMapping(value = "pages/orderkh", method = RequestMethod.GET)
+	public ModelAndView listDonHangBy(HttpSession session) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		String makh = (String) session.getAttribute("makhachhang");
+		System.out.println(makh);
+		model.put("donhangkhList", prepareListofBean(donhangService.listDonHangByMaKhachHang(makh)));
+		return new ModelAndView("pages/OrderListKh", model);
 	}
 
 }

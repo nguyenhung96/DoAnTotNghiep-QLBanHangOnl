@@ -165,7 +165,7 @@
 			<div class="container">
 				<div class="row">
 					<p class="pull-left">Copyright Â© 2020 Dá» ÃN. All rights reserved.</p>
-					<p class="pull-right">Designed by <span><a target="_blank" href="#">Dá» ÃN</a></span></p>
+					<p class="pull-right">Designed by <span><a target="_blank" href="#">Đồ Án</a></span></p>
 				</div>
 			</div>
 		</div>

@@ -59,6 +59,7 @@ public class SanPhamController {
 	public ModelAndView ShowSanPham() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
+		System.out.print("nga111");
 		return new ModelAndView("pages/product", model);
 	}
 
@@ -66,6 +67,7 @@ public class SanPhamController {
 	public ModelAndView ShowTrangChu() {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
+
 		return new ModelAndView("pages/index", model);
 	}
 
@@ -76,10 +78,11 @@ public class SanPhamController {
 		return new ModelAndView("pages/checkout");
 	}
 
-	 @RequestMapping(value = "pages/checkout", method = RequestMethod.POST)
+	@RequestMapping(value = "pages/checkout", method = RequestMethod.POST)
 	public ModelAndView checkout(ModelMap mm, HttpSession session,
 			@ModelAttribute("khachhangcheckout") KhachHangBean khachhangBean, DonHang donhang) {
 		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
+		// tạo khách hàng vào hóa đơn mới
 		KhachHang khachhang = prepareModelKhachHang(khachhangBean);
 		khachhangService.addKhachHang(khachhang);
 		if (cartItems == null) {
@@ -89,9 +92,10 @@ public class SanPhamController {
 		Date date = new Date(millis);
 		donhang.setMaDonHang(donhangService.autoGenrate()); // Làm 1 hàm tự động tạo mã đơn hàng
 		donhang.setKhachhang(khachhang);
+
 		donhang.setNgayDat(date);
 		donhang.setTrangThai(1);
-		donhang.setTongTien(totalPrice(cartItems)); // Lấy dữ liệu tổng tiền trên sessio
+		donhang.setTongTien(totalPrice(cartItems)); // Lấy dữ liệu tổng tiền trên session
 		donhangService.addDonHang(donhang);
 		for (Map.Entry<String, Cart> entry : cartItems.entrySet()) {
 			DonHangChiTiet donhangchitiet = new DonHangChiTiet();
@@ -107,6 +111,15 @@ public class SanPhamController {
 		session.setAttribute("myCartNum", 0);
 
 		return new ModelAndView("pages/success");
+	}
+
+	@RequestMapping(value = "pages/cart", method = RequestMethod.GET)
+	public ModelAndView showGioHang(ModelMap mm, HttpSession session, String maSP) {
+		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
+
+		return new ModelAndView("pages/cart", model);
 	}
 
 	// nga test 1
@@ -135,15 +148,6 @@ public class SanPhamController {
 		session.setAttribute("myCartNum", cartItems.size());
 		System.out.print("dut");
 		return "redirect:/pages/cart.do";
-	}
-	
-		@RequestMapping(value = "pages/cart", method = RequestMethod.GET)
-	public ModelAndView showGioHang(ModelMap mm, HttpSession session, String maSP) {
-		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("sanphamList", prepareListofBean(sanphamService.listSanPham()));
-
-		return new ModelAndView("pages/cart", model);
 	}
 
 	// chi tiết sản phẩm

@@ -11,7 +11,7 @@ public interface NhomSanPhamDao {
 
 	//Hàm lấy list nhóm sp
 	public List<NhomSanPham> listNhomSanPham();
-
+	public List<Integer> getMaNSP();
 	//Hàm lấy nhóm sp theo mã
 	public NhomSanPham getNhomSanPham(int Id);
 

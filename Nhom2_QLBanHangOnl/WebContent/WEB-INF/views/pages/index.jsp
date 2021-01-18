@@ -387,7 +387,12 @@
 							</form>
 						</div>
 					</div>
-
+					<div class="col-sm-3 col-sm-offset-1">
+						<div class="single-widget">
+							<h2></a> <a href="http://localhost:8080/Nhom2_QLBanHangOnl/login/login.do"><img
+						src="" alt="" />Đăng nhập</a></h2>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -398,7 +403,7 @@
 					<p class="pull-left">Copyright © 2020 DỒ ÁN. All rights
 						reserved.</p>
 					<p class="pull-right">
-						Designed by <span><a target="_blank" href="#">DỒ ÁN</a></span>
+						Designed by <span><a target="_blank" href="#">ĐỒ ÁN</a></span>
 					</p>
 				</div>
 			</div>

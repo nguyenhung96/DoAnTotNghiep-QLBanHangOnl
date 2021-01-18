@@ -11,7 +11,9 @@ public interface NhaCungCapService {
 	public List<NhaCungCap> listNhaCungCap();
 	
 	public NhaCungCap getNhaCungCap(String manhacc);
-	
+	public List<String> getMaNCC();
+	public List<String> getMaNCCFromNCC();
+	public List<String> getMaNCCFromNhomSP();
 	public void deleteNhaCungCap(NhaCungCap nhacungcap);
 	
 }

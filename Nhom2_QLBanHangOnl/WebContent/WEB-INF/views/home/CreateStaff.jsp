@@ -52,14 +52,14 @@
 												class="form-control " path="hoTenNV"
 												value="${nhanvien.hoTenNV}" /> <span id="checkTenNV"></span></td>
 									</tr>
-
+<%-- 
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="matKhau">Mật khẩu</form:label></td>
 										<td class="col-md-5"><form:input id="pass" path="matKhau"
 												type="password" class="form-control "
 												value="${nhanvien.matKhau}" /> <span id="checkpass"></span></td>
 
-									</tr>
+									</tr> --%>
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="email">Email</form:label></td>
 										<td class="col-md-5"><form:input id="email" path="email"

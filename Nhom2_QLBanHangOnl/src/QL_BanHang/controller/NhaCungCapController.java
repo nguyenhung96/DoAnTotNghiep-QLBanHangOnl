@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,46 +22,101 @@ import QL_BanHang.service.NhaCungCapService;
 public class NhaCungCapController {
 	@Autowired
 	private NhaCungCapService nhacungcapService;
-
+	
 	@RequestMapping(value = "home/savesupplier", method = RequestMethod.POST)
-	public ModelAndView saveNhaCungCap(@ModelAttribute("command") NhaCungCapBean nhacungcapBean, BindingResult result) {
-		NhaCungCap nhacungcap = prepareModel(nhacungcapBean);
-		nhacungcapService.addNhaCungCap(nhacungcap);
+	public ModelAndView saveNhaCungCap(@ModelAttribute("command") NhaCungCapBean nhacungcapBean, BindingResult result, Model model) {
+		NhaCungCap nhaCungCap = prepareModel(nhacungcapBean);		
+		List<String> maNCCs = nhacungcapService.getMaNCC();
+		List<String> maNCCFromNhomSPs = nhacungcapService.getMaNCCFromNhomSP();
+		List<String> maNCCFormNCCs = nhacungcapService.getMaNCCFromNCC();
+			for(String maNCC : maNCCFormNCCs) {
+				if(nhaCungCap.getMaNhaCungCap().equals(maNCC)){
+					model.addAttribute("messenge", "Mã nhà cung cấp đã tồn tại");
+					return new ModelAndView("home/CreateSupplier");				
+				}
+			}	
+		nhacungcapService.addNhaCungCap(nhaCungCap);
+		return new ModelAndView("redirect:/home/supplier.do");
+	}
+	@RequestMapping(value = "home/editsupplier", method = RequestMethod.POST)
+	public ModelAndView editNhaCungCap(@ModelAttribute("command") NhaCungCapBean nhacungcapBean, BindingResult result, Model model) {
+		NhaCungCap nhaCungCap = prepareModel(nhacungcapBean);
+		System.out.println(nhaCungCap.getMaNhaCungCap());
+		List<String> maNCCs = nhacungcapService.getMaNCC();	
+		List<String> MaNCCFromNCCs = nhacungcapService.getMaNCCFromNCC();
+		System.out.println(MaNCCFromNCCs);
+		boolean stt=false;
+		maNCCs.addAll(nhacungcapService.getMaNCCFromNhomSP());
+		for(String maNCC : MaNCCFromNCCs) {
+			System.out.println(nhaCungCap.getMaNhaCungCap());
+			System.out.println(maNCC);
+			
+			if(nhaCungCap.getMaNhaCungCap().equals(maNCC)){
+				stt=true;							
+			}
+			
+		}	
+		if(!stt) {
+			model.addAttribute("messenge", "Bạn không thể thay đổi mã nhà cung cấp!");				
+			return new ModelAndView("home/EditSupplier");	
+		}
+			for(String maNCC : maNCCs) {
+				if(nhaCungCap.getMaNhaCungCap().equals(maNCC)){
+					model.addAttribute("messenge", "Mã nhà cung cấp đã sử dụng. Bạn không thể thay đổi thông tin!");
+					return new ModelAndView("home/EditSupplier");				
+				}
+			}	
+		nhacungcapService.addNhaCungCap(nhaCungCap);
 		return new ModelAndView("redirect:/home/supplier.do");
 	}
 
 	@RequestMapping(value = "home/supplier", method = RequestMethod.GET)
 	public ModelAndView listNhaCungCap() {
 		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("nhacungcapList", prepareListofBean(nhacungcapService.listNhaCungCap()));
-
+		model.put("nhacungcapList", prepareListofBean(nhacungcapService.listNhaCungCap()));			
 		return new ModelAndView("home/Supplier", model);
-	}
-
+	}	
 	@RequestMapping(value = "home/createsupplier", method = RequestMethod.GET)
-	public ModelAndView addNhaCungCap(@ModelAttribute("command") NhaCungCapBean nhacungcapBean, BindingResult result) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("nhacungcapList", prepareListofBean(nhacungcapService.listNhaCungCap()));
-		return new ModelAndView("home/CreateSupplier", model);
+	public ModelAndView addNhaCungCap(@ModelAttribute("command") NhaCungCapBean nhacungcapBean, BindingResult result, Model model) {
+		Map<String, Object> models = new HashMap<String, Object>();	
+		models.put("nhacungcapList", prepareListofBean(nhacungcapService.listNhaCungCap()));
+		model.addAttribute("messenge", "Thông Tin Nhà Cung Cấp");
+		return new ModelAndView("home/CreateSupplier", models);
 	}
 
 	@RequestMapping(value = "home/deletesupplier", method = RequestMethod.GET)
 	public ModelAndView deleteNhaCungCap(@ModelAttribute("command") NhaCungCapBean nhacungcapBean,
-			BindingResult result) {
-		nhacungcapService.deleteNhaCungCap(prepareModel(nhacungcapBean));
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("nhacungcap", null);
-		model.put("nhacungcapList", prepareListofBean(nhacungcapService.listNhaCungCap()));
-		return new ModelAndView("redirect:/home/supplier.do");
+			BindingResult result, Model model) {
+		NhaCungCap nhaCungCap = prepareModel(nhacungcapBean);		
+		List<String> maNCCs = nhacungcapService.getMaNCC();		
+		maNCCs.addAll(nhacungcapService.getMaNCCFromNhomSP());
+		boolean stt= false;
+		for(String maNCC : maNCCs) {
+			if(nhaCungCap.getMaNhaCungCap().equals(maNCC)){					
+				stt=true;
+				break;
+			}
+		}
+		System.out.println(stt);
+		if(stt) {
+			model.addAttribute("messenge", "Mã nhà cung cấp đã sử dụng. Bạn không thể xóa!");
+		}else {
+			nhacungcapService.deleteNhaCungCap(nhaCungCap);			
+		}
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("nhacungcap", null);
+		models.put("nhacungcapList", prepareListofBean(nhacungcapService.listNhaCungCap()));
+		return new ModelAndView("home/Supplier",models);
 	}
 
 	@RequestMapping(value = "home/editsupplier", method = RequestMethod.GET)
-	public ModelAndView editNhaCungCap(@ModelAttribute("command") NhaCungCapBean nhacungcapBean, BindingResult result) {
-		Map<String, Object> model = new HashMap<String, Object>();
-		model.put("nhacungcap",
+	public ModelAndView edittNhaCungCap(@ModelAttribute("command") NhaCungCapBean nhacungcapBean, BindingResult result, Model model) {		
+		Map<String, Object> models = new HashMap<String, Object>();
+		models.put("nhacungcap",
 				prepareNhaCungCapBean(nhacungcapService.getNhaCungCap(nhacungcapBean.getMaNhaCungCap())));
-		model.put("nhacungcapList", prepareListofBean(nhacungcapService.listNhaCungCap()));
-		return new ModelAndView("home/CreateSupplier", model);
+		models.put("nhacungcapList", prepareListofBean(nhacungcapService.listNhaCungCap()));
+		model.addAttribute("messenge", "Thông Tin Nhà Cung Cấp");
+		return new ModelAndView("home/EditSupplier", models);
 	}
 
 	private NhaCungCap prepareModel(NhaCungCapBean nhacungcapBean) {
@@ -89,6 +145,7 @@ public class NhaCungCapController {
 				beans.add(bean);
 			}
 		}
+		
 		return beans;
 	}
 

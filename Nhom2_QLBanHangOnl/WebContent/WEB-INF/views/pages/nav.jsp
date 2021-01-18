@@ -14,9 +14,6 @@
 					<a
 						href="http://localhost:8080/Nhom2_QLBanHangOnl/Trangchu/index.do"><img
 						src="" alt="" />ĐỒ ÁN</a>
-						<a
-						href="http://localhost:8080/Nhom2_QLBanHangOnl/login/login.do"><img
-						src="" alt="" />Đăng nhập</a>
 				</div>
 
 
@@ -36,7 +33,7 @@
 
 			</div>
 
-			<div class="col-sm-7">
+			<div class="col-sm-9">
 				<div class="shop-menu ">
 
 					<ul class="nav navbar-nav">
@@ -44,14 +41,43 @@
 						<li><a href="Trangchu/Sanpham.do"> Sản Phẩm</a></li>
 						<li><a href="goto.do?query=tintuc"> Tin tức</a></li>
 						<li><a href="goto.do?query=lienhe">Liên hệ</a></li>
-						
+						<!-- <li><a href="http://localhost:8080/Nhom2_QLBanHangOnl/login/register.do"><img
+						src="" alt="" />Đăng ký</a></li> -->
+
+
+						<%-- <span id="maKH">${sessionScope.makhachhang}</span> --%>
+						<c:set var="y" scope="session" value="${makhachhang}" />
+						<c:if test="${y == null }">
+							<li><a id="dangnhap" href="khachhang/login.do"></a></li>
+						</c:if>
+
+						<c:if test="${y != null }">
+							<li><a id="lsdh" href="pages/orderkh.do"
+								onclick="myFunction()">Lịch sử đặt hàng</a></li>
+						</c:if>
+						<!-- <li><a href="home/orderkh.do">Lịch sử đặt hàng</a></li> -->
+
+
+						<span style="color: blue;" id="tenKH">${sessionScope.tenkhachhang}</span>
+
+						<c:set var="x" scope="session" value="${makhachhang}" />
+						<c:if test="${x == null }">
+							<li><a id="dangnhap" href="khachhang/login.do">Đăng nhập</a></li>
+						</c:if>
+
+						<c:if test="${x != null }">
+							<a style="color: red;" id="dangxuat" href="khachhang/dangxuat.do" />
+									Đăng xuất</a>
+						</c:if>
+
+
+
 					</ul>
-					
-					<ul class="giohang ">
+
+					<!-- <ul class="giohang ">
 						<a href="pages/cart.do" class="a1"><i
-							class="fa fa-shopping-cart" aria-hidden="true"></i>Giỏ
-								hàng</a>
-					</ul>
+							aria-hidden="true"></i>Giỏ hàng</a>
+					</ul> -->
 				</div>
 			</div>
 
@@ -84,7 +110,6 @@
 						title="Đồng hồ thời trang"> <b>Đồng hồ thời trang</b>
 					</a> <a href="khachhang/shop.htm" class="smartwatch"
 						title="Đồng hồ thông minh"> <b>Đồng hồ thông minh</b>
-					</a>
 				</nav>
 			</div>
 
@@ -98,5 +123,10 @@
 						</a>
 					</c:forEach>
 				</nav>
-
 			</div>
+			<script>
+				function myFunction() {
+					
+					/* window.open("http://localhost:8080/Nhom2_QLBanHangOnl/Trangchu/index.do"); */
+				}
+			</script>

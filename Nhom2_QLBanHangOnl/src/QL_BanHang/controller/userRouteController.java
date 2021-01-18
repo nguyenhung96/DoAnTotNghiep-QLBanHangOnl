@@ -36,16 +36,21 @@ public class userRouteController {
 			return "pages/new";
 		}
 		
+		if(pageQuery.equalsIgnoreCase("dangnhap")) {
+			System.out.println("go to dang nhap");
+			return "pages/dangnhap";
+		}
+		
+		if(pageQuery.equalsIgnoreCase("dangky")) {
+			System.out.println("go to dang ky");
+			return "pages/dangky";
+		}
+		
 		if(pageQuery.equalsIgnoreCase("donhang")) {
 			System.out.println("go to don hang");
 			return "pages/checkout";
 		}
 		
-
-		if(pageQuery.equalsIgnoreCase("dangnhap")) {
-			System.out.println("go to dang nhap");
-			return "pages/login";
-		}
 
 		if(pageQuery.equalsIgnoreCase("lienhe")) {
 			System.out.println("go to lien he");

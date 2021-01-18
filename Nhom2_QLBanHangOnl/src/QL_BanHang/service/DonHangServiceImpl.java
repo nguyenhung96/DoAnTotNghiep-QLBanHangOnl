@@ -58,18 +58,18 @@ public class DonHangServiceImpl implements DonHangService {
 	@Override
 	public void HuyDonHang(String madh) {
 		donhangDao.HuyDonHang(madh);
-		
+
 	}
 
 	@Override
 	public void completeDonHang(String madh) {
 		donhangDao.completeDonHang(madh);
-		
+
 	}
 
 	@Override
 	public int demsanphamdaban() {
-		
+
 		return donhangDao.demsanphamdaban();
 	}
 
@@ -83,5 +83,10 @@ public class DonHangServiceImpl implements DonHangService {
 	public int demdonhangchuaduyet() {
 
 		return donhangDao.demdonhangchuaduyet();
+	}
+
+	@Override
+	public List<DonHang> listDonHangByMaKhachHang(String makh) {
+		return donhangDao.listDonHangByMaKhachHang(makh);
 	}
 }

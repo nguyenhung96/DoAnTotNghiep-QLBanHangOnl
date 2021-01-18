@@ -17,7 +17,7 @@ public interface NhomSanPhamService {
 	public NhomSanPham getNhomSanPham(int Id);
 
 	public NhomSanPham getNhomSanPhamtheoten(String TenNhomSP);
-
+	public List<Integer> getMaNSP();
 	public void deleteNhomSanPham(NhomSanPham nhomsanpham);
 
 	public void deleteNhomSanPham1(int i);

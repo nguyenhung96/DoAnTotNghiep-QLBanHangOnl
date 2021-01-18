@@ -22,15 +22,17 @@ public interface SanPhamDao {
 
 	// Hàm xóa sp theo mã
 	public void deleteSanPham1(String masp);
-	
+
 	// Hàm thêm
 	public void updateImage(SanPham sanpham, String tenhinh);
 
-	
+	// lấy email khách hàng
+//	public List<String> getMailKH();
+
 	public String folderlocation();
-	
+
 	public String autoGenrate();
-	
+
 	public int demSanPham();
-	
+
 }

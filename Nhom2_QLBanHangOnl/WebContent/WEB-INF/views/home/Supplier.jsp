@@ -7,7 +7,7 @@
 <head>
 <base href="${pageContext.servletContext.contextPath}/">
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>Nhà Cung Cấp</title>
 <!--datatable-->
 <link
 	href="http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"
@@ -61,6 +61,7 @@ tr:nth-child(even) {
 				<span class="glyphicon glyphicon-star-empty "></span> Danh sách nhà
 				cung cấp
 			</h3>
+			<input style="margin-left: 10px; border-style: none; width: 900px; background-color: #f2f2f2;" value="${messenge}" readonly/>
 		</div>
 		<div class="container">
 			<div class="row">

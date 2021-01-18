@@ -115,13 +115,13 @@
 										</span>
 									</div>    
 									 -->
-									<div class="col-md-4">
+									<%-- <div class="col-md-4">
 										<a style="float: right;"
 											class="btn btn-mini btn-primary btncreate"
 											href="home/createkhachhang.do?maKH=${khachhang.maKH}"> <i
 											class="glyphicon glyphicon-plus-sign"></i> Thêm khách hàng
 										</a>
-									</div>
+									</div> --%>
 								</div>
 							</div>
 						</div>

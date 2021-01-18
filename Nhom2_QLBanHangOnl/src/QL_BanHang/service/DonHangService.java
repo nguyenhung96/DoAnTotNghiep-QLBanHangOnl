@@ -33,4 +33,6 @@ public interface DonHangService {
 
 	public int demdonhangchuaduyet();
 
+	public List<DonHang> listDonHangByMaKhachHang(String makh);
+
 }

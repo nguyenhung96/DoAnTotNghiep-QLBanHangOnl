@@ -29,6 +29,19 @@ public class KhachHangServiceImpl implements KhachHangService {
 	public KhachHang getKhachHang(String makh) {
 		return khachhangDao.getKhachHang(makh);
 	}
+	
+	public List<String> getMailKH() {
+		return khachhangDao.getMailKH();
+	}
+	
+//	//lấy email
+//	public KhachHang selectKhachHang(String email) {
+//		return khachhangDao.getKhachHang(email);
+//	}
+	
+	public KhachHang selectKhachHang(String email) {
+		return khachhangDao.selectKhachHang(email);
+	}
 
 	public void deleteKhachHang(KhachHang khachhang) {
 		khachhangDao.deleteKhachHang(khachhang);

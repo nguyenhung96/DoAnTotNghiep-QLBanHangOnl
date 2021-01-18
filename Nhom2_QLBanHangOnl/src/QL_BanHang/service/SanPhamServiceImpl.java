@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import QL_BanHang.dao.KhachHangDao;
 import QL_BanHang.dao.SanPhamDao;
 import QL_BanHang.model.SanPham;
 
@@ -16,6 +17,9 @@ public class SanPhamServiceImpl implements SanPhamService {
 
 	@Autowired
 	private SanPhamDao sanphamDao;
+	
+	@Autowired
+	private KhachHangDao khachhangDao;
 
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	public void addSanPham(SanPham sanpham) {
@@ -25,6 +29,10 @@ public class SanPhamServiceImpl implements SanPhamService {
 	public List<SanPham> listSanPham() {
 		return sanphamDao.listSanPham();
 	}
+	
+//	public List<String> getMailKH() {
+//		return khachhangDao.getMailKH();
+//	}
 
 	public SanPham getSanPham(String masp) {
 		return sanphamDao.getSanPham(masp);

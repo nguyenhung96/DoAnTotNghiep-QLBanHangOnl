@@ -67,7 +67,7 @@ display: flex;
 									
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="SDT">Số ĐT</form:label></td>
-										<td class="col-md-5"><form:input id="SDT" path="SDT"
+										<td class="col-md-5"><form:input id="SDT" path="SDT" type = "number"
 												class="form-control " value="${khachhang.SDT}" />
 												<span id="checkSDT"></span></td>
 												</td>

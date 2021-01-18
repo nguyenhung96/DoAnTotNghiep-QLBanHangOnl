@@ -7,10 +7,19 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Loại Sản Phẩm</title>
 <link
 	href="http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"
 	rel="stylesheet">
+<link
+	href="http://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"
+	rel="stylesheet">
+<script
+	src="http://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<!--datatable-->
+<script>
+	new WOW().init();
+</script>
 </head>
 <body>
 	<!-- main content start-->
@@ -20,6 +29,7 @@
 				<span class="glyphicon glyphicon-star-empty "></span> Danh sách Loại
 				sản phẩm
 			</h3>
+			<input style="margin-left: 10px; border-style: none; width: 800px; background-color: #f2f2f2;" value="${messenge}" readonly/>
 		</div>
 		<div class="container">
 			<div class="row">
@@ -55,7 +65,7 @@
 								<c:set var="count" value="${count+1}"></c:set>
 
 								<tr>
-									<td><c:out value="${count}" /></td>
+									<td><c:out value="${nhomsanpham.id}" /></td>
 									<td><c:out value="${nhomsanpham.tenNhomSP}" /></td>
 									<td><c:out value="${nhomsanpham.maNhaCungCap}" /></td>
 									<td>

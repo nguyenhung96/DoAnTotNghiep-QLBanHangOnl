@@ -55,6 +55,12 @@ public class SanPhamDaoImpl implements SanPhamDao {
 				.executeUpdate();
 
 	}
+	
+	// check email khách hàng
+//	@SuppressWarnings("unchecked")
+//	public List<String> getMailKH() {
+//		return (List<String>) sessionFactory.getCurrentSession().createQuery("select Email from KhachHang").list();
+//	}
 
 	public String folderlocation() {
 		String basePath = new File("").getAbsolutePath();
@@ -82,6 +88,7 @@ public class SanPhamDaoImpl implements SanPhamDao {
 		}
 
 	}
+
 	@Override
 	public int demSanPham() {
 		String hql = "FROM SanPham";

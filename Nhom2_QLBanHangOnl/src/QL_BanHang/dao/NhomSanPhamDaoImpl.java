@@ -21,7 +21,10 @@ public class NhomSanPhamDaoImpl implements NhomSanPhamDao {
 	public List<NhomSanPham> listNhomSanPham() {
 		return (List<NhomSanPham>) sessionFactory.getCurrentSession().createCriteria(NhomSanPham.class).list();
 	}
-
+	@SuppressWarnings("unchecked")
+	public List<Integer> getMaNSP() {
+		return (List<Integer>) sessionFactory.getCurrentSession().createQuery("select sp.nhomsanpham.Id FROM SanPham sp group by sp.nhomsanpham.Id").list();
+	}
 	public NhomSanPham getNhomSanPham(int Id) {
 		return (NhomSanPham) sessionFactory.getCurrentSession().get(NhomSanPham.class, Id);
 	}

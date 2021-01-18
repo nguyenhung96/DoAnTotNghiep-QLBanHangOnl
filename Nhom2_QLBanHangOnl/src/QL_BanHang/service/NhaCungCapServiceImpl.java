@@ -25,7 +25,15 @@ public class NhaCungCapServiceImpl implements NhaCungCapService {
 	public List<NhaCungCap> listNhaCungCap() {
 		return nhacungcapDao.listNhaCungCap();
 	}
-
+	public List<String> getMaNCC() {
+		return nhacungcapDao.getMaNCC();
+	}
+	public List<String> getMaNCCFromNCC(){
+		return nhacungcapDao.getMaNCCFromNCC();
+	}
+	public List<String> getMaNCCFromNhomSP() {
+		return nhacungcapDao.getMaNCCFromNhomSP();
+	}
 	public NhaCungCap getNhaCungCap(String manhacc) {
 		return nhacungcapDao.getNhaCungCap(manhacc);
 	}

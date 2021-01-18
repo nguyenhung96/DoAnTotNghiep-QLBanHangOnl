@@ -20,7 +20,18 @@ public class NhaCungCapDaoImpl implements NhaCungCapDao {
 	public List<NhaCungCap> listNhaCungCap() {
 		return (List<NhaCungCap>) sessionFactory.getCurrentSession().createCriteria(NhaCungCap.class).list();
 	}
-
+	@SuppressWarnings("unchecked")
+	public List<String> getMaNCC() {
+		return (List<String>) sessionFactory.getCurrentSession().createQuery("select sp.nhacungcap.MaNhaCungCap from SanPham sp group by sp.nhacungcap.MaNhaCungCap").list();
+	}
+	@SuppressWarnings("unchecked")
+	public List<String> getMaNCCFromNCC() {
+		return (List<String>) sessionFactory.getCurrentSession().createQuery("select MaNhaCungCap from NhaCungCap").list();
+	}
+	@SuppressWarnings("unchecked")
+	public List<String> getMaNCCFromNhomSP() {
+		return (List<String>) sessionFactory.getCurrentSession().createQuery("SELECT nsp.nhacungcap.MaNhaCungCap FROM NhomSanPham nsp GROUP BY nsp.nhacungcap.MaNhaCungCap").list();
+	}
 	public NhaCungCap getNhaCungCap(String manhacc) {
 		return (NhaCungCap) sessionFactory.getCurrentSession().get(NhaCungCap.class, manhacc);
 	}
