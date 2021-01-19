@@ -216,43 +216,58 @@ public class DonHangController {
 
 	// Nút hoàn tất đơn hàng
 	@RequestMapping(value = "home/saveorder", method = RequestMethod.POST)
-	public ModelAndView saveOrder(ModelMap mm, HttpSession session,
+	public String saveOrder(ModelMap mm, HttpSession session,
 			@ModelAttribute("khachhangcheckout") KhachHangBean khachhangBean, DonHang donhang, Principal principal) {
 		HashMap<String, Cart> orderItems = (HashMap<String, Cart>) session.getAttribute("orderItems");
-		KhachHang khachhang = prepareModelKhachHang(khachhangBean);
-		System.out.println(khachhang.getMaKH());
-		System.out.println(khachhang.getHoTenKH());
-		System.out.println(khachhang.getSDT());
-		System.out.println(khachhang.getMatKhau());
-		System.out.println(khachhang.getDiaChi());
-		NhanVien nhanvien = nhanvienService.getNhanVien(principal.getName());
-		khachhangService.addKhachHang(khachhang);
-		String madh = donhangService.autoGenrate();
-		if (orderItems == null) {
-			orderItems = new HashMap<>();
-		}
-		long millis = System.currentTimeMillis();
-		Date date = new Date(millis);
-		donhang.setMaDonHang(madh); // Làm 1 hàm tự động tạo mã đơn hàng
-		donhang.setKhachhang(khachhang);
-		donhang.setNhanvien(nhanvien);
-		donhang.setNgayDat(date);
-		donhang.setTrangThai(3);
-		donhang.setTongTien(totalPrice(orderItems)); // Lấy dữ liệu tổng tiền trên session
-		donhangService.addDonHang(donhang);
-		for (Map.Entry<String, Cart> entry : orderItems.entrySet()) {
-			DonHangChiTiet donhangchitiet = new DonHangChiTiet();
-			donhangchitiet.setDonhang(donhang);
-			donhangchitiet.setSanpham(entry.getValue().getSanpham());
-			donhangchitiet.setSoLuong(entry.getValue().getSoluong());
-			donhangService.createdonhangchitiet(donhangchitiet); // Tạo don hang chi tiet
-		}
-		orderItems = new HashMap<>();
-		session.setAttribute("orderItems", orderItems);
-		session.setAttribute("orderTotal", 0);
-		session.setAttribute("orderNum", 0);
 
-		return new ModelAndView("redirect:/home/detailorder.do?MaDonHang=" + madh);
+		if (khachhangBean.getHoTenKH().isEmpty() == false) {
+			if (khachhangBean.getSDT().isEmpty() == false) {
+				if (orderItems.isEmpty() == false) {
+					KhachHang khachhang = prepareModelKhachHang(khachhangBean);
+					NhanVien nhanvien = nhanvienService.getNhanVien(principal.getName());
+					khachhangService.addKhachHang(khachhang);
+					String madh = donhangService.autoGenrate();
+					if (orderItems == null) {
+						orderItems = new HashMap<>();
+					}
+					long millis = System.currentTimeMillis();
+					Date date = new Date(millis);
+					donhang.setMaDonHang(madh); // Làm 1 hàm tự động tạo mã đơn hàng
+					donhang.setKhachhang(khachhang);
+					donhang.setNhanvien(nhanvien);
+					donhang.setNgayDat(date);
+					donhang.setTrangThai(3);
+					donhang.setTongTien(totalPrice(orderItems)); // Lấy dữ liệu tổng tiền trên session
+					donhangService.addDonHang(donhang);
+					for (Map.Entry<String, Cart> entry : orderItems.entrySet()) {
+						DonHangChiTiet donhangchitiet = new DonHangChiTiet();
+						donhangchitiet.setDonhang(donhang);
+						donhangchitiet.setSanpham(entry.getValue().getSanpham());
+						donhangchitiet.setSoLuong(entry.getValue().getSoluong());
+						donhangService.createdonhangchitiet(donhangchitiet); // Tạo don hang chi tiet
+					}
+					orderItems = new HashMap<>();
+					session.setAttribute("orderItems", orderItems);
+					session.setAttribute("orderTotal", 0);
+					session.setAttribute("orderNum", 0);
+
+					return ("redirect:/home/detailorder.do?MaDonHang=" + madh);
+
+				} else {
+					mm.addAttribute("msg", "Chưa chọn sản phẩm");
+					return "redirect:/home/createorder.do";
+				}
+
+			} else {
+				mm.addAttribute("msg", "Chưa nhập SDT");
+				return "redirect:/home/createorder.do";
+			}
+
+		} else {
+			mm.addAttribute("msg", "Chưa nhập tên KH");
+			return "redirect:/home/createorder.do";
+		}
+
 	}
 
 	// Nhân viên tạo hóa đơn bán hàng

@@ -52,7 +52,7 @@
 												class="form-control " path="hoTenNV"
 												value="${nhanvien.hoTenNV}" /> <span id="checkTenNV"></span></td>
 									</tr>
-<%-- 
+									<%-- 
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="matKhau">Mật khẩu</form:label></td>
 										<td class="col-md-5"><form:input id="pass" path="matKhau"
@@ -76,16 +76,19 @@
 									</tr>
 									<tr class="form-group col-md-11">
 										<td class="col-md-3"><form:label path="CMND">Số CMND</form:label></td>
-										<td class="col-md-5"><form:input type="number" id="CMND"
-												path="CMND" class="form-control " value="${nhanvien.CMND}" />
-											<span id="checkCMND"></span></td>
+										<td class="col-md-5"><form:input id="CMND" path="CMND"
+												class="form-control " value="${nhanvien.CMND}" /> <span
+											id="checkCMND"></span></td>
 									</tr>
 									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="gioiTinhString">Giới tính</form:label></td>
-										<td class="col-md-5"><form:input id="Gioitinh"
-												path="gioiTinhString" class="form-control "
-												value="${nhanvien.gioiTinhString}" /> <span
-											id="checkGioitinh"></span></td>
+										<td class="col-md-4"><form:label path="gioiTinhString">Giới tính</form:label></td>
+										<td class="col-md-5"><form:select id="stt" path="gioiTinhString"
+												class="form-control">
+												<option value="${nhanvien.gioiTinhString}">${nhanvien.gioiTinhString}</option>
+												<option value="Nam">Nam</option>
+												<option value="Nữ">Nữ</option>
+
+											</form:select> <span id="checkGioitinh"></span></td>
 									</tr>
 
 									<tr class="form-group col-md-11">

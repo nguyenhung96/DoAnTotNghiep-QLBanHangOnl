@@ -66,7 +66,7 @@ tr:nth-child(even) {
 						<div class="col-md-4">
 							<a style="float: right;"
 								class="btn btn-mini btn-primary btncreate"
-								href="CreateProduct.html"> <i
+								href="home/createorder.do"> <i
 								class="glyphicon glyphicon-plus-sign"></i> Tạo đơn hàng
 							</a>
 						</div>

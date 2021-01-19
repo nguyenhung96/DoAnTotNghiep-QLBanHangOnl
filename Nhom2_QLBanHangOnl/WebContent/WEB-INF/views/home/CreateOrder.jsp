@@ -121,15 +121,16 @@ tr:nth-child(even) {
 							</h4>
 						</div>
 						<div class="widget-body">
+						<span>${msg}</span>
 							<form:form method="POST"
 								action="/Nhom2_QLBanHangOnl/home/saveorder.do">
 								<table>
 									<tr class="form-group">
 										<td><form:label class="col-sm-5" for="lbloaiSP"
 												path="hoTenKH">Tên khách hàng</form:label></td>
-
 										<td><form:input path="hoTenKH"
 												class="form-control col-sm-7 " /></td>
+												
 
 									</tr>
 									<tr class="form-group">

@@ -125,7 +125,7 @@ tr:nth-child(even) {
 										class="col-sm-6">Mật
 										khẩu:</form:label></td>
 								<td><a class="btn btn-mini btn-primary col-sm-6"
-									href="changepass.do">Đổi mật khẩu</a></td>
+									href="home/changepass.do">Đổi mật khẩu</a></td>
 							</tr>
 							<tr class="form-group">
 								<td><form:label for="lblgia" path="quyenNV"
