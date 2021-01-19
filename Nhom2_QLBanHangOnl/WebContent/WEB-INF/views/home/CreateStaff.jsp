@@ -117,7 +117,7 @@
 							
 											function CreateStaff(){
 								var TenNV= document.getElementById('TenNV').value;
-								var pass= document.getElementById('pass').value;
+								/* var pass= document.getElementById('pass').value; */
 								var emailID= document.getElementById('email').value;
 								var SDT= document.getElementById('SDT').value;
 								var 	CMND = document.getElementById('CMND').value;
@@ -144,7 +144,7 @@
 							            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
 							            status= true;
 								}
-							    if (pass == '') {
+							/*     if (pass == '') {
 									document.getElementById("checkpass").innerHTML = 
 							            " <span class='fas fa-window-close' style='color:red;'>Vui lòng nhập mật khẩu!</span> ";
 							         status= false;
@@ -153,7 +153,7 @@
 									document.getElementById("checkpass").innerHTML = 
 							            " <span class='fa fa-check-square' style='color:#3FFF00;'></span> ";
 							          
-								}
+								} */
 							    if(emailID !==''){
 									if(atpos < 1 || ( dotpos - atpos < 2 )){
 										document.getElementById("checkEmail").innerHTML = 

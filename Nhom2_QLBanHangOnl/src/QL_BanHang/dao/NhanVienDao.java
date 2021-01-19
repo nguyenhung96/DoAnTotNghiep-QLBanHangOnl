@@ -27,4 +27,6 @@ public interface NhanVienDao {
 	List<QuyenNV> listquyennvtheoma(String manv);
 	
 	public void setpasworld(NhanVien nhanvien, String matkhau);
+	
+	public void deleteRole(String manv);
 }

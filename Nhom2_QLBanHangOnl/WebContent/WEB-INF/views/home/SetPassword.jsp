@@ -118,19 +118,20 @@ tr:nth-child(even) {
 									</tr>
 
 									<tr class="form-group col-md-11">
-										<td class="col-md-3"><label>Mật khẩu</label></td>
-										<td class="col-md-5"><input id="pass" type="password"
-											class="form-control " /> <span id="checkpass1"></span></td>
+										<td class="col-md-3"><form:label path="matKhau">Mật khẩu   </form:label></td>
+										<td class="col-md-5"><form:input id="pass"
+												path="matKhau" type="password" class="form-control "
+												value="${nhanvien.matKhau}" /> <span id="checkpass1"></span></td>
 
 									</tr>
 									<tr class="form-group col-md-11">
-										<td class="col-md-3"><form:label path="matKhau">Nhập lại mật khẩu</form:label></td>
+										<td class="col-md-3"><form:label path="matKhauNhap">Nhập lại MK:</form:label></td>
 										<td class="col-md-5"><form:input id="pass2"
-												path="matKhau" type="password" class="form-control "
+												path="matKhauNhap" type="password" class="form-control "
 												value="${nhanvien.matKhau}" /> <span id="checkpass2"></span></td>
 
 									</tr>
-									<tr><td><span>${msg}</span></td></tr>
+									<tr><td><span style= "color: red">${msg}</span></td></tr>
 									<tr>
 
 										<td colspan="2"><input type="submit"

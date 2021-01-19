@@ -89,4 +89,12 @@ public class NhanVienDaoImpl implements NhanVienDao {
 				+ "' where MaNhanVien ='" + nhanvien.getMaNhanVien() + "'").executeUpdate();
 	}
 
+	@Override
+	public void deleteRole(String manv) {
+		sessionFactory.getCurrentSession()
+		.createQuery("DELETE FROM QuyenNV WHERE MaNhanVien = '" + manv + "'")
+		.executeUpdate();
+		
+	}
+
 }

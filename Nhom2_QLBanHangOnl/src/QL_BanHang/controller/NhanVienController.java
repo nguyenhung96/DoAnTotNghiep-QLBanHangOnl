@@ -1,5 +1,6 @@
 package QL_BanHang.controller;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,12 +56,20 @@ public class NhanVienController {
 
 	// Xóa nhân viên
 	@RequestMapping(value = "admin/deletenhanvien", method = RequestMethod.GET)
-	public ModelAndView editNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result) {
-		nhanvienService.deleteNhanVien(prepareModel1(nhanvienBean));
+	public ModelAndView editNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result,
+			ModelMap mdm) {
 		Map<String, Object> model = new HashMap<String, Object>();
+		String trangthaiString = null;
+		try {
+			nhanvienService.deleteNhanVien(prepareModel1(nhanvienBean));
+			trangthaiString = "Xóa nhân viên thành công";
+		} catch (Exception e) {
+			trangthaiString = "Nhân viên này không thể xóa";
+		}
+		mdm.addAttribute("msg", trangthaiString);
 		model.put("nhanvien", null);
 		model.put("nhanvienList", prepareListofBean(nhanvienService.listNhanVien()));
-		return new ModelAndView("redirect:/admin/nhansu.do");
+		return new ModelAndView("redirect:/admin/nhansu.do", model);
 	}
 
 	// Chọn nhân viên để edit
@@ -82,6 +92,22 @@ public class NhanVienController {
 		return new ModelAndView("home/SetRole", model);
 	}
 
+	// Xóa quyên nhân viên
+	@RequestMapping(value = "admin/deleterole", method = RequestMethod.GET)
+	public String deleteRole(@ModelAttribute("command") NhanVienBean nhanvienBean, QuyenNVBean quyennvBean,
+			BindingResult result, Principal principal, ModelMap map) {
+		Map<String, Object> model = new HashMap<String, Object>();
+		NhanVien nhanVien = prepareModel1(nhanvienBean);
+		String manv = principal.getName();
+		if (nhanVien.getMaNhanVien().equals(manv) == false) {
+			nhanvienService.deleteRole(nhanVien.getMaNhanVien());
+			model.put("msg", "Xóa thành công");
+		} else {
+			map.addAttribute("msg", "Xóa không thành công, không thể tự hủy!");
+		}
+		return ("redirect:/admin/nhansu.do");
+	}
+
 	// Cấp quyền cho nhân viên
 	@RequestMapping(value = "admin/luuquyennv", method = RequestMethod.POST)
 	public ModelAndView savequyenNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, QuyenNVBean quyennvBean,
@@ -92,10 +118,10 @@ public class NhanVienController {
 		QuyenNV quyenNV = prepareModelquyennv(nhanvienBean);
 		try {
 			nhanvienService.taoquyenchonhanvien(quyenNV);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
+
 		return new ModelAndView("redirect:/admin/nhansu.do", model);
 	}
 
@@ -111,12 +137,19 @@ public class NhanVienController {
 
 	// Cấp lại mật khẩu
 	@RequestMapping(value = "admin/savepassword", method = RequestMethod.POST)
-	public ModelAndView savetPassword(@ModelAttribute("command") NhanVienBean nhanvienBean, QuyenNVBean quyennvBean,
-			BindingResult result) {
+	public String savetPassword(ModelMap modelMap, @ModelAttribute("command") NhanVienBean nhanvienBean,
+			QuyenNVBean quyennvBean, BindingResult result) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		NhanVien nhanvien = nhanvienService.getNhanVien(quyennvBean.getMaNhanVien());
-		nhanvienService.setpasworld(nhanvien, nhanvienBean.getMatKhau());
-		return new ModelAndView("redirect:/admin/nhansu.do");
+		if (nhanvien.getMatKhau().equals(nhanvienBean.getMatKhauNhap()) == false) {
+			modelMap.addAttribute("msg", "Mật khẩu nhập lại không đúng !");
+			return ("home/SetPassword");
+		} else {
+			nhanvienService.setpasworld(nhanvien, nhanvienBean.getMatKhau());
+			modelMap.addAttribute("msg", "Đổi mật khẩu thành công!");
+			return ("redirect:/admin/nhansu.do");
+		}
+
 	}
 
 	private NhanVien prepareModel(NhanVienBean nhanvienBean) {

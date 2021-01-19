@@ -103,7 +103,11 @@ tr:nth-child(even) {
 							<div class="col-sm-12">
 								<div class="form-group">
 
-									<div class="col-md-4">
+									<div class="col-md-6">
+										<h4><span style= "color:red">${msg}</span></h4>
+											<label>${msg}</label>
+									</div>
+									<div class="col-md-6">
 										<a style="float: right;"
 											class="btn btn-mini btn-primary btncreate"
 											href="admin/createstaff.do"> <i
@@ -151,7 +155,7 @@ tr:nth-child(even) {
 															class="btn btn-minier btn-success" id="btnEdit"
 															title="Chỉnh sửa thông tin"> <i
 															class="glyphicon glyphicon-edit"></i>
-														</a> <a
+														</a> <a onclick="abc()"
 															href="admin/deletenhanvien.do?MaNhanVien=${nhanvien.maNhanVien}"
 															class="btn btn-minier btn-danger" title="Xóa nhân viên">
 															<i class="glyphicon glyphicon-trash"></i>
@@ -159,7 +163,7 @@ tr:nth-child(even) {
 															href="admin/editquyennv.do?MaNhanVien=${nhanvien.maNhanVien}"
 															class="btn btn-minier btn-success" id="btnEdit"
 															title="Phân quyền"> <i
-															class="glyphicon glyphicon-edit"></i>
+															class="glyphicon glyphicon-user"></i>
 														</a>
 
 													</div>
@@ -199,12 +203,11 @@ tr:nth-child(even) {
 													<td><c:out value="${quyennv.quyenNV}" /></td>
 													<td>
 														<div class="hidden-phone visible-desktop action-buttons">
-															<a
-																href="admin/editquyennv.do?MaNhanVien=${quyennv.maNhanVien}"
-																class="btn btn-minier btn-success" id="btnEdit"
-																title="Phân quyền"> <i
-																class="glyphicon glyphicon-edit"></i>
-															</a> <a class="btn btn-mini btn-primary" id="btnSetKey"
+															<a onclick="abc()"
+															href="admin/deleterole.do?MaNhanVien=${quyennv.maNhanVien}"
+															class="btn btn-minier btn-danger" title="Xóa quyền">
+															<i class="glyphicon glyphicon-trash"></i>
+														</a> <a class="btn btn-mini btn-primary" id="btnSetKey"
 																href="admin/setpassword.do?MaNhanVien=${quyennv.maNhanVien}"
 																title="Cấp lại mật khẩu"> <i
 																class="ace-icon fa fa-key"></i>
@@ -281,5 +284,10 @@ tr:nth-child(even) {
 		</div>
 		<!-- Setkey model popup-->
 	</div>
+	<script>
+	function abc(){
+       confirm("Bấm vào nút OK để tiếp tục")
+    }
+	</script>
 </body>
 </html>

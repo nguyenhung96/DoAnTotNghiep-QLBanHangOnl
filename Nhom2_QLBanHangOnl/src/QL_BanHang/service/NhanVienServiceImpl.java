@@ -74,5 +74,11 @@ public class NhanVienServiceImpl implements NhanVienService {
 		
 	}
 
+	@Override
+	public void deleteRole(String manv) {
+		nhanvienDao.deleteRole(manv);
+		
+	}
+
 
 }

@@ -193,7 +193,7 @@ public class KhachHangController {
 					session.setAttribute("diachikh", khachhang.getDiaChi());
 					return "pages/index";
 				}
-				model.addAttribute("message", "Sai mật khẩu!");
+				model.addAttribute("message", "Sai thông tin, vui lòng kiểm tra lại!");
 				return "pages/dangnhap";
 			}
 //			System.out.println("kh k ton tai");
