@@ -56,7 +56,7 @@ public class NhanVienController {
 
 	// Xóa nhân viên
 	@RequestMapping(value = "admin/deletenhanvien", method = RequestMethod.GET)
-	public ModelAndView editNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result,
+	public String editNhanVien(@ModelAttribute("command") NhanVienBean nhanvienBean, BindingResult result,
 			ModelMap mdm) {
 		Map<String, Object> model = new HashMap<String, Object>();
 		String trangthaiString = null;
@@ -69,7 +69,7 @@ public class NhanVienController {
 		mdm.addAttribute("msg", trangthaiString);
 		model.put("nhanvien", null);
 		model.put("nhanvienList", prepareListofBean(nhanvienService.listNhanVien()));
-		return new ModelAndView("redirect:/admin/nhansu.do", model);
+		return ("redirect:/admin/nhansu.do");
 	}
 
 	// Chọn nhân viên để edit
@@ -102,10 +102,12 @@ public class NhanVienController {
 		if (nhanVien.getMaNhanVien().equals(manv) == false) {
 			nhanvienService.deleteRole(nhanVien.getMaNhanVien());
 			model.put("msg", "Xóa thành công");
+			return ("redirect:/admin/nhansu.do");
 		} else {
 			map.addAttribute("msg", "Xóa không thành công, không thể tự hủy!");
+			return ("redirect:/admin/nhansu.do");
 		}
-		return ("redirect:/admin/nhansu.do");
+		//return ("redirect:/admin/nhansu.do");
 	}
 
 	// Cấp quyền cho nhân viên

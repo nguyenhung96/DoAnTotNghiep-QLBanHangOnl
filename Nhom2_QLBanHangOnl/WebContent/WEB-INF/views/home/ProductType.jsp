@@ -65,7 +65,7 @@
 								<c:set var="count" value="${count+1}"></c:set>
 
 								<tr>
-									<td><c:out value="${nhomsanpham.id}" /></td>
+									<td><c:out value="${count}" /></td>
 									<td><c:out value="${nhomsanpham.tenNhomSP}" /></td>
 									<td><c:out value="${nhomsanpham.maNhaCungCap}" /></td>
 									<td>

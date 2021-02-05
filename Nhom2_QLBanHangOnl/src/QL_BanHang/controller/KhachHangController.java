@@ -51,16 +51,17 @@ public class KhachHangController {
 
 	/// nhấn nút đăng kí và thêm dữ liệu vào dtb
 	@RequestMapping(value = "pages/dangky", method = RequestMethod.POST)
-	public ModelAndView addKhachHang(@ModelAttribute("command") KhachHangBean khachhangBean, BindingResult result, Model model) {
+	public ModelAndView addKhachHang(@ModelAttribute("command") KhachHangBean khachhangBean, BindingResult result,
+			Model model) {
 		Map<String, Object> models = new HashMap<String, Object>();
 		KhachHang khachhang = prepareModel(khachhangBean);
 		List<String> mails = khachhangService.getMailKH();
 		boolean status = false;
-		for (String mailKh : mails) {			
-			if(khachhang.getEmail().equals(mailKh)) {				
+		for (String mailKh : mails) {
+			if (khachhang.getEmail().equals(mailKh)) {
 				model.addAttribute("message", "Email đã tồn tại!");
 				return new ModelAndView("pages/dangky", models);
-			}			
+			}
 		}
 		khachhangService.addKhachHang(khachhang);
 		models.put("khachhangList", prepareListofBean(khachhangService.listKhachHang()));
@@ -98,9 +99,16 @@ public class KhachHangController {
 	}
 
 	@RequestMapping(value = "home/deletekhachhang", method = RequestMethod.GET)
-	public ModelAndView editKhachHang(@ModelAttribute("command") KhachHangBean khachhangBean, BindingResult result) {
-		khachhangService.deleteKhachHang(prepareModel1(khachhangBean));
+	public ModelAndView editKhachHang(@ModelAttribute("command") KhachHangBean khachhangBean, BindingResult result,
+			ModelMap modelMap) {
+
 		Map<String, Object> model = new HashMap<String, Object>();
+		try {
+			khachhangService.deleteKhachHang(prepareModel1(khachhangBean));
+			modelMap.addAttribute("msg", "không thể xóa khách hàng");
+		} catch (Exception e) {
+			modelMap.addAttribute("msg", "không thể xóa khách hàng");
+		}
 		model.put("khachhang", null);
 		model.put("khachhangList", prepareListofBean(khachhangService.listKhachHang()));
 		return new ModelAndView("redirect:/home/khachhang.do");

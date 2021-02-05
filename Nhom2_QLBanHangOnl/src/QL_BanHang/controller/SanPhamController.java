@@ -83,15 +83,24 @@ public class SanPhamController {
 			@ModelAttribute("khachhangcheckout") KhachHangBean khachhangBean, DonHang donhang) {
 		HashMap<String, Cart> cartItems = (HashMap<String, Cart>) session.getAttribute("myCartItems");
 		// tạo khách hàng vào hóa đơn mới
-		KhachHang khachhang = prepareModelKhachHang(khachhangBean);
-		khachhangService.addKhachHang(khachhang);
+
+		String makhString = (String) session.getAttribute("makhachhang");
+
+		KhachHang khachHang = new KhachHang();
+		if (makhString.isEmpty()) {
+			khachHang = prepareModelKhachHang(khachhangBean);
+			khachhangService.addKhachHang(khachHang);
+		} else {
+			khachHang = khachhangService.getKhachHang(makhString);
+		}
+
 		if (cartItems == null) {
 			cartItems = new HashMap<>();
 		}
 		long millis = System.currentTimeMillis();
 		Date date = new Date(millis);
 		donhang.setMaDonHang(donhangService.autoGenrate()); // Làm 1 hàm tự động tạo mã đơn hàng
-		donhang.setKhachhang(khachhang);
+		donhang.setKhachhang(khachHang);
 
 		donhang.setNgayDat(date);
 		donhang.setTrangThai(1);

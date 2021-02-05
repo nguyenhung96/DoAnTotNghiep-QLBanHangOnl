@@ -115,6 +115,9 @@
 										</span>
 									</div>    
 									 -->
+									<%--  <div class="col-md-6">
+										<input ${msg} readonly/>
+									</div> --%>
 									<%-- <div class="col-md-4">
 										<a style="float: right;"
 											class="btn btn-mini btn-primary btncreate"

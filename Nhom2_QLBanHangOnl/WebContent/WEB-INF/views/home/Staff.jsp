@@ -104,8 +104,7 @@ tr:nth-child(even) {
 								<div class="form-group">
 
 									<div class="col-md-6">
-										<h4><span style= "color:red">${msg}</span></h4>
-											<label>${msg}</label>
+										<input style="margin-left: 10px; border-style: none; width: 800px; background-color: #f2f2f2;" value="${msg}" readonly/>
 									</div>
 									<div class="col-md-6">
 										<a style="float: right;"

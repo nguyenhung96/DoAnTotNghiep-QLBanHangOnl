@@ -81,9 +81,10 @@
 											id="checkCMND"></span></td>
 									</tr>
 									<tr class="form-group col-md-11">
-										<td class="col-md-4"><form:label path="gioiTinhString">Giới tính</form:label></td>
-										<td class="col-md-5"><form:select id="stt" path="gioiTinhString"
-												class="form-control">
+										<td class="col-md-4" style="width: 64.333333%;"><form:label
+												path="gioiTinhString">Giới tính</form:label></td>
+										<td class="col-md-5" style= ""><form:select id="stt"
+												path="gioiTinhString" class="form-control">
 												<option value="${nhanvien.gioiTinhString}">${nhanvien.gioiTinhString}</option>
 												<option value="Nam">Nam</option>
 												<option value="Nữ">Nữ</option>
@@ -124,7 +125,7 @@
 								var emailID= document.getElementById('email').value;
 								var SDT= document.getElementById('SDT').value;
 								var 	CMND = document.getElementById('CMND').value;
-								var Gioitinh= document.getElementById('Gioitinh').value;
+						/* 		var Gioitinh= document.getElementById('Gioitinh').value; */
 								var stt= document.getElementById('stt').value;
 								var Diachi= document.getElementById('Diachi').value;
 								

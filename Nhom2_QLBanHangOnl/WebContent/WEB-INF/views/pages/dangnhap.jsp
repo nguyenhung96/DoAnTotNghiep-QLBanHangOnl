@@ -41,7 +41,7 @@
 					</div>
 					<div class="signin-form">
 						<h2 class="form-title">Đăng nhập</h2>
-						<input style="font-size: 20px; color: red; border: none;"
+						<input style="font-size: 15px; color: red; border: none;"
 							class="form-control " value="${message}" readonly />
 						<form:form class="login100-form validate-form"
 							action="khachhang/loginkh.do" method='POST'
